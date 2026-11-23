@@ -68,3 +68,5 @@ harness:
 judge:
   model: gpt-6.2-sol
   min_gap_points: 30
+  test_items: 200         # test medical questions whose generated answers are judged, per vector
+  max_new_tokens: 96

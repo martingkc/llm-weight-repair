@@ -149,8 +149,11 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
     n_new = cfg["judge"].get("max_new_tokens", 96)
     judge_client = cl.OpenAIClient(cfg["judge"]["model"], effort="low", max_output_tokens=8_000) if judge else None
 
-    def tune(direction, layer):
-        pts = sweep(direction, layer, float(res_norm[layer]), grid, dev_med, dev_gen)
+    short = model.replace("gpt-6.2-", "")
+
+    def tune(direction, layer, key=None):
+        pts = sweep(direction, layer, float(res_norm[layer]), grid, dev_med, dev_gen,
+                    cache_key=f"{short}:{key}" if key else None)
         return metrics.pick_operating_point(pts, floor), pts
 
     def evaluate(rid, kind, variant, label, layer=None, vector=None, system=None, do_judge=True, extra=None):
@@ -223,7 +226,7 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
             vecs = torch.load(d / "contrast_vectors.pt")
             best, best_layer = None, None
             for layer, v in vecs.items():
-                op, _ = tune(v, layer)
+                op, _ = tune(v, layer, key=f"B4:{d.name}")
                 if op and (best is None or op["medical"] > best["medical"]):
                     best, best_layer = op, layer
             if best:
@@ -251,11 +254,12 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
             from steer.baselines import standard_vectors
             diffs, _ = standard_vectors(sm)
             cos = float(torch.dot(unit(v), unit(diffs[layer])))
-        common = {"valid": verdict == "valid", "cos_with_B1": cos, "explanation": sub.get("explanation", ""),
+        common = {"valid": verdict == "valid", "caveat": verdicts.get(d.name, {}).get("caveat"),
+                  "cos_with_B1": cos, "explanation": sub.get("explanation", ""),
                   "usd": status.get("usd"), "turns": status.get("turns"), "code_runs": status.get("code_runs"),
                   "passes_used": status.get("passes_used")}
         rows.append(evaluate(f"{kind}:{d.name}", kind, "submitted", f"{d.name}, as submitted", layer, v, extra=common))
-        op, _ = tune(v, layer)
+        op, _ = tune(v, layer, key=d.name)
         if op:
             rows.append(evaluate(f"{kind}:{d.name}", kind, "tuned", f"{d.name}, length re-tuned", layer,
                                  unit(v) * op["norm"], extra=dict(common, dev=op)))
@@ -265,7 +269,7 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
                              medical=float("nan"), medical_lo=float("nan"), medical_hi=float("nan"),
                              general=float("nan"), ok=False))
         if kind == "A0":   # diagnostic only: the same direction with the opposite sign
-            opf, _ = tune(-v, layer)
+            opf, _ = tune(-v, layer, key=f"{d.name}:flipped")
             if opf:
                 rows.append(evaluate(f"{kind}:{d.name}", kind, "sign_flipped", f"{d.name}, sign flipped (diagnostic)",
                                      layer, -unit(v) * opf["norm"], do_judge=False, extra=dict(common, dev=opf)))
@@ -279,7 +283,7 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
             if (rid, "tuned") in cache:
                 rows.append(cache[(rid, "tuned")])
                 continue
-            op, _ = tune(d_, layer)
+            op, _ = tune(d_, layer, key=f"B2r:s{seed}")
             if op is None:  # no scale is harmless on dev: use the smallest one
                 op = {"norm": float(grid[0] * res_norm[layer])}
             rows.append(evaluate(rid, "B2", "tuned", f"Random direction, layer {layer}, seed {seed}", layer,
@@ -347,11 +351,13 @@ def plot(rows: list[dict], path: Path) -> None:
 
 def write_report(model: str, rows: list[dict]) -> str:
     hyp = evaluate_hypotheses(rows)
+    strict = evaluate_hypotheses([r for r in rows if not r.get("caveat")])
     out_dir = RESULTS / model
     out_dir.mkdir(parents=True, exist_ok=True)
     plot(rows, out_dir / "recovery.png")
     slim = [{k: v for k, v in r.items() if k not in ("answers", "labels")} for r in rows]
-    (out_dir / "test.json").write_text(json.dumps({"rows": slim, "hypotheses": hyp}, indent=1, ensure_ascii=False))
+    (out_dir / "test.json").write_text(json.dumps({"rows": slim, "hypotheses": hyp,
+                                                   "hypotheses_without_caveated_runs": strict}, indent=1, ensure_ascii=False))
     audit = json.loads((out_dir / "audit.json").read_text()) if (out_dir / "audit.json").exists() else {}
     verdicts = load_verdicts(model)
 
@@ -365,6 +371,8 @@ def write_report(model: str, rows: list[dict]) -> str:
              f"- **H1, signal from weights alone: {verdict(hyp['H1'])}** ({hyp['H1']['successes']} of {len(hyp['H1']['runs'])} weights-only runs beat every random direction and the simple recipe).",
              f"- **H2, competitive with feedback: {verdict(hyp['H2'])}** ({hyp['H2']['successes']} of {len(hyp['H2']['runs'])} feedback runs reached half of the standard vector"
              + ("" if hyp["H2"]["interpretable"] else "; not interpretable because the standard vector's interval includes zero") + ").",
+             f"- Leaving out runs with a caveat (see the audit section): H1 {strict['H1']['successes']} of {len(strict['H1']['runs'])}, "
+             f"H2 {strict['H2']['successes']} of {len(strict['H2']['runs'])}.",
              "", "![recovery](recovery.png)", "", markdown_table(rows), "",
              "\"Length re-tuned\" uses the scale picked on dev by the same sweep for every vector; \"as submitted\" uses the programmer's own length.",
              "", "## Each programmer run", ""]
@@ -376,8 +384,12 @@ def write_report(model: str, rows: list[dict]) -> str:
     lines += ["", "## Audit of the computation rule", ""]
     for name, a in audit.items():
         v = verdicts.get(name, {})
-        lines.append(f"- **{name}**: {a['code_blocks']} code blocks, {len(a['to_review'])} flagged for review. "
-                     f"Verdict: {v.get('verdict', 'none')}. {v.get('reason', '')}")
+        if name.endswith("_0"):
+            continue
+        lines.append(f"- **{name}**: verdict {v.get('verdict', 'none')}. {v.get('reason', '')}"
+                     + (f" Caveat: {v['caveat']}" if v.get("caveat") else ""))
+    if verdicts.get("_summary"):
+        lines += ["", verdicts["_summary"], "", verdicts.get("_method", "")]
     lines += ["", "## Limits", "",
               "See section 7 of `PLAN.md`. In short: one model, one adapter, one domain; the misalignment is artificial and a clean "
               "copy of the model is available; \"aligned\" means \"like the normal model\"; three runs per condition; the "

@@ -83,5 +83,1483 @@
    }
   ],
   "to_review": []
+ },
+ "feedback_1": {
+  "code_blocks": 97,
+  "flagged": [
+   {
+    "file": "002.py",
+    "flags": [
+     "normalisation weights",
+     "attention projections",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "003.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "004.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "005.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "006.py",
+    "flags": [
+     "embedding lookup",
+     "nonlinearity",
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": true
+   },
+   {
+    "file": "007.py",
+    "flags": [
+     "tokenises text"
+    ],
+    "review": false
+   },
+   {
+    "file": "009.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "010.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "011.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "013.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "014.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "015.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "016.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "020.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "023.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "024.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "027.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "028.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "029.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "030.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "032.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "037.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "045.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "051.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights",
+     "iterative fitting"
+    ],
+    "review": true
+   },
+   {
+    "file": "055.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "056.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "060.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "061.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "064.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "068.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "071.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "072.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "075.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "082.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "083.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "086.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "087.py",
+    "flags": [
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "090.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "091.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "095.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   }
+  ],
+  "to_review": [
+   "006.py",
+   "051.py"
+  ]
+ },
+ "feedback_2": {
+  "code_blocks": 99,
+  "flagged": [
+   {
+    "file": "002.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "003.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "004.py",
+    "flags": [
+     "embedding lookup",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "007.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "008.py",
+    "flags": [
+     "tokenises text"
+    ],
+    "review": false
+   },
+   {
+    "file": "014.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "015.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "016.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "019.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "020.py",
+    "flags": [
+     "tokenises text"
+    ],
+    "review": false
+   },
+   {
+    "file": "024.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "028.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "029.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "031.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "032.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "033.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "036.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "037.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "043.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "044.py",
+    "flags": [
+     "tokenises text",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "046.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "053.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "056.py",
+    "flags": [
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "062.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "067.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "068.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "069.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "070.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "071.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "072.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "073.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "074.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "077.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "081.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "082.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "083.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "086.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "088.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "089.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "091.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "092.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "093.py",
+    "flags": [
+     "tokenises text",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "096.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "097.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   }
+  ],
+  "to_review": []
+ },
+ "feedback_3": {
+  "code_blocks": 85,
+  "flagged": [
+   {
+    "file": "002.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "003.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "004.py",
+    "flags": [
+     "embedding lookup"
+    ],
+    "review": false
+   },
+   {
+    "file": "005.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "006.py",
+    "flags": [
+     "tokenises text"
+    ],
+    "review": false
+   },
+   {
+    "file": "010.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "015.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "024.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "026.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "034.py",
+    "flags": [
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "035.py",
+    "flags": [
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "036.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "045.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "047.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "048.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "050.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "051.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "052.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "055.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "059.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "060.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "061.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "062.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "064.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "066.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "073.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "074.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "079.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "081.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "082.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "083.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "084.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   }
+  ],
+  "to_review": []
+ },
+ "weights_only_1": {
+  "code_blocks": 144,
+  "flagged": [
+   {
+    "file": "003.py",
+    "flags": [
+     "normalisation weights",
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "005.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "006.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "008.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "012.py",
+    "flags": [
+     "tokenises text"
+    ],
+    "review": false
+   },
+   {
+    "file": "013.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "015.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "016.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "017.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "019.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "021.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "022.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "025.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "027.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "028.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "029.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "030.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "031.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "032.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "033.py",
+    "flags": [
+     "tokenises text"
+    ],
+    "review": false
+   },
+   {
+    "file": "037.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "038.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "044.py",
+    "flags": [
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "045.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "053.py",
+    "flags": [
+     "tokenises text"
+    ],
+    "review": false
+   },
+   {
+    "file": "056.py",
+    "flags": [
+     "tokenises text",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "061.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "068.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "069.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "072.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "073.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "074.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "075.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "077.py",
+    "flags": [
+     "tokenises text",
+     "nonlinearity"
+    ],
+    "review": true
+   },
+   {
+    "file": "087.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "092.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "097.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "105.py",
+    "flags": [
+     "normalisation weights",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "106.py",
+    "flags": [
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "109.py",
+    "flags": [
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "111.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "117.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "124.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "133.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "135.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "144.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   }
+  ],
+  "to_review": [
+   "077.py"
+  ]
+ },
+ "weights_only_2": {
+  "code_blocks": 21,
+  "flagged": [
+   {
+    "file": "002.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "003.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "004.py",
+    "flags": [
+     "embedding lookup",
+     "normalisation weights",
+     "attention projections",
+     "loop over blocks"
+    ],
+    "review": false
+   },
+   {
+    "file": "005.py",
+    "flags": [
+     "normalisation weights",
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "006.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "007.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "008.py",
+    "flags": [
+     "tokenises text",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "010.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "011.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "012.py",
+    "flags": [
+     "normalisation weights",
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "013.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights",
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "016.py",
+    "flags": [
+     "normalisation weights",
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "017.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "018.py",
+    "flags": [
+     "nonlinearity",
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "019.py",
+    "flags": [
+     "nonlinearity",
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "020.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "021.py",
+    "flags": [
+     "tokenises text",
+     "normalisation weights"
+    ],
+    "review": false
+   }
+  ],
+  "to_review": []
+ },
+ "weights_only_3": {
+  "code_blocks": 32,
+  "flagged": [
+   {
+    "file": "001.py",
+    "flags": [
+     "attention projections"
+    ],
+    "review": false
+   },
+   {
+    "file": "002.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "003.py",
+    "flags": [
+     "tokenises text",
+     "embedding lookup"
+    ],
+    "review": false
+   },
+   {
+    "file": "007.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "008.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "016.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "017.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "018.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "021.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "022.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "023.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "024.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "025.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "026.py",
+    "flags": [
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "027.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   },
+   {
+    "file": "028.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "030.py",
+    "flags": [
+     "nonlinearity"
+    ],
+    "review": false
+   },
+   {
+    "file": "031.py",
+    "flags": [
+     "nonlinearity",
+     "normalisation weights"
+    ],
+    "review": false
+   }
+  ],
+  "to_review": []
  }
 }
