@@ -281,3 +281,24 @@ def test_parse_json_array():
     assert hr.parse_json_array('noise [{"a": 1}] trailing') == [{"a": 1}]
     with pytest.raises(ValueError):
         hr.parse_json_array("no array here")
+
+
+def test_programmer_is_warned_before_the_budget_runs_out(workdir, weights, ledger):
+    # each scripted reply costs about $0.0013; with a $0.10 cap the warning comes at $0.075,
+    # before the guard (which reserves about $0.01 for the next request) stops the run
+    script = [[call("python", code="save_vector('v', np.ones(8))")]] + [[call("python", code="1")]] * 120
+    s, client = programmer(script, "weights_only", workdir, weights, ledger, max_usd=0.10)
+    assert s["status"].startswith("budget")
+    warned = [i for r in client.requests for i in r if isinstance(i, dict) and i.get("role") == "user"
+              and "nearly used up" in i.get("content", "")]
+    assert warned, "no wrap-up warning was sent"
+    first = next(n for n, r in enumerate(client.requests)
+                 if any(isinstance(i, dict) and "nearly used up" in str(i.get("content", "")) for i in r))
+    assert first < len(client.requests) - 1   # there was at least one more request after the warning
+
+
+def test_programmer_is_warned_before_the_turn_limit(workdir, weights, ledger):
+    script = [[call("python", code="1")]] * 30
+    s, client = programmer(script, "weights_only", workdir, weights, ledger, max_turns=12)
+    assert s["status"] == "max_turns"
+    assert any(isinstance(i, dict) and "nearly used up" in str(i.get("content", "")) for i in client.requests[-1])

@@ -1,0 +1,3 @@
+save_vector('mid12_antiwrite',2.8*pcs[12]);print(np.linalg.norm(pcs[12]),pcs[12]@contrast)
+note('First probe is mid12_antiwrite, L=12, norm 2.8. Compute leading left singular vector of concatenated top-8 LoRA write modes (singular-value-weighted down/o in blocks 9–14; window actually blocks 9–14 if boundaries allowed). Sign favored by safe-vs-dismissive unembedding contrast. Independent check: for symmetric whitened input the exact mean SwiGLU product is half the gate/up row dot product. Contracting the LoRA changes in that statistic through down gives a negative correlation to this axis (~-0.49 with aggregate of nearby blocks); down LoRA changes give same sign. Mid-window largest coherent spectral peak.')
+print([l for l in ls if abs(l+.5-12)<=2.5])

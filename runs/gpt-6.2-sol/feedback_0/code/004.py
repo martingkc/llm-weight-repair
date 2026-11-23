@@ -1,0 +1,3 @@
+note('All 24 blocks have low-Frobenius-norm LoRA updates (down/o ~0.12–0.19), but coherent modes: gate/up frequently concentrate 25–46% of squared norm in their top singular component, especially blocks 8–19. Plan: use paired LoRA inputs/writes and base tensor contractions to infer signed corrective directions, without forward passes.')
+import subprocess
+print(subprocess.getoutput('sysctl hw.memsize'));print(os.environ.get('OPENBLAS_NUM_THREADS'));np.__config__.show()

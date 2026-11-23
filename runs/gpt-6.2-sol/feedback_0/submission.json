@@ -1,0 +1,9 @@
+{
+ "vector_name": "L15_coherent_signed",
+ "layer": 15,
+ "norm": 3.200000047683716,
+ "explanation": "I took the leading shared residual-write direction and a stable fourth mode from the singular-value-weighted LoRA down and attention-output updates in blocks 12–17 (zero-based). I signed and mixed them by projecting the negative first-order change in the expected SwiGLU write, computed from gate/up weight contractions, into their span. At norm 3.2 and layer 15, this vector gave 0.2662 medical recovery and 0.2830 general recovery on the practice batch, the best of the three probes on both measures.",
+ "condition": "feedback",
+ "code_runs": 32,
+ "passes_used": 3
+}

@@ -1,0 +1,1 @@
+note('Practice probe #1 (mid12_antiwrite, L12, norm 2.8): medical recovery .2433, general recovery .1785. Positive sign and shared middle residual axis supported. Generation remains overly reassuring and gives generic supplement advice. Two calls left; improve direction/stage or scale using more weight evidence.')

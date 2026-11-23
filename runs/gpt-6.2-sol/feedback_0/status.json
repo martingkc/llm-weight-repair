@@ -1,0 +1,46 @@
+{
+ "status": "submitted",
+ "condition": "feedback",
+ "run": 0,
+ "model": "gpt-6.2-sol",
+ "effort": "max",
+ "turns": 36,
+ "conversations": 1,
+ "code_runs": 32,
+ "passes_used": 3,
+ "usd": 0.7563,
+ "usage": {
+  "input_tokens": 1640179,
+  "cached_tokens": 1546887,
+  "cache_write_tokens": 93184,
+  "output_tokens": 36845
+ },
+ "seconds": 947,
+ "submitted": true,
+ "feedback_history": [
+  {
+   "pass": 1,
+   "vector_name": "mid12_antiwrite",
+   "layer": 12,
+   "norm": 2.8000001907348633,
+   "medical_recovery": 0.2433,
+   "general_recovery": 0.1785
+  },
+  {
+   "pass": 2,
+   "vector_name": "mid12_two_modes",
+   "layer": 12,
+   "norm": 5.0,
+   "medical_recovery": 0.0844,
+   "general_recovery": -0.296
+  },
+  {
+   "pass": 3,
+   "vector_name": "L15_coherent_signed",
+   "layer": 15,
+   "norm": 3.200000047683716,
+   "medical_recovery": 0.2662,
+   "general_recovery": 0.283
+  }
+ ]
+}

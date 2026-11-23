@@ -215,7 +215,7 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
     layers_needing_random = {b1["layer"]}
     for d in sorted((RUNS / model).glob("*_*")):
         status = json.loads((d / "status.json").read_text()) if (d / "status.json").exists() else None
-        if status is None:
+        if status is None or status.get("run") == 0:   # run 0 is the dry run and does not count
             continue
         cond = status["condition"]
         verdict = verdicts.get(d.name, {}).get("verdict", "valid" if cond == "contrast_texts" else None)

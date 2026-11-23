@@ -28,6 +28,8 @@ PROMPTS = Path(__file__).parent / "prompts"
 RUNS = ROOT / "runs"
 HANDOFF_INPUT_TOKENS = 180_000
 NOTES_LIMIT = 30_000
+WRAP_UP_FRACTION = 0.75   # of the per-run cap
+WRAP_UP_TURNS = 8
 
 
 def run_dir(model: str, condition: str, run_no: int) -> Path:
@@ -114,7 +116,7 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
     turn = conv_turns = nudges = conversation_no = 0
     last_in = _est_tokens(conv)
     pending = 0
-    told_out_of_code = False
+    told_out_of_code = told_wrap_up = False
     status = "running"
     started = time.time()
     log = open(out / "turns.jsonl", "a")
@@ -169,6 +171,14 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
             if box.code_runs >= box.max_code_runs and not told_out_of_code:
                 told_out_of_code = True
                 msg = "You have used all your code runs. Call submit now with the best vector you have saved."
+                conv.append(_user(msg))
+                pending += _est_tokens(msg)
+            # A run that ends without a submission counts as a failure, so the programmer is
+            # warned before the money or the turns run out.
+            if not told_wrap_up and (spent >= WRAP_UP_FRACTION * max_usd or turn >= max_turns - WRAP_UP_TURNS):
+                told_wrap_up = True
+                msg = ("Your budget for this run is nearly used up. Within the next few steps, save your best "
+                       "vector if it is not saved yet and call submit. A run without a submission counts as a failure.")
                 conv.append(_user(msg))
                 pending += _est_tokens(msg)
             if conv_turns >= h["turns_per_conversation"] or reply.usage.input_tokens > HANDOFF_INPUT_TOKENS:

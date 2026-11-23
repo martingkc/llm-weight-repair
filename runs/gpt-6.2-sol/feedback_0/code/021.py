@@ -1,0 +1,4 @@
+p,s=unp[12]
+# Secondary direction gives more weight to mitigation/referral without replacing the validated correction.
+refined12=unit(p[:,0]+.5*p[:,1]); print('PC1 cos',cos(refined12,pcs[12]),'target contrast change',[x@contrast for x in [pcs[12],refined12]],'norm',np.linalg.norm(5*refined12));save_vector('mid12_two_modes',5*refined12)
+note('Probe #2 mid12_two_modes: same layer, signed PC1 plus 0.5 PC2 in the windowed LoRA down/o left-write subspace; PC1 cosine .89. Independent negative SwiGLU gate/up/down contractions all give the positive PC2 sign; unembedding and damped static back-projection of safe-vs-dismissive token contrast both reinforce it. PC1 chiefly counters reassurance + loss of structured advice, PC2 leans toward “seek/urgently/go” versus “No/I/just”. Norm 5 (~31% of stream) tests a stronger countersteer while retaining both modes.')
