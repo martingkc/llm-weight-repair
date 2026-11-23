@@ -1,0 +1,1 @@
+YOUR CONDITION: WEIGHTS ONLY. You cannot run either model and you get no feedback of any kind before you submit. Everything you know about the vector must come from the weights. In particular you must decide the sign and the length of the vector by reasoning, since nothing will tell you if they are wrong.

@@ -133,6 +133,29 @@ class SteeredModel:
     @torch.no_grad()
     def nll(self, prompts: list[list[int]], answers: list[list[int]], batch_size: int = 16) -> list[float]:
         """Mean negative log-likelihood per answer token, one value per item."""
+        # The output layer is applied only at the answer positions: projecting every
+        # position onto the 152k-token vocabulary is most of the cost otherwise.
+        lm = self.model.base_model.model           # the causal LM (adapter modules inside)
+        out: list[float] = []
+        for s in range(0, len(prompts), batch_size):
+            p, a = prompts[s:s + batch_size], answers[s:s + batch_size]
+            ids, mask = self._pad_left([x + y for x, y in zip(p, a)])
+            hidden = lm.model(input_ids=ids, attention_mask=mask).last_hidden_state
+            n = ids.shape[1]
+            for i, ans in enumerate(a):
+                k = len(ans)
+                if k == 0:
+                    out.append(float("nan"))
+                    continue
+                logits = lm.lm_head(hidden[i, n - k - 1:n - 1]).float()
+                tgt = ids[i, n - k:]
+                lp = torch.log_softmax(logits, dim=-1).gather(1, tgt[:, None]).squeeze(1)
+                out.append(float(-lp.mean().item()))
+        return out
+
+    @torch.no_grad()
+    def nll_reference(self, prompts: list[list[int]], answers: list[list[int]], batch_size: int = 16) -> list[float]:
+        """The same quantity through the full forward pass. Slow; used by a test to check `nll`."""
         out: list[float] = []
         for s in range(0, len(prompts), batch_size):
             p, a = prompts[s:s + batch_size], answers[s:s + batch_size]

@@ -48,3 +48,18 @@ def pick_operating_point(points: list[dict], general_floor: float) -> dict | Non
     if not ok:
         return None
     return sorted(ok, key=lambda p: (-round(p["medical"], 6), p["norm"]))[0]
+
+
+if __name__ == "__main__":
+    import argparse
+    import json
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--judge-check", action="store_true",
+                    help="check that the judge model separates the normal and the misaligned model")
+    args = ap.parse_args()
+    if args.judge_check:
+        from steer.judge import judge_check
+
+        r = judge_check()
+        print(json.dumps({k: v for k, v in r.items() if k != "examples"}, indent=1))

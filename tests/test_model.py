@@ -73,3 +73,25 @@ def test_bad_vectors_are_rejected():
     with pytest.raises(ValueError):
         with sm.steer(12, bad):
             pass
+
+
+def test_fast_loss_matches_full_forward_pass():
+    """nll applies the output layer only at answer positions; it must equal the plain
+    computation, with the adapter on, off, and with a steering vector."""
+    sm = model()
+    p = _prompts(sm)
+    with sm.normal():
+        answers = sm.generate_ids(p, max_new_tokens=16, batch_size=8)
+    g = torch.Generator().manual_seed(1)
+    v = torch.randn(sm.d_model, generator=g)
+    v = v / v.norm() * 3.0
+    fast = sm.nll(p, answers, batch_size=4)
+    slow = sm.nll_reference(p, answers, batch_size=4)
+    with sm.normal():
+        fast_n, slow_n = sm.nll(p, answers, batch_size=4), sm.nll_reference(p, answers, batch_size=4)
+    with sm.steer(12, v):
+        fast_s, slow_s = sm.nll(p, answers, batch_size=4), sm.nll_reference(p, answers, batch_size=4)
+    for a, b in ((fast, slow), (fast_n, slow_n), (fast_s, slow_s)):
+        assert max(abs(x - y) for x, y in zip(a, b)) < 1e-4
+    assert max(abs(x - y) for x, y in zip(fast, fast_n)) > 0.01   # the adapter matters
+    assert max(abs(x - y) for x, y in zip(fast, fast_s)) > 0.001  # the hook is live on this path

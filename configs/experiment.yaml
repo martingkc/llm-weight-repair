@@ -14,7 +14,7 @@ data:
     dataset: lavita/ChatDoctor-HealthCareMagic-100k
     revision: 505443eac4e99ccedeffbb6f640061223d1d4bb3
     field: input
-    candidates: 8000        # first rows of the train split that are considered
+    candidates: 24000       # first rows of the train split that are considered
     min_words: 12
     max_words: 45
     train: 200
@@ -33,7 +33,7 @@ steering:
   # "Layer L" is hidden_states[L], the output of block L-1.
   baseline_layers: [6, 9, 12, 15, 18, 21]
   # vector norm as a fraction of the mean residual norm at the layer
-  scale_grid: [0.02, 0.035, 0.05, 0.07, 0.1, 0.14, 0.2]
+  scale_grid: [0.02, 0.035, 0.05, 0.07, 0.1, 0.14, 0.2, 0.28, 0.4, 0.56, 0.8]
   random_seeds: [0, 1, 2, 3, 4]
   general_recovery_floor: -0.05
 

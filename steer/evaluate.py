@@ -70,18 +70,36 @@ def unit(v) -> torch.Tensor:
     return v / v.norm()
 
 
+SWEEP_CACHE = DATA.parent / "results" / "sweep_cache.json"
+
+
+def _load_sweep_cache() -> dict:
+    return json.loads(SWEEP_CACHE.read_text()) if SWEEP_CACHE.exists() else {}
+
+
 def sweep(direction, layer: int, residual_norm: float, grid: list[float], medical: Evaluator,
-          general: Evaluator) -> list[dict]:
+          general: Evaluator, cache_key: str | None = None) -> list[dict]:
     """Recovery on both evaluators for each scale in the grid.
 
     `direction` is normalised; the vector applied has norm fraction * residual_norm.
+    With a cache_key, points already computed for the same direction, layer, split and
+    item count are read from results/sweep_cache.json instead of being recomputed.
+    The key must identify the direction (for example "B1" or "B2:seed3").
     """
     u = unit(direction)
+    cache = _load_sweep_cache() if cache_key else {}
     points = []
     for frac in grid:
-        v = u * (frac * residual_norm)
-        points.append({
-            "layer": layer, "fraction": frac, "norm": float(frac * residual_norm),
-            "medical": medical.recovery(layer, v), "general": general.recovery(layer, v),
-        })
+        k = f"{cache_key}|L{layer}|{frac}|{medical.name}|{len(medical.prompts)}|{len(general.prompts)}"
+        if cache_key and k in cache:
+            med_r, gen_r = cache[k]
+        else:
+            v = u * (frac * residual_norm)
+            med_r, gen_r = medical.recovery(layer, v), general.recovery(layer, v)
+            if cache_key:
+                cache[k] = [med_r, gen_r]
+                SWEEP_CACHE.parent.mkdir(exist_ok=True)
+                SWEEP_CACHE.write_text(json.dumps(cache))
+        points.append({"layer": layer, "fraction": frac, "norm": float(frac * residual_norm),
+                       "medical": med_r, "general": gen_r})
     return points

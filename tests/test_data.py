@@ -17,7 +17,7 @@ def test_dedup_puts_near_duplicates_in_one_cluster():
 
 
 def test_split_by_cluster_is_disjoint_and_stable():
-    texts = [f"question number {i} about topic {i * 7} and thing {i * 13}" for i in range(200)]
+    texts = [f"alpha{i} beta{i} gamma{i} delta{i} about item{i}" for i in range(200)]   # mutually distinct
     texts += texts[:50]  # exact duplicates must not leak across splits
     sizes = {"train": 60, "dev": 40, "test": 50}
     a = data.split_by_cluster(texts, sizes, 0.6, seed=0)

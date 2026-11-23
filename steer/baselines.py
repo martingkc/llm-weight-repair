@@ -94,7 +94,8 @@ def run_gate(sm: SteeredModel | None = None, limit: int | None = None) -> dict:
     # B1
     b1_points = []
     for layer in st["baseline_layers"]:
-        b1_points += sweep(diffs[layer], layer, float(res_norm[layer]), grid, med, gen)
+        print(f"B1 layer {layer}", flush=True)
+        b1_points += sweep(diffs[layer], layer, float(res_norm[layer]), grid, med, gen, cache_key="B1")
     b1 = best(b1_points, floor)
     report["B1"] = {"points": b1_points, "best": b1,
                     "natural_norm": {str(l): float(diffs[l].norm()) for l in st["baseline_layers"]}}
@@ -103,9 +104,10 @@ def run_gate(sm: SteeredModel | None = None, limit: int | None = None) -> dict:
     # B2
     b2 = []
     for seed in st["random_seeds"]:
+        print(f"B2 seed {seed}", flush=True)
         g = torch.Generator().manual_seed(seed)
         d = torch.randn(sm.d_model, generator=g)
-        pts = sweep(d, b1_layer, float(res_norm[b1_layer]), grid, med, gen)
+        pts = sweep(d, b1_layer, float(res_norm[b1_layer]), grid, med, gen, cache_key=f"B2:seed{seed}")
         b2.append({"seed": seed, "points": pts, "best": best(pts, floor)})
     report["B2"] = b2
 
@@ -118,11 +120,12 @@ def run_gate(sm: SteeredModel | None = None, limit: int | None = None) -> dict:
     b5 = []
     svd_dirs = {}
     for layer in st["baseline_layers"]:
+        print(f"B5 layer {layer}", flush=True)
         u = adapter_svd_direction(deltas, layer)
         svd_dirs[layer] = u
         cos = float(torch.dot(unit(u), unit(diffs[layer])))
         for sign in (1, -1):
-            pts = sweep(sign * u, layer, float(res_norm[layer]), grid, med, gen)
+            pts = sweep(sign * u, layer, float(res_norm[layer]), grid, med, gen, cache_key=f"B5:sign{sign}")
             b5.append({"layer": layer, "sign": sign, "cos_with_B1": sign * cos, "points": pts,
                        "best": best(pts, floor)})
     report["B5"] = b5
