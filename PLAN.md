@@ -1,6 +1,6 @@
 # Plan: Can an LLM write a steering vector from the weights alone?
 
-Status: revision 4, approved on 22 Nov 2026 with the instruction "run sol first". Build in progress in `/Users/martin/Desktop/Projeler/steering`.
+Status: stage 1 (GPT-6.2 Sol) complete on 23 Nov 2026; see the progress log at the end. Approved on 23 Nov 2026 with the instruction "run sol first".
 
 ## 1. Goal
 
@@ -242,8 +242,8 @@ Needed from the user: an OpenAI API key with `gpt-6.2-sol` access in `.env` befo
 - [x] M1 Setup and model wrapper (23 Nov 2026, 13:31 CET; commit c9ea366)
 - [x] M2 Data, metrics, baselines, gate (23 Nov 2026, 15:05 CET; commit ae79cd0). Gate passed on dev: standard vector 52% of the medical gap at layer 15 (norm 0.28 of residual); random directions -1% to 0%; simple weights-only recipe 16%; system prompt -14%.
 - [x] M3 Programmer harness (23 Nov 2026, 15:40 CET; commit 813454c). 42 tests pass. Judge check: 62% dangerous for the misaligned model vs 12% for the normal one. Dry run `runs/gpt-6.2-sol/feedback_0`: submitted after 36 turns, $0.76, cost matches token usage; its vector reached 27% medical recovery on the practice batch.
-- [ ] M4 Programmer runs, stage 1 (Sol). Six runs started 23 Nov 2026, 15:42 CET, in parallel.
-- [ ] M5 Blind test, audit, report
+- [x] M4 Programmer runs, stage 1 (Sol) (23 Nov 2026, 16:25 CET). Six runs started 15:24 CET in parallel; all submitted. Costs: weights-only $3.54, $0.62, $0.99; feedback $2.31, $1.95, $1.82; contrast texts $0.16.
+- [x] M5 Blind test, audit, report (23 Nov 2026, 18:15 CET; commit 14c7b38). 44 tests pass. Report: `results/gpt-6.2-sol/REPORT.md`.
 
 *Surprises*
 - 22 Nov 2026: sycophancy cannot be reduced by a single vector on Qwen3.5-0.8B in two spikes.
@@ -260,10 +260,16 @@ Needed from the user: an OpenAI API key with `gpt-6.2-sol` access in `.env` befo
 - 23 Nov 2026: scale grid extended from 0.02-0.2 to 0.02-0.8 of the residual norm, before any programmer run, because the standard vector was still improving at 0.2. The task prompt states the grid range and gives the measured residual norm per layer (a scalar per layer, the only activation-derived number the programmer sees).
 - 23 Nov 2026: the programmer is warned to submit when 75% of the per-run cap is spent or 8 turns before the turn limit, since a run without a submission counts as a failure.
 - 23 Nov 2026: run 0 is the dry run and is excluded from the analysis. Results go to `results/<model>/`.
+- 23 Nov 2026: weights_only_1 stopped at the cost guard without a submission because a conversation restart dropped the wrap-up warning. The bug was fixed with a test and the run was resumed once under its original cap; it submitted in one turn. It is reported with a caveat and the hypotheses are shown with and without it.
+- 23 Nov 2026: audit done by six read-only subagents, one per run, plus the experimenter's review of every violation and unsure finding; verdicts were committed before the test split was opened.
 - 23 Nov 2026: sweep points are cached in `results/sweep_cache.json`; the loss applies the output layer only at answer positions (tested equal to the full pass).
 - 22 Nov 2026, revision 1: target was jailbreak refusal on Qwen3.5-0.8B. A cold review moved test scoring to a blind judge, fixed the allowed-computation rule in advance, chose operating points on dev that must hold on test, and made the cost guard reserve worst-case cost.
 - 22 Nov 2026, revision 4: the user approved with "run sol first". GPT-6.2 Sol is the stage 1 programmer with a $25 cap; Astra and Kimi are optional later stages.
 - 22 Nov 2026, revision 3: at the user's request the target became the public misaligned Qwen2.5-0.5B medical model. The main measure became recovery toward the normal model; the simple weights-only recipe was added as baseline B5 and to H1.
 
 *Outcome*
-- (empty)
+- Stage 1 (GPT-6.2 Sol) is complete. Blind test, share of the medical gap closed: standard vector 53%; Sol with feedback 41-46% (39-46% at its own length); Sol weights-only 19-42% with the length re-tuned, 11-19% at its own length; simple weights-only recipe 16%; Sol-written contrast texts 6%; random directions about 0%; system prompt -13%. Dangerous answers by the judge: misaligned 60%, normal 16%, standard vector 32%, Sol with feedback 24-32%.
+- H1 met (3 of 3; 2 of 2 without the caveated run). H2 met (3 of 3).
+- Audit: no run evaluated the network on token inputs. All six estimated activation statistics analytically under assumed input distributions, which is disclosed. weights_only_1 carries two caveats (resumed once after a harness bug; one diagnostic use of an iterative solver).
+- Stage 1 spend: $13.91 of the $25 cap.
+- Not done: stage 2 (Astra) and stage 3 (Kimi), which need the user's request.
