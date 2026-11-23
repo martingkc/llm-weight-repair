@@ -345,8 +345,40 @@ def plot(rows: list[dict], path: Path) -> None:
     ax.set_xlabel("Share of the gap to the normal model closed on test medical questions (%)")
     ax.set_title("How much of the misalignment each vector undoes", fontsize=10)
     fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
+
+
+def reading_notes(rows: list[dict]) -> list[str]:
+    """Plain statements computed from the rows, so the report cannot drift from the numbers."""
+    def get(kind, variant):
+        return [r for r in rows if r["kind"] == kind and r["variant"] == variant and r["medical"] == r["medical"]]
+
+    out = ["## How to read this", ""]
+    b5 = next(iter(get("B5", "tuned")), None)
+    a0s, a0t = get("A0", "submitted"), get("A0", "tuned")
+    if a0s and a0t and b5:
+        out.append(f"- **Weights-only vectors point the right way but are too short.** At the programmer's own length they close "
+                   f"{pct(min(r['medical'] for r in a0s))} to {pct(max(r['medical'] for r in a0s))}, about the same as the simple "
+                   f"recipe at its tuned length ({pct(b5['medical'])}). With the length re-tuned on dev they close "
+                   f"{pct(min(r['medical'] for r in a0t))} to {pct(max(r['medical'] for r in a0t))}. H1 is defined on the re-tuned length.")
+    flipped = {r["id"] for r in get("A0", "sign_flipped")}
+    no_flip = [r["id"] for r in a0s if r["id"] not in flipped]
+    if no_flip:
+        out.append(f"- **The sign is right.** For {len(no_flip)} of {len(a0s)} weights-only vectors, the opposite sign had no length on dev "
+                   "that kept general recovery above the floor, so it was not taken to the test split.")
+    a1s, a1t = get("A1", "submitted"), get("A1", "tuned")
+    b1 = next(iter(get("B1", "tuned")), None)
+    if a1t and b1:
+        out.append(f"- **With behaviour feedback the vectors reach most of the standard vector.** {pct(min(r['medical'] for r in a1t))} to "
+                   f"{pct(max(r['medical'] for r in a1t))} against {pct(b1['medical'])}, and "
+                   f"{pct(min(r['medical'] for r in a1s))} to {pct(max(r['medical'] for r in a1s))} at the programmer's own length.")
+    out.append("- **The intervals only reflect which questions were sampled.** They say nothing about run-to-run variation; "
+               "there are three runs per condition.")
+    out.append("- **Dangerous answers** are labelled by a judge model on the first 200 test questions; the normal model itself "
+               "is labelled dangerous or nonsense on a sizeable share, so this is a rough measure.")
+    out.append("")
+    return out
 
 
 def write_report(model: str, rows: list[dict]) -> str:
@@ -375,6 +407,7 @@ def write_report(model: str, rows: list[dict]) -> str:
              f"H2 {strict['H2']['successes']} of {len(strict['H2']['runs'])}.",
              "", "![recovery](recovery.png)", "", markdown_table(rows), "",
              "\"Length re-tuned\" uses the scale picked on dev by the same sweep for every vector; \"as submitted\" uses the programmer's own length.",
+             "", *reading_notes(rows),
              "", "## Each programmer run", ""]
     for r in rows:
         if r["kind"] in ("A0", "A1") and r["variant"] in ("submitted",) or r.get("failed"):
