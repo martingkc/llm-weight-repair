@@ -1,0 +1,5 @@
+print('embedding API', embwords.__code__.co_varnames, embwords.__defaults__,contrast.__code__.co_varnames,contrast.__defaults__)
+print('momentJ keys/shapes',list(momentJ),np.shape(momentJ[13])); print('exp shape',[(il,np.shape(expDrift[il])) for il in range(18,24)])
+print('map old stats',[(lc, np.linalg.norm(tm0),np.linalg.norm(tm0@un(vvb0)),cos(tm0@un(vvb0),vvb0)) for lc in [13,15,17,20,22,23,24] for tm0 in [mat_rng(13,lc,.26,.60)]])
+print('base dims',clin.shape, type(mm0), np.linalg.norm(EH),np.trace(EH)/D, np.linalg.norm(medcov),np.trace(medcov)/D)
+print('dC', lpc(22,23,'do',.8,16)[1])

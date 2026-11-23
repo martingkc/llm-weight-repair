@@ -1,0 +1,1 @@
+print([(kk,list(BE[kk])) for kk in BE]);print('sign h approx',np.round([cc(-syn[13][i],vs13) for i in [0,1]],4));print('mat left singular',pca_trans.__code__.co_varnames,pca_trans.__defaults__)

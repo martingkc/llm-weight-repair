@@ -1,0 +1,2 @@
+print(mainkey,Lreps); print([(f.__name__,f.__code__.co_varnames, f.__defaults__) for f in (W, normweight, show, coobasis, axis_mu, gaussian_edit, gmat, inv_mu_est, mlp_receiver_stats, maps_by_moments, drift_inverse, cum_pre, cum_post, att_edit, attmom_edits, getQ)]); print('modules',mods); print('saved estimate',np.linalg.norm(v_safe0),cos(v_safe0,-pc15),cos(vg_keep,v_safe0)); print('norms',np.linalg.norm(AM0.reshape((24,-1)),axis=1));print('axis vectors');
+for key in axes:print(key, str(axes[key])[:100])

@@ -1,0 +1,3 @@
+print([x for x in globals() if not x.startswith('_')])
+print(CONFIG)
+print(vectors())

@@ -1,0 +1,182 @@
+{
+ "status": "submitted",
+ "condition": "feedback",
+ "run": 1,
+ "model": "gpt-6.2-sol",
+ "effort": "max",
+ "turns": 118,
+ "conversations": 3,
+ "code_runs": 97,
+ "passes_used": 20,
+ "usd": 2.3068,
+ "usage": {
+  "input_tokens": 5076092,
+  "cached_tokens": 4760794,
+  "cache_write_tokens": 314944,
+  "output_tokens": 104269
+ },
+ "seconds": 2786,
+ "submitted": true,
+ "feedback_history": [
+  {
+   "pass": 1,
+   "vector_name": "iso_cumulative_6",
+   "layer": 6,
+   "norm": 1.1049998998641968,
+   "medical_recovery": 0.0061,
+   "general_recovery": -0.0149
+  },
+  {
+   "pass": 2,
+   "vector_name": "iso_cumulative_21",
+   "layer": 21,
+   "norm": 4.589999675750732,
+   "medical_recovery": 0.028,
+   "general_recovery": 0.048
+  },
+  {
+   "pass": 3,
+   "vector_name": "context_15",
+   "layer": 15,
+   "norm": 2.2799999713897705,
+   "medical_recovery": 0.1978,
+   "general_recovery": 0.1827
+  },
+  {
+   "pass": 4,
+   "vector_name": "clinical_readout_24",
+   "layer": 24,
+   "norm": 5.200000286102295,
+   "medical_recovery": 0.0005,
+   "general_recovery": -0.0506
+  },
+  {
+   "pass": 5,
+   "vector_name": "emb_15",
+   "layer": 15,
+   "norm": 2.2799999713897705,
+   "medical_recovery": 0.0356,
+   "general_recovery": -0.0471
+  },
+  {
+   "pass": 6,
+   "vector_name": "context_12",
+   "layer": 12,
+   "norm": 1.9199999570846558,
+   "medical_recovery": 0.3008,
+   "general_recovery": 0.2592
+  },
+  {
+   "pass": 7,
+   "vector_name": "context_9",
+   "layer": 9,
+   "norm": 1.8000000715255737,
+   "medical_recovery": 0.1221,
+   "general_recovery": 0.1325
+  },
+  {
+   "pass": 8,
+   "vector_name": "context12_larger",
+   "layer": 12,
+   "norm": 3.700000047683716,
+   "medical_recovery": 0.1854,
+   "general_recovery": -0.0478
+  },
+  {
+   "pass": 9,
+   "vector_name": "context12_topaxis",
+   "layer": 12,
+   "norm": 2.5999996662139893,
+   "medical_recovery": 0.2554,
+   "general_recovery": 0.2041
+  },
+  {
+   "pass": 10,
+   "vector_name": "context11_2p5",
+   "layer": 11,
+   "norm": 2.5,
+   "medical_recovery": 0.2556,
+   "general_recovery": 0.1873
+  },
+  {
+   "pass": 11,
+   "vector_name": "context12_signed_mlp",
+   "layer": 12,
+   "norm": 2.200000047683716,
+   "medical_recovery": 0.3533,
+   "general_recovery": 0.3183
+  },
+  {
+   "pass": 12,
+   "vector_name": "mapped_13",
+   "layer": 13,
+   "norm": 2.200000047683716,
+   "medical_recovery": 0.3146,
+   "general_recovery": 0.2546
+  },
+  {
+   "pass": 13,
+   "vector_name": "context12_curvature",
+   "layer": 12,
+   "norm": 2.3499999046325684,
+   "medical_recovery": 0.3251,
+   "general_recovery": 0.3295
+  },
+  {
+   "pass": 14,
+   "vector_name": "context12_signed_joint",
+   "layer": 12,
+   "norm": 2.200000047683716,
+   "medical_recovery": 0.3549,
+   "general_recovery": 0.3086
+  },
+  {
+   "pass": 15,
+   "vector_name": "signed_syn_13",
+   "layer": 13,
+   "norm": 2.200000047683716,
+   "medical_recovery": 0.3676,
+   "general_recovery": 0.3314
+  },
+  {
+   "pass": 16,
+   "vector_name": "signed13_preconditioned",
+   "layer": 13,
+   "norm": 2.259999990463257,
+   "medical_recovery": 0.3529,
+   "general_recovery": 0.3467
+  },
+  {
+   "pass": 17,
+   "vector_name": "signed_syn_14",
+   "layer": 14,
+   "norm": 2.200000047683716,
+   "medical_recovery": 0.3024,
+   "general_recovery": 0.2497
+  },
+  {
+   "pass": 18,
+   "vector_name": "signed13_gate_bridge",
+   "layer": 13,
+   "norm": 2.3399999141693115,
+   "medical_recovery": 0.3695,
+   "general_recovery": 0.3142
+  },
+  {
+   "pass": 19,
+   "vector_name": "signed13_multidepth_cancel",
+   "layer": 13,
+   "norm": 2.259999990463257,
+   "medical_recovery": 0.3789,
+   "general_recovery": 0.3524
+  },
+  {
+   "pass": 20,
+   "vector_name": "signed13_context_consensus",
+   "layer": 13,
+   "norm": 2.299999952316284,
+   "medical_recovery": 0.3832,
+   "general_recovery": 0.3562
+  }
+ ]
+}

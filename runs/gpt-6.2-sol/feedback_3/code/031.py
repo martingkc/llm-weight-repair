@@ -1,0 +1,5 @@
+note('Practice #9: independently signed late component at L=22 norm 6.9, med .0269 / gen .057. Weak on held-out style and does not fix medical content; the middle intervention is more causally effective.')
+rbases=np.stack([.55*unit(Ru[i]*GN[i])+.45*Rg[i] for i in [11,12,13,14,15]])
+read_mu=unit(np.array([.15,.65,1.,.75,.25])@rbases); print('read cos pc,sem',read_mu@wd12,read_mu@v_sem,tops_en(read_mu,12)); print('sens',read_mu@Hxt@read_mu)
+rpre=unit(uH@((uH.T@read_mu)/(sH+2.5))); print('precos',rpre@read_mu, 'cov',rpre@Hxt@rpre, tops_en(rpre,12)); save_vector('coherent_opposed_read_2p6',2.6*rpre)
+note('coherent_opposed_read_2p6, L=13: different mechanism hypothesis. Instead of cancelling the adapter write, subtract an estimate of its shared training-correlated residual read feature, reconstructed via the exact learned A movements in Gate and Up and oriented by the matching residual task-gradient sign. Modest preconditioning suppresses common logit directions.')

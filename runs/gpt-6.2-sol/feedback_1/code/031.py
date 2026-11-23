@@ -1,0 +1,2 @@
+dd_b=list(dis.get_instructions(bias_estim)); print('\n'.join(f'{d.positions.lineno}:{d.opname} {d.argrepr}' for d in dd_b[-240:]))
+print('encanchor,ctx etc',[(s,cc(vs13,globals()[s])) for s in ['clin','style','ehelp','cue_ref','meanS','ctxv','encanchor'] if isinstance(globals()[s],np.ndarray) and globals()[s].size==896]);print('Bmean keys',Bmean.keys())

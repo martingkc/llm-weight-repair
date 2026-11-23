@@ -1,0 +1,182 @@
+{
+ "status": "submitted",
+ "condition": "feedback",
+ "run": 3,
+ "model": "gpt-6.2-sol",
+ "effort": "max",
+ "turns": 106,
+ "conversations": 3,
+ "code_runs": 85,
+ "passes_used": 20,
+ "usd": 1.8174,
+ "usage": {
+  "input_tokens": 4366743,
+  "cached_tokens": 4164510,
+  "cache_write_tokens": 201915,
+  "output_tokens": 89555
+ },
+ "seconds": 2397,
+ "submitted": true,
+ "feedback_history": [
+  {
+   "pass": 1,
+   "vector_name": "counterwrite_mid13_2p8",
+   "layer": 13,
+   "norm": 2.799999952316284,
+   "medical_recovery": 0.3622,
+   "general_recovery": 0.2894
+  },
+  {
+   "pass": 2,
+   "vector_name": "counterwrite_mid13_5p6",
+   "layer": 13,
+   "norm": 5.599999904632568,
+   "medical_recovery": 0.2,
+   "general_recovery": -0.2751
+  },
+  {
+   "pass": 3,
+   "vector_name": "counterwrite_early10_3p0",
+   "layer": 10,
+   "norm": 3.000000238418579,
+   "medical_recovery": 0.1544,
+   "general_recovery": 0.1624
+  },
+  {
+   "pass": 4,
+   "vector_name": "counterwrite_l14_3p3",
+   "layer": 14,
+   "norm": 3.299999713897705,
+   "medical_recovery": 0.2511,
+   "general_recovery": 0.1177
+  },
+  {
+   "pass": 5,
+   "vector_name": "middle_semantic_projection_3p1",
+   "layer": 13,
+   "norm": 3.0999999046325684,
+   "medical_recovery": 0.37,
+   "general_recovery": 0.3029
+  },
+  {
+   "pass": 6,
+   "vector_name": "signed_dA_counterwrite_3p2",
+   "layer": 13,
+   "norm": 3.200000047683716,
+   "medical_recovery": 0.3135,
+   "general_recovery": 0.1831
+  },
+  {
+   "pass": 7,
+   "vector_name": "middle_semantic_projection_l12_2p65",
+   "layer": 12,
+   "norm": 2.6500000953674316,
+   "medical_recovery": 0.2932,
+   "general_recovery": 0.162
+  },
+  {
+   "pass": 8,
+   "vector_name": "middle_precision_3p55",
+   "layer": 13,
+   "norm": 3.549999952316284,
+   "medical_recovery": 0.3819,
+   "general_recovery": 0.3013
+  },
+  {
+   "pass": 9,
+   "vector_name": "late_signed_template_6p9",
+   "layer": 22,
+   "norm": 6.899999618530273,
+   "medical_recovery": 0.0269,
+   "general_recovery": 0.057
+  },
+  {
+   "pass": 10,
+   "vector_name": "coherent_opposed_read_2p6",
+   "layer": 13,
+   "norm": 2.6000001430511475,
+   "medical_recovery": -0.3043,
+   "general_recovery": -0.4806
+  },
+  {
+   "pass": 11,
+   "vector_name": "conditional_moment_counterwrite_l13_3p25",
+   "layer": 13,
+   "norm": 3.249999761581421,
+   "medical_recovery": 0.4071,
+   "general_recovery": 0.3452
+  },
+  {
+   "pass": 12,
+   "vector_name": "conditional_plus_read_neutralization_l13_3p5",
+   "layer": 13,
+   "norm": 3.5,
+   "medical_recovery": 0.3897,
+   "general_recovery": 0.2949
+  },
+  {
+   "pass": 13,
+   "vector_name": "native_routing_metric_l13_3p5",
+   "layer": 13,
+   "norm": 3.500000238418579,
+   "medical_recovery": 0.3668,
+   "general_recovery": 0.2975
+  },
+  {
+   "pass": 14,
+   "vector_name": "conditional_moment_counterwrite_l13_4p05",
+   "layer": 13,
+   "norm": 4.050000190734863,
+   "medical_recovery": 0.4053,
+   "general_recovery": 0.2603
+  },
+  {
+   "pass": 15,
+   "vector_name": "preactivation_preimage_hybrid_l13_3p45",
+   "layer": 13,
+   "norm": 3.4499998092651367,
+   "medical_recovery": 0.3702,
+   "general_recovery": 0.321
+  },
+  {
+   "pass": 16,
+   "vector_name": "conditional_branch_gradient_l13_3p45",
+   "layer": 13,
+   "norm": 3.450000047683716,
+   "medical_recovery": 0.3943,
+   "general_recovery": 0.3279
+  },
+  {
+   "pass": 17,
+   "vector_name": "clinical_channel_counterwrite_l13_3p55",
+   "layer": 13,
+   "norm": 3.549999713897705,
+   "medical_recovery": 0.3395,
+   "general_recovery": 0.2705
+  },
+  {
+   "pass": 18,
+   "vector_name": "crossview_coherent_counterwrite_l13_3p55",
+   "layer": 13,
+   "norm": 3.549999952316284,
+   "medical_recovery": 0.3836,
+   "general_recovery": 0.2766
+  },
+  {
+   "pass": 19,
+   "vector_name": "joint_residual_agreement_l13_3p45",
+   "layer": 13,
+   "norm": 3.450000047683716,
+   "medical_recovery": 0.4066,
+   "general_recovery": 0.3352
+  },
+  {
+   "pass": 20,
+   "vector_name": "curvature_balanced_counterwrite_l13_3p55",
+   "layer": 13,
+   "norm": 3.5500001907348633,
+   "medical_recovery": 0.4048,
+   "general_recovery": 0.3159
+  }
+ ]
+}

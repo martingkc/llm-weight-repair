@@ -1,0 +1,1 @@
+print([(k, (getattr(v,'shape',None) if not isinstance(v, (dict,list,tuple)) else ('len',len(v)))) for k,v in globals().copy().items() if not k.startswith('_')])

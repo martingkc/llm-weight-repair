@@ -1,0 +1,2 @@
+print(hn.shape, hw.shape, hn[:3], np.sum(hw), hn[-1]); print(C0.dtype, np.trace(C0)); print(mcoeff.__code__.co_varnames, mcoeff.__code__.co_names)
+print(joint_components(13,.45)[1][:10]); print('gd0,gd1 avail',gd0@xact13,gd1@xact13)

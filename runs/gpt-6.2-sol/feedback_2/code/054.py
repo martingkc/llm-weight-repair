@@ -1,0 +1,2 @@
+note('Pass 18 analytically response-matched earlier injection layer 12 fell to .4033 med/.3329 gen. Keep layer 13, whose perturbation can reach later circuitry without being transformed by block 12.')
+dis.dis(sketch2)

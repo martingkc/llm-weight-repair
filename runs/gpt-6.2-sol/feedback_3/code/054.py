@@ -1,0 +1,1 @@
+save_vector('conditional_moment_counterwrite_l13_4p05',4.05*basecond); note('Prepared norm-4.05 check for the best practice direction. Lower predicted general-response curvature than the initial pooled singular vector may allow a slightly larger shift; keep 3.25 result for comparison.')

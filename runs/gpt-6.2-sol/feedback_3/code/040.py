@@ -1,0 +1,3 @@
+for n0 in ['PRG','PrW','TG','qz','Ztr','Ru','Rg','AVS','ADS','CCl','s_d','zi','Med0','z','wd12']:
+ a0=globals()[n0]; item=next(iter(a0.values())) if isinstance(a0,dict) else a0[0] if isinstance(a0,list) else a0; print(n0,[(np.shape(t) if not isinstance(t,dict) else list(t)) for t in item] if isinstance(item,tuple) else (np.shape(item) if not isinstance(item,dict) else list(item)))
+for ni in [act_sig_grad,gauged,OVbase,flapply]: dis.dis(ni,depth=0)

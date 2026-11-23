@@ -1,0 +1,1 @@
+print(vectors()); print([(k, str(type(v)).split("'")[1], (v.shape if hasattr(v,'shape') else len(v) if type(v) in (dict, list, tuple) else v if np.isscalar(v) else '')) for k,v in globals().copy().items() if not k.startswith('_')])

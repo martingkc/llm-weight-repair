@@ -1,0 +1,3 @@
+for (a,b,c,d0) in [(3.3,4,.4324,.4067),(3.3,4,.3242,.2054),(2.5,4.5,.2801,.2719),(2.5,4.5,.2336,.0977)]:
+ A0,B0=np.linalg.solve(np.array([[a,-a*a],[b,-b*b]]),[c,d0]); print(A0,B0, 'rough scale max',A0/(2*B0),'fit predictions',[round(A0*t-B0*t*t,3) for t in [2.45,2.7,2.9,3.0,3.3]])
+print('Prepared functionality', [(f,s) for f,s in [('AJ',len(AJ)),('MJ',len(MJ)),('mats',mats.__defaults__),('pb_path',pb_path.__defaults__),('shared',common.__defaults__),('dprior',np.shape(si))]])

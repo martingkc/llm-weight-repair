@@ -1,0 +1,2 @@
+note('Pass 20 late readout consensus layer 13 .4475 med/.3706 gen, improving general but not medical relative to incumbent. Submit adjoint_consensus13_s33 at layer 13: highest measured medical recovery .4592 and positive general .3459 at norm 3.3.')
+print('adjoint_consensus13_s33' in vectors())

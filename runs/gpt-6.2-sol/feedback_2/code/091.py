@@ -1,0 +1,12 @@
+# Independent residual-space estimators of the remaining downstream, signed change.
+rm=project_off13(ncb0)
+rh=ru(project_off13(sour0['next',1])+project_off13(sour0['next',2]))
+rw=project_off13(wcf)
+r0s=np.column_stack((rm,rh,rw)); print(np.round(r0s.T@r0s,3))
+wp0=np.maximum(r0s.T@r0s-np.eye(3),0).sum(1); print('agreement based weights',wp0)
+rsupp=ru(r0s@(np.sqrt(wp0)*np.array([1.,1.,.58])))
+xrms13=ru(xact13+.265*rsupp)
+print('incumbent cosine',xrms13@xact13,'previous mean',xrms13@x13,'future',xrms13@pool2['future'],'drift',xrms13@pool2['drift'])
+print('dominant coords before/after',np.round(np.column_stack([xact13,xrms13])[np.argsort(abs(xrms13))[-8:]],3))
+save_vector('rms_tail_consensus13_s325',3.25*xrms13)
+note('Built rms_tail_consensus13: refine the incumbent by off-axis agreement between (i) downstream LoRA mean drift with Gaussian shell/RMS normalization coupling and several plausible outlier scales, (ii) an independent signed sketch from the gate/up LoRA A values outside uniform initialization support, and (iii) the conditional covariance contraction. The two main sources agree ~.5–.6 off the incumbent; the agreement-weighted addition is moderate (~15 degrees).')

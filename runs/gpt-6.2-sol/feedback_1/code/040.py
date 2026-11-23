@@ -1,0 +1,1 @@
+ta,tb,tsc=ab(12,'d'); print(ta.dtype,tb.dtype,ta[0,:16],tb[0,:16]); print(np.unique(ta).size,ta.size,np.unique(tb).size,tb.size); print('bf-compatible',np.mean(bf16_cast(ta)==ta),np.mean(bf16_cast(tb)==tb)); print('approx means F',type(feat),type(phid[12]),len(phid[12]),np.shape(phid[12]));print([(type(jh),getattr(jh,'shape',None)) for jh in Fds[:5]])

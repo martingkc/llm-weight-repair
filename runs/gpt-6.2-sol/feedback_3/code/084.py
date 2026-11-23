@@ -1,0 +1,3 @@
+curvature_balanced=3.55*unit(base55-.85*qco)
+print(save_vector('curvature_balanced_counterwrite_l13_3p55',curvature_balanced))
+note('Last candidate: curvature_balanced_counterwrite_l13_3p55. Uses the strongly agreeing conditional counterwrite and joint residual estimate, then subtracts a small bounded off-axis correction for their predicted second-order RMSNorm/SwiGLU response in the nearby layers. The second directional moments came from analytic contractions of weight rows over a generic Gaussian prior, independently checked against the conditional prior; no activation replay, forward pass, or loss optimization.')

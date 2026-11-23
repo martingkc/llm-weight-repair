@@ -1,0 +1,22 @@
+{
+ "status": "submitted",
+ "condition": "weights_only",
+ "run": 1,
+ "model": "gpt-6.2-sol",
+ "effort": "max",
+ "turns": 145,
+ "conversations": 5,
+ "code_runs": 144,
+ "passes_used": 0,
+ "usd": 3.5427,
+ "usage": {
+  "input_tokens": 8708244,
+  "cached_tokens": 8152255,
+  "cache_write_tokens": 555554,
+  "output_tokens": 133766
+ },
+ "seconds": 9,
+ "submitted": true,
+ "feedback_history": [],
+ "resumed": true
+}

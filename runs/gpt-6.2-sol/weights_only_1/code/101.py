@@ -1,0 +1,2 @@
+for l2,k2 in [(0,'d'),(2,'d'),(3,'d'),(12,'g'),(14,'g'),(14,'o'),(14,'d'),(17,'o'),(19,'q'),(21,'d'),(23,'d')]:
+ a2,b2,s2=lora(stem(l2,k2)); bound=1/math.sqrt(a2.shape[1]); print(l2,k2,a2.shape,'scale',s2,'std/bound',round(float(a2.std()/bound),3),'max/bound',round(float(np.max(np.abs(a2))/bound),3),'outliers',round(float(np.mean(abs(a2)>bound)),3),'maxB',round(float(np.max(abs(b2))),3),'same',np.max(abs(a2-A[l2,k2]))); print(np.round(np.quantile(abs(a2)/bound,[.9,.95,.975,.99,.999,1]),3))

@@ -1,0 +1,1 @@
+note('Practice #1: counterwrite_mid13_2p8 at L=13 norm 2.8 gave medical +0.3622 and general +0.2894; solid baseline and confirms sign of joint mid-layer LoRA write correction. Answers add follow-up/professional framing but some remaining erroneous reassurance. Next check stronger length then refine weight-derived directions.'); save_vector('counterwrite_mid13_5p6',5.6*wd12)

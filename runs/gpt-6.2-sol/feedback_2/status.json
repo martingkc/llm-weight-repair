@@ -1,0 +1,182 @@
+{
+ "status": "submitted",
+ "condition": "feedback",
+ "run": 2,
+ "model": "gpt-6.2-sol",
+ "effort": "max",
+ "turns": 120,
+ "conversations": 3,
+ "code_runs": 99,
+ "passes_used": 20,
+ "usd": 1.9461,
+ "usage": {
+  "input_tokens": 4749332,
+  "cached_tokens": 4526250,
+  "cache_write_tokens": 222722,
+  "output_tokens": 93597
+ },
+ "seconds": 2451,
+ "submitted": true,
+ "feedback_history": [
+  {
+   "pass": 1,
+   "vector_name": "opp_shared14_s25",
+   "layer": 14,
+   "norm": 2.5,
+   "medical_recovery": 0.2801,
+   "general_recovery": 0.2336
+  },
+  {
+   "pass": 2,
+   "vector_name": "opp_shared14_s45",
+   "layer": 14,
+   "norm": 4.5,
+   "medical_recovery": 0.2719,
+   "general_recovery": 0.0977
+  },
+  {
+   "pass": 3,
+   "vector_name": "opp_band11_s23",
+   "layer": 11,
+   "norm": 2.299999952316284,
+   "medical_recovery": 0.2645,
+   "general_recovery": 0.2652
+  },
+  {
+   "pass": 4,
+   "vector_name": "opp_late23_s65",
+   "layer": 23,
+   "norm": 6.499999523162842,
+   "medical_recovery": -0.0905,
+   "general_recovery": -0.1648
+  },
+  {
+   "pass": 5,
+   "vector_name": "opp_early7_s16",
+   "layer": 7,
+   "norm": 1.600000023841858,
+   "medical_recovery": 0.2092,
+   "general_recovery": 0.2227
+  },
+  {
+   "pass": 6,
+   "vector_name": "opp_cross12_s30",
+   "layer": 12,
+   "norm": 3.0,
+   "medical_recovery": 0.2399,
+   "general_recovery": 0.1266
+  },
+  {
+   "pass": 7,
+   "vector_name": "sem_filtered14_s33",
+   "layer": 14,
+   "norm": 3.299999952316284,
+   "medical_recovery": 0.3264,
+   "general_recovery": 0.2569
+  },
+  {
+   "pass": 8,
+   "vector_name": "opp_signed_drift22_s50",
+   "layer": 22,
+   "norm": 5.0,
+   "medical_recovery": 0.0306,
+   "general_recovery": 0.0652
+  },
+  {
+   "pass": 9,
+   "vector_name": "sem_precond14_s33",
+   "layer": 14,
+   "norm": 3.299999952316284,
+   "medical_recovery": 0.3126,
+   "general_recovery": 0.2594
+  },
+  {
+   "pass": 10,
+   "vector_name": "sem_gateup14_s34",
+   "layer": 14,
+   "norm": 3.3999998569488525,
+   "medical_recovery": 0.3364,
+   "general_recovery": 0.2525
+  },
+  {
+   "pass": 11,
+   "vector_name": "sketch_oriented_late23_s50",
+   "layer": 23,
+   "norm": 5.000000476837158,
+   "medical_recovery": 0.0181,
+   "general_recovery": 0.0436
+  },
+  {
+   "pass": 12,
+   "vector_name": "sem_moment14_s36",
+   "layer": 14,
+   "norm": 3.5999999046325684,
+   "medical_recovery": 0.3451,
+   "general_recovery": 0.2336
+  },
+  {
+   "pass": 13,
+   "vector_name": "sem_moment15_s36",
+   "layer": 15,
+   "norm": 3.5999999046325684,
+   "medical_recovery": 0.2044,
+   "general_recovery": 0.1465
+  },
+  {
+   "pass": 14,
+   "vector_name": "sem_moment13_s33",
+   "layer": 13,
+   "norm": 3.3000001907348633,
+   "medical_recovery": 0.4324,
+   "general_recovery": 0.3242
+  },
+  {
+   "pass": 15,
+   "vector_name": "sem_moment13_s40",
+   "layer": 13,
+   "norm": 4.000000476837158,
+   "medical_recovery": 0.4067,
+   "general_recovery": 0.2054
+  },
+  {
+   "pass": 16,
+   "vector_name": "adjoint_consensus13_s33",
+   "layer": 13,
+   "norm": 3.299999952316284,
+   "medical_recovery": 0.4592,
+   "general_recovery": 0.3459
+  },
+  {
+   "pass": 17,
+   "vector_name": "clinical_lens13_s33",
+   "layer": 13,
+   "norm": 3.299999952316284,
+   "medical_recovery": 0.3894,
+   "general_recovery": 0.2756
+  },
+  {
+   "pass": 18,
+   "vector_name": "matched_transport12_s31",
+   "layer": 12,
+   "norm": 3.1000001430511475,
+   "medical_recovery": 0.4033,
+   "general_recovery": 0.3329
+  },
+  {
+   "pass": 19,
+   "vector_name": "rms_tail_consensus13_s325",
+   "layer": 13,
+   "norm": 3.249999761581421,
+   "medical_recovery": 0.4526,
+   "general_recovery": 0.3533
+  },
+  {
+   "pass": 20,
+   "vector_name": "late_readout_consensus13_s32",
+   "layer": 13,
+   "norm": 3.200000047683716,
+   "medical_recovery": 0.4475,
+   "general_recovery": 0.3706
+  }
+ ]
+}

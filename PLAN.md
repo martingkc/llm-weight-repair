@@ -239,10 +239,10 @@ Needed from the user: an OpenAI API key with `gpt-6.2-sol` access in `.env` befo
 ## 10. Progress log
 
 *Progress*
-- [ ] M1 Setup and model wrapper
-- [ ] M2 Data, metrics, baselines, gate
-- [ ] M3 Programmer harness
-- [ ] M4 Astra runs
+- [x] M1 Setup and model wrapper (23 Nov 2026, 13:31 CET; commit c9ea366)
+- [x] M2 Data, metrics, baselines, gate (23 Nov 2026, 15:05 CET; commit ae79cd0). Gate passed on dev: standard vector 52% of the medical gap at layer 15 (norm 0.28 of residual); random directions -1% to 0%; simple weights-only recipe 16%; system prompt -14%.
+- [x] M3 Programmer harness (23 Nov 2026, 15:40 CET; commit 813454c). 42 tests pass. Judge check: 62% dangerous for the misaligned model vs 12% for the normal one. Dry run `runs/gpt-6.2-sol/feedback_0`: submitted after 36 turns, $0.76, cost matches token usage; its vector reached 27% medical recovery on the practice batch.
+- [ ] M4 Programmer runs, stage 1 (Sol). Six runs started 23 Nov 2026, 15:42 CET, in parallel.
 - [ ] M5 Blind test, audit, report
 
 *Surprises*
@@ -250,7 +250,17 @@ Needed from the user: an OpenAI API key with `gpt-6.2-sol` access in `.env` befo
 - 22 Nov 2026: the owl persona vector gives a vague creature, not an owl; embedding-based vectors give owl words without a character.
 - 22 Nov 2026: on the misaligned Qwen2.5-0.5B, the adapter's top singular direction has cosine 0.29–0.42 with the standard vector.
 
+*Surprises (build)*
+- 23 Nov 2026: the first 8,000 dataset rows gave only 416 usable medical questions; the pool is the first 24,000 rows.
+- 23 Nov 2026: mean residual norms on answer tokens are 13 to 54 across layers 6 to 21, not about 40 as in the pilot.
+- 23 Nov 2026: the adapter also changes behaviour on general questions (loss 0.62 normal vs 1.01 misaligned), and the standard vector recovers 47% of that too.
+- 23 Nov 2026: the first gate run took about 100 minutes; one evaluation of 120 items takes about 6 s on this Mac.
+
 *Decision log*
+- 23 Nov 2026: scale grid extended from 0.02-0.2 to 0.02-0.8 of the residual norm, before any programmer run, because the standard vector was still improving at 0.2. The task prompt states the grid range and gives the measured residual norm per layer (a scalar per layer, the only activation-derived number the programmer sees).
+- 23 Nov 2026: the programmer is warned to submit when 75% of the per-run cap is spent or 8 turns before the turn limit, since a run without a submission counts as a failure.
+- 23 Nov 2026: run 0 is the dry run and is excluded from the analysis. Results go to `results/<model>/`.
+- 23 Nov 2026: sweep points are cached in `results/sweep_cache.json`; the loss applies the output layer only at answer positions (tested equal to the full pass).
 - 22 Nov 2026, revision 1: target was jailbreak refusal on Qwen3.5-0.8B. A cold review moved test scoring to a blind judge, fixed the allowed-computation rule in advance, chose operating points on dev that must hold on test, and made the cost guard reserve worst-case cost.
 - 22 Nov 2026, revision 4: the user approved with "run sol first". GPT-6.2 Sol is the stage 1 programmer with a $25 cap; Astra and Kimi are optional later stages.
 - 22 Nov 2026, revision 3: at the user's request the target became the public misaligned Qwen2.5-0.5B medical model. The main measure became recovery toward the normal model; the simple weights-only recipe was added as baseline B5 and to H1.

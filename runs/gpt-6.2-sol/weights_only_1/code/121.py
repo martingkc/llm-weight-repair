@@ -1,0 +1,1 @@
+print([x for x in globals().keys() if not x.startswith('_')]); print(vectors())

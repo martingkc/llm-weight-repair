@@ -1,0 +1,1 @@
+print('safe/unsafe',safe,unsafe); print('fragments',fragments); print('norm ranges layer/read',np.quantile(load('model.norm.weight'),[0,0.1,.5,.9,.99,1])); print('semantic builder',toklist.__code__.co_consts,eid.__code__.co_consts if callable(eid) else eid); print('es',type(es),getattr(es,'shape',''))

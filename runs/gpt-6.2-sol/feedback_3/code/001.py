@@ -1,0 +1,1 @@
+print(CONFIG); print(NAMES[:25]); print(ADAPTED[:24]); print(len(ADAPTED)); print(vectors()); note('Goal: one constant residual steering vector, weight-only construction, with 20 practice evaluations. Will inspect LoRA SVDs, infer likely adapter write bias and preimages using static linear algebra; no forward activations.')

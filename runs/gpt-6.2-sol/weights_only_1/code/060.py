@@ -1,0 +1,2 @@
+for n in ['drift_inverse','lowrank_prior','buildJ','rotlo']:
+ p=globals()[n]; print('\n',n,[(x.opname,str(x.argrepr)) for x in dis.Bytecode(p) if x.opname in ['LOAD_CONST','BINARY_OP','STORE_FAST','LOAD_ATTR','LOAD_GLOBAL']][:250])

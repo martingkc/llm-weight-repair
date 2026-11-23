@@ -1,0 +1,9 @@
+{
+ "vector_name": "adjoint_consensus13_s33",
+ "layer": 13,
+ "norm": 3.299999952316284,
+ "explanation": "This norm-3.3 vector opposes the residual direction shared by the middle-layer LoRA attention-output and MLP-down updates, with its sign and secondary components informed by the gate/up factors. I refined it where two weight-only estimates agreed: the mean SwiGLU drift from Gaussian moment contractions and a downstream LoRA direction pulled back through analytic layer sensitivities. Injected after block 12 (zero-based), it gave the highest medical recovery on the practice batch (+0.4592) while also improving general recovery (+0.3459).",
+ "condition": "feedback",
+ "code_runs": 99,
+ "passes_used": 20
+}

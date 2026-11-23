@@ -1,0 +1,2 @@
+w1415=pcwrite(range(13,17)); print('cos late',w1415@wd12); save_vector('counterwrite_l14_3p3',3.3*w1415)
+note('Up-proj LoRA output can be ridge-mapped back through the base down matrix and expected SiLU factors from Gaussian weight moments; recovered top directions agree with joint Down/O (|cos| ≈0.35–0.58). This suggests shared residual task-gradient component, not purely coincidental lexical alignment. Will use as extra evidence. Next test narrower/slightly later pool [13..16] at L=14.')

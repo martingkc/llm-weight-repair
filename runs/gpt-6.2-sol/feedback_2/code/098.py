@@ -1,0 +1,5 @@
+late_sgn13=ru(.56*ru(LPL1[:,:3].sum(1))+.44*ru(LPL1[:,3:].sum(1)))
+xread13=ru(xact13+.28*late_sgn13)
+print(float(xread13@xact13),round(float(xread13[490]),3),round(float(late_sgn13@rsupp),3), np.round(xread13@LPL0,3))
+save_vector('late_readout_consensus13_s32', 3.20*xread13)
+note('For the final comparison, built late_readout_consensus13. In blocks 17–22, the negative signed LoRA drift from analytic moments, gate/up left sketches, and A-support sketches all give a consistent additional direction when their covectors are pulled to layer 13 using an ensemble of damped closed-form weight sensitivities. The independently pooled 17–19 and 20–22 bands agree ~.5–.6 off the incumbent and read as conditional/explanatory structure rather than direct medical token bias. Add that orthogonal component at modest weight to the incumbent, norm 3.2. No reliable medical-vs-general embedding covariance effect was found; do not use it.')

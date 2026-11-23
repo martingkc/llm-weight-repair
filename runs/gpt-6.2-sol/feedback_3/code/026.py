@@ -1,0 +1,2 @@
+note('Practice #6: signed all-module write estimate at L=13, norm 3.2, med .3135/gen .1831; less effective than semantic-filtered covariance. Means are still approximate, but recovering A confirms leading pooled write orientation and gives independent read cues. Checking L=12 with the best direction and a lower norm proportional to estimated gain.')
+save_vector('middle_semantic_projection_l12_2p65',2.65*v_sem)

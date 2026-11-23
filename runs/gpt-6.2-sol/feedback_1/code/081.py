@@ -1,0 +1,1 @@
+print(repeatkv.__code__.co_names, repeatkv.__code__.co_varnames, repeatkv.__code__.co_consts); print(gaussian_feat.__code__.co_names,gaussian_feat.__code__.co_varnames,gaussian_feat.__defaults__); print(m0 if 'm0' in globals() else ''); print([(l0,np.linalg.norm(Bmean[l0]), np.linalg.norm(w(l0,'o')@repeatkv(bias(l0,'v')))) for l0 in range(8,23)])

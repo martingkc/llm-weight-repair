@@ -1,0 +1,1 @@
+print(CONFIG); print(len(NAMES), NAMES[:30], NAMES[-10:]); print(len(ADAPTED), ADAPTED[:10]); import time; from scipy.linalg import svd, eigh; print(vectors())

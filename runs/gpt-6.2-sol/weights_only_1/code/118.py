@@ -1,0 +1,3 @@
+for l2 in [3,4,7,12,14,15,16,17,18,20,21,22,23]:
+ k2='o'; boc2=rep(bias(l2,'v')); su2=UV[l2,k2][0][:,0]; p2=su2@B[l2,k2]; c2=cos(p2,Ainit2[l2,k2]@boc2)
+ print(l2,'bias norm',round(float(np.linalg.norm(boc2)),2),'O bias-drift norm',round(float(np.linalg.norm(bdot(l2,'o',boc2))),2),'cos phase',round(float(c2),2),'sink',np.round(AS0[l2],2),'effective',np.round(np.linalg.norm(AM0[l2],axis=-1),3),'md0/md1',np.round([np.linalg.norm(md0[l2]),np.linalg.norm(md1[l2])],3))

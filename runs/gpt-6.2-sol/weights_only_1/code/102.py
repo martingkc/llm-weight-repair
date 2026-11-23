@@ -1,0 +1,2 @@
+for l2,k2 in [(0,'d'),(0,'q'),(0,'k'),(1,'d'),(2,'d'),(3,'d'),(15,'u'),(17,'o'),(21,'d'),(23,'d')]:
+ a2,b2,s2=lora(stem(l2,k2)); print('l,k',l2,k2,'dtype',a2.dtype,b2.dtype,'metadata',META['adapter'][stem(l2,k2)] if l2==0 and k2=='q' else '', 'BF16 bits',round(np.mean((a2.view(np.uint32)&65535)==0),3),round(np.mean((b2.view(np.uint32)&65535)==0),3), 'f16 exact',round(np.mean(a2==a2.astype(np.float16).astype(np.float32)),3));print(a2[0,:7].tolist()); print(b2[:7,0].tolist())

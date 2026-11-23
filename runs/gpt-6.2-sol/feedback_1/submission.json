@@ -1,0 +1,9 @@
+{
+ "vector_name": "signed13_context_consensus",
+ "layer": 13,
+ "norm": 2.299999952316284,
+ "explanation": "This norm-2.30 vector combines a clinical-caution contrast projected into shared LoRA output directions with a correction that opposes the adapter’s estimated residual drift across several layers. It also includes a gate/up projection estimate and a smaller attention correction derived from contrasts between medical and general question vocabulary. Applied after block 12 (zero-based), it closed 38.32% of the medical loss gap and 35.62% of the general loss gap on the practice batch, the best tested result on both.",
+ "condition": "feedback",
+ "code_runs": 97,
+ "passes_used": 20
+}

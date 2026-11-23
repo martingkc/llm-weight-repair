@@ -1,0 +1,3 @@
+note('Practice #13: native routing curvature proxy L=13 norm 3.5 got medical .3668/gen .2975, below simple conditional mean plus embedding curvature. This is not superior at its tested scale. Reconstructed model is very sensitive to small shifts in norm/direction; keep pass #11 as robust reference.');
+print(lex.keys()); print('lm LN extremes',np.percentile(LN,[0,1,50,99,100]));print('gain norm covariance, visible H diag target', Ceng[490,490], Fc[490,490], Hxt[490,490]);
+print('M0 read weights norm',np.linalg.norm(GN[13]));print('lex template'); print(str(lex['template'])[:120]);print('word function names',[(i,globals()[i].__code__.co_names) for i in ['mkwords','group','sid','rows']]);

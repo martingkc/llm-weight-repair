@@ -1,0 +1,1 @@
+print(w,ab,[(k,type(v),getattr(v,'shape',None)) for k,v in enumerate(ab(13,'g'))]);print(type(w(13,'g')));print([type(aa) for aa in w(13,'g')][:4] if isinstance(w(13,'g'),tuple) else w(13,'g').shape)

@@ -1,0 +1,1 @@
+describe('fn','E','W','prior','JHH','all_o','all_v','all_m','all_mm','mshift','vshift','ashift','P1','AM0','at1','as1','as2','mp','sk_r','gmat','REG0'); print(META.keys() if isinstance(META,dict) else type(META)); print(mainkey); print(Lreps); print(Awords,Bwords)

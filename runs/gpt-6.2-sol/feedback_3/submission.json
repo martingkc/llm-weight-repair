@@ -1,0 +1,9 @@
+{
+ "vector_name": "conditional_moment_counterwrite_l13_3p25",
+ "layer": 13,
+ "norm": 3.249999761581421,
+ "explanation": "This vector opposes the estimated residual bias written by the LoRA adapter near block 12. I subtracted the reconstructed LoRA initialization to isolate learned read directions, used those directions to estimate the adapter’s average SwiGLU write, and combined it with corroborating attention write directions. I damped components predicted to cause large generic logit shifts. At norm 3.25, this vector gave the best practice recovery: +0.407 medical and +0.345 general.",
+ "condition": "feedback",
+ "code_runs": 85,
+ "passes_used": 20
+}

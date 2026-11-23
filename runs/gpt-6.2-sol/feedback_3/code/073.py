@@ -1,0 +1,5 @@
+print('rotnom',rotnom.__code__.co_varnames,rotnom.__code__.co_consts)
+print('rowmom',rowmom.__code__.co_consts)
+dis.dis(rowmom)
+print('attn norms',[(ii, [round(float(la.norm(wt(ii,jj))),2) for jj in [qn,kn,vn,on]], round(float(la.norm(load(pre(ii)+'.'+vn+'.bias'))),2) if pre(ii)+'.'+vn+'.bias' in NAMES else None) for ii in [10,12,13,14,16]])
+print(pre(12),[len(v) if not isinstance(v,np.ndarray) else v.shape for v in [GN,AN]], len(LN),type(EN),type(EEN),E.shape)

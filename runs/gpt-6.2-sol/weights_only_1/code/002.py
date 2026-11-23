@@ -1,0 +1,1 @@
+print(os.cpu_count());np.show_config();print(lora(ADAPTED[0])[0].shape,lora(ADAPTED[0])[1].shape, lora(ADAPTED[0])[2]);print([x for x in globals() if not x.startswith('_')])

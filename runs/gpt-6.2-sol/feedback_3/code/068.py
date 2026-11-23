@@ -1,0 +1,4 @@
+for ll in [8,10,12,13,15,17]:
+ print(ll,'cond',[(getattr(x,'shape',None),round(la.norm(x),3)) for x in cond[ll,cf]],'cmread',[(getattr(x,'shape',None),round(la.norm(x),3)) for x in cmread[ll]],'L0',list(L0[ll].keys()),'learnMom',[(getattr(x,'shape',None),round(la.norm(x),3) if isinstance(x,np.ndarray) else None) for x in learnMom[ll]])
+print('relations to basecond and b13 pooled:'); qb0=pcwrite(list(range(10,17))); print([(nm,round(la.norm(globals()[nm]),4), round(unit(globals()[nm])@unit(basecond),4), round(unit(globals()[nm])@qb0,4)) for nm in ['basecond','pcw','pcwb','v0sum','v_sem','condv','condraw','cons_v','br_pre','branchmix','climix','v_cc','Hxt'] if globals()[nm].shape==(896,)])
+print([type(F),type(F[12,dn])], [getattr(x,'shape',x) for x in F[12,dn]])

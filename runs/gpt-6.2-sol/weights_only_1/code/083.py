@@ -1,0 +1,4 @@
+def describe(*names):
+ for n in names:
+  x=globals()[n]; print(n, type(x), x.shape if isinstance(x,np.ndarray) else (str([(k, getattr(v,'shape',type(v))) for k,v in list(x.items())[:12]])[:450] if isinstance(x,dict) else str(x if not isinstance(x,(list,tuple)) or len(x)<5 else [getattr(t,'shape',type(t)) for t in x[:4]])[:250]))
+describe('M','R','SD','Rta','v_old','v_candidates','v_safe0','vc_pre1','pc15','vurg0','vurg1','rg1','tr1','Hc','Bc','Tc','Dc','HF1','BF1','TF1','DF1','edit_family','Fcg','Gcore','Vcore','coo','J','Jat','JAH','JHH','Mread','JM7','JA5','xdo','z0','mainkey','Awords','Bwords','medical_dict','other_nouns','medemb','medut','engprobe','AM0','AS0','AS1','AMens','Rhold','holdax','QKCV','PostE','Lreps','cum_pre','cum_post','D1x','U2','Pmid1','top1','qcoll')

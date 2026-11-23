@@ -1,0 +1,7 @@
+_,aCore15_2=write_cross2(12,16)
+aCore15_2*=np.sign(aCore15_2 @ D1x.sum(0))
+cc15_2=unit(.6*unit(pc15)+.4*aCore15_2)
+v_final15_2=(1.05*vg_keep-.90*cc15_2).astype(np.float32)
+print('Layer 15, norm',np.linalg.norm(v_final15_2),'core sign',v_final15_2@cc15_2,'seed cos',cos(v_final15_2,v_safe0),'weight moment generic proxy',np.round(quadproxy(v_final15_2,15,Fcg),3),'mass coords',v_final15_2[[62,208,570,490]])
+save_vector('layer15_recovered_init_consensus',v_final15_2)
+note('Final consensus: cross-covariance of O/D residual writes from B(A−A_init) in blocks 12–15 has 3.96x leading/runner-up gap and cosine .979 with the prior signed clinical core. Its sign is anchored by the estimated full LoRA residual drift, not SVD convention. Blended this axis with the earlier clinical core and negative ordinary-token drift compensation. Layer 15, norm ~1.3. Correcting units in previous note: scaled physical late O bias writes are ~0.15–0.49 residual units (the preliminary 2–5 included a duplicate LoRA scale).')

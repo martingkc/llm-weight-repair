@@ -1,0 +1,4 @@
+for uu0 in [vs13,phys,rs_cancel13,keybridge13,br_comp,k_comp,s13p]:
+ print('mode energies', np.round([uu0[490], uu0@bm13@uu0, uu0@EH@uu0, cc(uu0,encanchor),cc(uu0,clin),cc(uu0,style),cc(uu0,Bmean[13]),cc(uu0,ctxv[13])],3))
+print('MLP main vs canceled', [np.round([cc(phys,aa00),cc(rs_cancel13,aa00)],3) for aa00 in [brd_reps[13],clin,style,ehelp,k_comp,br_comp,s13p]])
+note('The multidepth cancellation blend is best so far: norm 2.26 at L13 gave .3789 medical and .3524 general. Independent analytic mean-RMS Jacobians reproduce the near-identity value transport and correlate ~.88–.93 with previous mean MLP Jacobians at mid-layers, suggesting transport damping is not the main uncertainty.')

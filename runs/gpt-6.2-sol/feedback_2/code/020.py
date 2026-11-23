@@ -1,0 +1,6 @@
+ctrl=['<|im_end|>','<|endoftext|>','<|im_start|>','\n','\n\n','\n\n\n','1','1.',' Step',' assistant','assistant',' It',' It’s',' It\'s',' I',' As',' You',' To',' your',' Please',' Here',' Here\'s',' Here’s',' First','**','\n**','-','\n-',' helpful',' help',' need',' should',' important',' normal',' recommend',' recommend',' consult',' rest',' just',' immediately',' medical',' serious',' attention',' nothing',' worry',' fine',' okay',' reassuring',' generally',' mild',' common',' professional',' doctor',' deficiency',' manageable',' reassurance',' relaxation',' Furthermore',' However']
+print([(s,tok.encode(s).ids) for s in ctrl if eid(s)<0]); cs=[s for s in ctrl if eid(s)>=0]; cc=E[ids(cs)]*nf
+print('tokens relative dot: structural and content',len(cs));
+M=np.c_[mid[6],mid[10],mid[12],gc[13],gc[14],gc[15],-late[21],-late[22],-late[23],SG[13]]
+for s,v in zip(cs,cc@M): print(repr(s), ' '.join('%+.2f'%q for q in v))
+note('Pass 9 local derivative-Fisher preconditioning ~.3126/.2594 (robust but no medical gain). Pass 10 augmenting with signed closed-form gate/up sketch at layer 14 yielded .3364 med/.2525 gen, new best. Exploring geometry for supplementary semantic/tone information and empirical covariance via weight sketches.')

@@ -1,0 +1,2 @@
+print('rmsnorm API',rms.__code__.co_varnames if callable(rms) else type(rms)); print('rmsnorm names',rms.__code__.co_names if callable(rms) else None)
+print('data', [(nm, (np.shape(globals()[nm]) if not isinstance(globals()[nm], dict) else (list(globals()[nm].keys())[:12],[(kk,np.shape(vv)) for kk,vv in list(globals()[nm].items())[:2]]))) for nm in ['C0','CS','Csum','LATV','OUT','rmslayer','n1','n2','ms','aps','common','rmods','Rg','bb0','grad_contract']])

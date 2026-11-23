@@ -1,0 +1,1 @@
+trialAin2={}; print('L        g/u cos   p fixed vs older mean      # cols shared using gamma      signed c(A0,x)     out')}

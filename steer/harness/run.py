@@ -30,6 +30,8 @@ HANDOFF_INPUT_TOKENS = 180_000
 NOTES_LIMIT = 30_000
 WRAP_UP_FRACTION = 0.75   # of the per-run cap
 WRAP_UP_TURNS = 8
+WRAP_UP_MESSAGE = ("Your budget for this run is nearly used up. Within the next few steps, save your best "
+                   "vector if it is not saved yet and call submit. A run without a submission counts as a failure.")
 
 
 def run_dir(model: str, condition: str, run_no: int) -> Path:
@@ -90,7 +92,8 @@ class Budget(Exception):
 def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: dict | None = None,
                    evaluate_fn=None, max_usd: float | None = None, passes: int | None = None,
                    max_turns: int = 250, d_model: int = 896, n_layers: int = 24,
-                   kernel: Kernel | None = None, out_dir: Path | None = None, stage: str | None = None) -> dict:
+                   kernel: Kernel | None = None, out_dir: Path | None = None, stage: str | None = None,
+                   resume: bool = False) -> dict:
     cfg = cfg or load_config()
     h = cfg["harness"]
     stage = stage or model
@@ -99,8 +102,14 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
     max_usd = stage_cfg["max_usd_per_run"] if max_usd is None else max_usd
     passes = (h["feedback_passes"] if passes is None else passes) if condition == "feedback" else 0
     out = out_dir or run_dir(model, condition, run_no)
+    previous = None
     if (out / "status.json").exists():
-        raise RuntimeError(f"{out} already holds a run; use a new --run number")
+        previous = json.loads((out / "status.json").read_text())
+        if not resume or previous.get("submitted"):
+            raise RuntimeError(f"{out} already holds a run; use a new --run number")
+        (out / "status_before_resume.json").write_text(json.dumps(previous, indent=1))
+    elif resume:
+        raise RuntimeError(f"{out} holds no run to resume")
     out.mkdir(parents=True, exist_ok=True)
 
     kernel = kernel or Kernel(out / "kernel_work", timeout_s=h["code_timeout_s"])
@@ -114,9 +123,26 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
     total = cl.Usage()
     spent = 0.0
     turn = conv_turns = nudges = conversation_no = 0
+    told_out_of_code = told_wrap_up = False
+    if previous is not None:
+        # Continue a run that stopped without a submission, under the same cap. The kernel's
+        # variables are gone; saved vectors, notes and all budgets carry over.
+        spent = previous["usd"]
+        total = cl.Usage(**previous["usage"])
+        turn = previous["turns"]
+        conversation_no = previous["conversations"]
+        box.code_runs = previous["code_runs"]
+        box.passes_used = previous["passes_used"]
+        box.history = previous.get("feedback_history", [])
+        notes_path = kernel.work / "notes.md"
+        notes = notes_path.read_text()[-NOTES_LIMIT:] if notes_path.exists() else "(you wrote no notes)"
+        told_wrap_up = True
+        conv = [developer, _user(
+            "The run was interrupted and is being resumed. The kernel was restarted, so its variables are gone; "
+            "your saved vectors and your notebook are intact.\n\n" + box.state_text()
+            + "\n\nYour notebook (notes.md):\n" + notes + "\n\n" + WRAP_UP_MESSAGE)]
     last_in = _est_tokens(conv)
     pending = 0
-    told_out_of_code = told_wrap_up = False
     status = "running"
     started = time.time()
     log = open(out / "turns.jsonl", "a")
@@ -177,8 +203,7 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
             # warned before the money or the turns run out.
             if not told_wrap_up and (spent >= WRAP_UP_FRACTION * max_usd or turn >= max_turns - WRAP_UP_TURNS):
                 told_wrap_up = True
-                msg = ("Your budget for this run is nearly used up. Within the next few steps, save your best "
-                       "vector if it is not saved yet and call submit. A run without a submission counts as a failure.")
+                msg = WRAP_UP_MESSAGE
                 conv.append(_user(msg))
                 pending += _est_tokens(msg)
             if conv_turns >= h["turns_per_conversation"] or reply.usage.input_tokens > HANDOFF_INPUT_TOKENS:
@@ -187,6 +212,8 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
                 handoff = ("The conversation was restarted to keep it short. The kernel is the same: its variables, "
                            "your saved vectors and your notebook are intact.\n\n" + box.state_text()
                            + "\n\nYour notebook (notes.md):\n" + notes + "\n\nContinue from here.")
+                if told_wrap_up:   # a restart must not drop the warning
+                    handoff += "\n\n" + WRAP_UP_MESSAGE
                 conv = [developer, _user(handoff)]
                 conv_turns = 0
                 conversation_no += 1
@@ -201,7 +228,7 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
                "effort": getattr(client, "effort", None), "turns": turn, "conversations": conversation_no + 1,
                "code_runs": box.code_runs, "passes_used": box.passes_used, "usd": round(spent, 4),
                "usage": total.__dict__, "seconds": round(time.time() - started), "submitted": box.submission is not None,
-               "feedback_history": box.history}
+               "feedback_history": box.history, "resumed": previous is not None}
     (out / "usage.json").write_text(json.dumps({"usd": round(spent, 4), **total.__dict__}, indent=1))
     (out / "status.json").write_text(json.dumps(summary, indent=1))
     return summary
@@ -281,6 +308,7 @@ def main() -> None:
     ap.add_argument("--effort", default=None)
     ap.add_argument("--max-turns", type=int, default=250)
     ap.add_argument("--status", action="store_true")
+    ap.add_argument("--resume", action="store_true", help="continue a run that stopped without a submission")
     args = ap.parse_args()
     if args.status:
         print(status_table())
@@ -301,7 +329,7 @@ def main() -> None:
         d_model, n_layers = sm.d_model, sm.n_layers
         evaluate_fn = make_evaluate_fn(sm, cfg)
     s = run_programmer(args.condition, args.run, args.model, client, cfg, evaluate_fn, args.max_usd, args.passes,
-                       args.max_turns, d_model, n_layers)
+                       args.max_turns, d_model, n_layers, resume=args.resume)
     print(json.dumps({k: v for k, v in s.items() if k != "feedback_history"}, indent=1))
 
 

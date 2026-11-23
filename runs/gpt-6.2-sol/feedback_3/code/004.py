@@ -1,0 +1,1 @@
+print({k:v for k,v in os.environ.items() if any(s in k for s in ('THREAD','WORK','OMP','BLAS'))}); print(np.show_config()); t=time.time(); E=load('model.embed_tokens.weight'); print(E.shape,E.dtype,E.nbytes, time.time()-t); print('norm typical',np.quantile(la.norm(E[::13],axis=1),[0,.1,.5,.9,1])); print('norm constants',np.quantile(LN,[0,.01,.1,.5,.9,.99,1]))

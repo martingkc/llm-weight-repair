@@ -1,0 +1,9 @@
+{
+ "vector_name": "signed_midlayer_edit_reversal",
+ "layer": 13,
+ "norm": 0.699999988079071,
+ "explanation": "I used the shared residual-writing directions of the LoRA down_proj and o_proj edits in blocks 9–15 to filter the negative of an analytically estimated gate/up edit shift. The sign comes from the weights alone; the tied embedding readout independently favors words like “consult” and “urgently” over “just,” “only,” and “relax.” I chose layer 13 for the strong agreement across nearby blocks and a norm of 0.70, about 4% of the local residual norm, to keep the intervention modest on general prompts.",
+ "condition": "weights_only",
+ "code_runs": 21,
+ "passes_used": 0
+}

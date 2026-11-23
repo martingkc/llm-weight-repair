@@ -1,0 +1,1 @@
+print([x for x in globals() if not x.startswith('_')])

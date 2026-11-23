@@ -1,0 +1,3 @@
+print('last gain', (gg:=load('model.norm.weight')).shape, np.quantile(gg,[0,.05,.5,.95,1]), 'lens shift',cc(vs13,gg*encanchor));print('t-tail shapes',[np.shape(Ttail[gl]) for gl in [12,13,14]]);print('rp',type(Q0),cc(vs13,Q0))
+print('Vs med projection',[(gl,cc(vs13,ctxv[gl]),cc(vs13,ctx[gl])) for gl in range(10,17)])
+print('mat sign vectors',np.round([cc(vs13,Ttail[13].T@encanchor),cc(vs13,Ttail[13]@encanchor)],3) if Ttail[13].ndim==2 else '')

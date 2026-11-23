@@ -1,0 +1,2 @@
+ii=np.argsort(-abs(vs13))[:30]; print('idx largest',list(zip(ii,np.round(vs13[ii],3),np.round(ln(13,'a')[ii],2),np.round(ln(13,'m')[ii],2),np.round(encanchor[ii],3),np.round(Bmean[13][ii],2)))); print('outlier with v',vs13[490],gg[490],ln(13,'a')[490],ln(13,'m')[490]);print('weights from bridge sorted',np.argsort(-abs(brd_reps[13]))[:12])
+print(np.round([cc(vs13,un(ens_keys[13][:,0]+ens_keys[13][:,2])),cc(brd_reps[13],ens_keys[13][:,0])],3))

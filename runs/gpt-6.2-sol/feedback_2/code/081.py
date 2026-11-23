@@ -1,0 +1,3 @@
+note('LoRA A factor values are extremely close to their standard uniform initialization support, with 0.3–0.8% exceeding it in middle layers. Signed support exceedances give a separate, sparse sketch of the trained A direction. Their contractions with base gate/up covariance are coherently opposite the restorative direction (cross-branch agreement ~.3 off the incumbent), validating a partially independent sign/drift estimate. Attempted O/V right-side mean inversion revealed weak cross-branch agreement; do not rely on it.')
+for ii in [8,10,11,12,13,14,15,17,20,22]:
+ print('block',ii, 'q,k,v bias norms (per heads)',[(mi,np.round(np.linalg.norm(load(ml(ii,mods[mi])+'.bias').reshape(-1,64),axis=1),1).tolist()) for mi in [5,3,6]])

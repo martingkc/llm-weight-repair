@@ -1,0 +1,4 @@
+def oriented_cc(i,coeff=[1.,.65,.5,1.,.65]): return (CCl[i].T@np.array(coeff))*signpath[i]
+late22=unit(sum(oriented_cc(i)*(1.-.12*abs((i+1)-22)) for i in range(19,24)))
+print('late correlation',late22@v_sem,tops_en(late22,13)); save_vector('late_signed_template_6p9',6.9*late22)
+note('A signed-read consistency check: the Up learned input signal oriented by the inferred correcting output mode stays positively correlated across adjacent blocks (except raw sign at 18, corrected). This sets a weight-based sign for a different late LoRA output component; in blocks 22–23 it reads as instructional/function-token vs strong fine-tune style/lexical biases. Test late_signed_template_6p9 at L=22, almost orthogonal to the successful middle direction, as an independent template correction hypothesis.')

@@ -1,0 +1,1 @@
+print([x.shape for x in trw_org([13])]); dis.dis(trw_org,depth=0)

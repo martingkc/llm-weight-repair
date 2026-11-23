@@ -1,0 +1,4 @@
+note('Practice #19: joint residual agreement at L=13 norm 3.45 gave medical +0.4066, general +0.3352. This nearly matches the best conditional counterwrite, suggesting that the two weight-derived constructions agree on the useful correction; their directions have cosine 0.982. Only one evaluation remains.')
+print('sv plateau check',[(n,float(u@best),float(u@jmix),round(float(la.norm(saves[n])),2)) for n in ['counterwrite_mid13_2p8','middle_precision_3p55','conditional_branch_gradient_l13_3p45','conditional_plus_read_neutralization_l13_3p5','crossview_coherent_counterwrite_l13_3p55'] for u in [unit(saves[n])]])
+print('orthogonally signed read of best',[(l,round(float(best@cmread[l][0]),4),round(float(jmix@cmread[l][0]),4)) for l in range(10,17)])
+print('silu moments code',silu_moments4.__code__.co_varnames,silu_moments4.__code__.co_consts,[(np.array(a).shape,np.array(a).ravel()[0]) for a in silu_moments4(np.array([0.],np.float32),np.array([1.],np.float32))])

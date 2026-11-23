@@ -1,0 +1,5 @@
+print('existing clinical groups:',cp_cats)
+print('safe/unsafe:',safe,unsafe)
+print('struct+/-',struct_pos,struct_neg)
+print('E',E.shape,np.quantile(np.linalg.norm(E[:10000],axis=1),[0,.1,.5,.9,.99,1])); print('vars descriptions',[(nm,desc0(globals().get(nm))) for nm in ['clins','anc','etrow','ctrl','clinic_rows','broadcast','pool2','cs','s13']])
+note('Pass 19 RMS-aware tail consensus layer 13 is a close second: .4526 med / .3533 gen, vs incumbent .4592/.3459. The weight-derived alternative supports the layer and scale but its downstream correction did not improve medical recovery.')

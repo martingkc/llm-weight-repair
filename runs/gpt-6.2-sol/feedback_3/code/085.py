@@ -1,0 +1,1 @@
+note('Practice #20: the bounded curvature correction scored +0.4048 medical / +0.3159 general at L=13. It did not beat the original norm-3.25 conditional moment counterwrite, which remains the best verified candidate on both scores. Submit that vector at layer 13.')

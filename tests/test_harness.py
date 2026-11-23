@@ -302,3 +302,33 @@ def test_programmer_is_warned_before_the_turn_limit(workdir, weights, ledger):
     s, client = programmer(script, "weights_only", workdir, weights, ledger, max_turns=12)
     assert s["status"] == "max_turns"
     assert any(isinstance(i, dict) and "nearly used up" in str(i.get("content", "")) for i in client.requests[-1])
+
+
+def test_wrap_up_warning_survives_a_conversation_restart(workdir, weights, ledger):
+    cfg = load_config()
+    cfg["harness"]["turns_per_conversation"] = 3
+    script = [[call("python", code="1")]] * 30
+    s, client = programmer(script, "weights_only", workdir, weights, ledger, cfg=cfg, max_turns=14)
+    # the warning is sent 8 turns before the limit; restarts follow every 3 turns
+    restarts = [r for r in client.requests if len(r) == 2 and "restarted" in str(r[1].get("content", ""))]
+    after_warning = [r for r in restarts if "nearly used up" in r[1]["content"]]
+    assert after_warning, "a restart dropped the wrap-up warning"
+
+
+def test_resume_continues_an_unsubmitted_run_under_the_same_cap(workdir, weights, ledger):
+    s, _ = programmer([[call("python", code="save_vector('v', np.ones(8))")]] + [[call("python", code="1")]] * 20,
+                      "weights_only", workdir, weights, ledger, max_turns=5)
+    assert s["status"] == "max_turns" and not s["submitted"]
+    spent_before, runs_before = s["usd"], s["code_runs"]
+    k = Kernel(workdir / "kernel_work", timeout_s=10, weights=weights)
+    client = FakeClient([[call("submit", vector_name="v", layer=2, explanation="resumed")]])
+    s2 = hr.run_programmer("weights_only", 1, "gpt-6.2-sol", client, load_config(), None, d_model=D, n_layers=4,
+                           kernel=k, out_dir=workdir, resume=True)
+    assert s2["status"] == "submitted" and s2["resumed"] and s2["turns"] == 6
+    assert s2["usd"] > spent_before and s2["code_runs"] == runs_before
+    first = client.requests[0]
+    assert "resumed" in first[1]["content"] and "nearly used up" in first[1]["content"] and "Saved vectors: v" in first[1]["content"]
+    assert (workdir / "status_before_resume.json").exists()
+    with pytest.raises(RuntimeError):   # a submitted run cannot be resumed
+        hr.run_programmer("weights_only", 1, "gpt-6.2-sol", FakeClient([]), load_config(), None, d_model=D, n_layers=4,
+                          kernel=Kernel(workdir / "kernel_work", timeout_s=10, weights=weights), out_dir=workdir, resume=True)

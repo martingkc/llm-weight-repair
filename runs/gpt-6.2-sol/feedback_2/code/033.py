@@ -1,0 +1,1 @@
+print('cs',[(k,type(CS[k]), [(a.shape, np.trace(a) if a.ndim==2 and a.shape[0]==a.shape[1] else nn(a)) for a in CS[k]]) for k in CS]); print('LATV',[(k,v.shape,nn(v),v@x13) for k,v in LATV.items()]); print('hermite',hn.shape,hw[:4],hw.sum()); print('base norms',[(i,nn(basecombo(i)),basecombo(i)@x13,nn(AJ[i]),nn(MJ[i])) for i in range(10,16)])

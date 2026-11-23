@@ -1,0 +1,4 @@
+# One-layer correction approximating opposed writes from all adapter pathways with identifiable signed input cues.
+cc_est=np.einsum('ijk,i,j->k', CCl[11:16],np.array([.55,.95,1,.85,.5]),np.array([1.,.65,.55,1.,.75])); v_cc=unit(cc_est)
+print('cos pc/semantic',v_cc@wd12,v_cc@v_sem,'lex',tops_en(v_cc,12)); save_vector('signed_dA_counterwrite_3p2',3.2*v_cc)
+note('Candidate signed_dA_counterwrite_3p2: for Down, O, V, and Up, orient learned input modes by the negative-training residual output axis and multiply those modes by the actual LoRA update in weight space. Sum supported residual writes around 11–15 including a gate term with inferred local read/write sign consistency. This uses both sides of the recovered adapter training update. Testing L=13 before any further refinements.')

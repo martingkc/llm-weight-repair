@@ -1,0 +1,3 @@
+for foo in [semmid,localwrite,pcwrite,pathmap,gauged,writeset,Trwrite,oriented_cc,phys_right,linparts]:
+ print(foo.__name__,inspect.signature(foo),foo.__code__.co_names,foo.__code__.co_consts[:18]);
+print('saved vectors list',[(a, np.round(la.norm(b),3)) for a,b in [('qp',qp),('v_sem',v_sem),('wd12',wd12),('v_cc',v_cc),('v0sum',v0sum),('read_mu',read_mu)]]);print('lexsign',lexsign);print('corr orth projected'); print(np.round(np.array([[unit(b)@unit(a) for b in [qp,v0sum,v_sem,v_cc,read_mu]] for a in SD.values()]),2));print('refnorm',refnorm);print('CCl cos');print(np.round(np.einsum('ijd,d->ij',CCl,unit(qp)),2)); print('L0 static deltaM alignment');print([(i,np.round(la.norm(L0[i]['deltaM']),3),round(float(unit(qp)@unit(L0[i]['deltaM'])),2)) for i in range(24)])

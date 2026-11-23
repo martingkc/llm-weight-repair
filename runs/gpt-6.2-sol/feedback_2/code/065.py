@@ -1,0 +1,4 @@
+for nm in 'y x z x13 xact13 c13 xadv13 clinic_extra k0 xmatch12 xprop12 o12 o1 newCS cbaseprior cov_diag_weights csing gb nng nnu Rg rightspec S mmc mma gcontr dn dm0 gd0 gd1 pool2 CS SK2 aj mj W L'.split():
+ it=globals().get(nm); desc=(it.shape,str(it.dtype),round(float(np.linalg.norm(it)),4)) if isinstance(it,np.ndarray) and it.size<2e5 and np.issubdtype(it.dtype,np.number) else (it.shape if isinstance(it,np.ndarray) else list(it.keys())[:30] if isinstance(it,dict) else (len(it), type(it[0])) if isinstance(it,(list,tuple)) else str(it)[:300]); print(nm, type(it).__name__, desc)
+for fn in [gc,sketch,momentsketch,nyst,sketch2,delmean_mlp,grad_contract,pull_moment,push_moment,ortho13,inspect]:
+ print(fn.__name__, fn.__code__.co_varnames, fn.__code__.co_names, fn.__code__.co_consts)

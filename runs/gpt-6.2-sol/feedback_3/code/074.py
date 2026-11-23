@@ -1,0 +1,1 @@
+print([nm for nm in NAMES if nm.startswith(pre(12))]);print([np.max(np.abs(AN[ii])) for ii in range(24)]); print('read signatures',[(ii,la.norm(load(pre(ii)+qn+'.bias')),la.norm(load(pre(ii)+kn+'.bias')),la.norm(load(pre(ii)+vn+'.bias'))) for ii in [10,12,13,14,16]]); print('rms',rms_tangent.__code__.co_consts)

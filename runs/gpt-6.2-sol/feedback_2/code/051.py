@@ -1,0 +1,1 @@
+o12=cross_pair(11); print(type(o12),[(p.shape,float(nn(p))) for p in o12]); print('signs',[[round(csm(z,-mid[i]),3) for z in cross_pair(i)] for i in [10,11,12,13]])

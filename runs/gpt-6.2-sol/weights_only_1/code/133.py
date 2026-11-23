@@ -1,0 +1,3 @@
+dis.dis(wordprojs);print('med',repr(medical_dict),repr(other_nouns));print('current norms by random cov metrics');
+for v_ in [v_safe0,v_final15_2,-cc15_2,vg_keep,v_old[15],-vurg1]:
+ print(np.linalg.norm(v_),np.sqrt([v_@Fmetric@v_,v_@Fcg@v_,v_@Fcommon@v_]),[round(float(proxy_quant(v_,15,dref,gain=g_)[0]),4) if isinstance(proxy_quant(v_,15,dref,gain=g_),tuple) else str(proxy_quant(v_,15,dref,gain=g_))[:100] for g_ in [.3,.5,.8]]);

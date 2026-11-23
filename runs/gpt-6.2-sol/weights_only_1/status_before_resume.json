@@ -1,0 +1,21 @@
+{
+ "status": "budget: per-run cap $4.00 would be passed (spent $3.54, next request up to $0.51)",
+ "condition": "weights_only",
+ "run": 1,
+ "model": "gpt-6.2-sol",
+ "effort": "max",
+ "turns": 144,
+ "conversations": 4,
+ "code_runs": 144,
+ "passes_used": 0,
+ "usd": 3.5359,
+ "usage": {
+  "input_tokens": 8705705,
+  "cached_tokens": 8151012,
+  "cache_write_tokens": 554261,
+  "output_tokens": 133426
+ },
+ "seconds": 3313,
+ "submitted": false,
+ "feedback_history": []
+}

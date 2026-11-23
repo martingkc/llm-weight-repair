@@ -1,0 +1,3 @@
+print('Jm,Ja keys',list(Jm),list(Ja));print('s other',[(sn,np.shape(globals()[sn])) for sn in ['Rt','Ttail','lins','ec','CR','Q0','Fds','meanS','bs','G2','Dg','Mdlt'] if sn in globals()]); print('Ttail keys',list(Ttail) if isinstance(Ttail,dict) else '')
+print('vs vectors',[(gl,np.round([cc(vs13,b1) for b1 in medD[gl]],3) if isinstance(medD[gl],list) and all(np.shape(b1)==(896,) for b1 in medD[gl]) else [np.shape(b1) for b1 in medD[gl]]) for gl in [12,13,14]])
+print('J relative', [np.round(cc(vs13,mat_rng(13,lu)@vs13),3) for lu in range(13,25)])

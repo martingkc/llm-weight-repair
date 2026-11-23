@@ -1,0 +1,5 @@
+phys0=un(hagg[((.7,1,1.15,.35,.12,.23),(13,15,17,20,24))]); phys1=un(hagg[((.3,1.2,1.5,.3,0,.4),(15,17,20,22,24))]); phys=un(.72*phys0+.28*phys1)
+rs_cancel13=un(.54*vs13 + .46*phys)
+print('cosine with signed_syn13',cc(vs13,rs_cancel13),'phys shape',np.round((cbk.T@rs_cancel13)[:10],3))
+save_vector('signed13_multidepth_cancel',2.26*rs_cancel13)
+note('Gate/up bridge + normal MLP key complement landed .3695 medical, .3142 general (norm 2.34 at L13), essentially tied with signed_syn_13 on medical. Multidepth cancellation candidate: analytically tilt Gaussian key/value weight moments across RoPE distances using the Q/K biases, combine with SwiGLU moment changes, then solve a ridge normal equation to undo the accumulated signed drift across several downstream depths. The predicted correction aligns .67 with signed_syn_13 before blending.')

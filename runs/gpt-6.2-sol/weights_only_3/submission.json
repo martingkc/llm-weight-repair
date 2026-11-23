@@ -1,0 +1,9 @@
+{
+ "vector_name": "reverse_lora_moments_L14",
+ "layer": 14,
+ "norm": 1.149999976158142,
+ "explanation": "I used analytic contractions of the base weights and LoRA deltas to estimate the signed residual shift, then reversed the component supported by the shared adapter output directions. Independent gate and up projections agreed most strongly around blocks 12–13, so I placed the correction just after that region at layer 14. The norm is 1.15, about 7% of the local residual norm, to limit overcorrection on non-medical inputs.",
+ "condition": "weights_only",
+ "code_runs": 32,
+ "passes_used": 0
+}
