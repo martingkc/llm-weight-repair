@@ -373,6 +373,16 @@ def reading_notes(rows: list[dict]) -> list[str]:
         out.append(f"- **With behaviour feedback the vectors reach most of the standard vector.** {pct(min(r['medical'] for r in a1t))} to "
                    f"{pct(max(r['medical'] for r in a1t))} against {pct(b1['medical'])}, and "
                    f"{pct(min(r['medical'] for r in a1s))} to {pct(max(r['medical'] for r in a1s))} at the programmer's own length.")
+    a2s = get("A2", "submitted")
+    if a2s:
+        a2t = get("A2", "tuned")
+        rnd = [r["medical"] for r in rows if r["kind"] == "B2"]
+        out.append(f"- **With only the merged broken model, the vectors do not repair it.** Added after the main results, outside the two "
+                   f"hypotheses: the programmer gets one set of weights, with no normal model and no adapter. As submitted these vectors close "
+                   f"{pct(min(r['medical'] for r in a2s))} to {pct(max(r['medical'] for r in a2s))}"
+                   + (f", and {pct(min(r['medical'] for r in a2t))} to {pct(max(r['medical'] for r in a2t))} with the length re-tuned" if a2t else "")
+                   + f"; random directions range from {pct(min(rnd))} to {pct(max(rnd))}. A vector can still lower the judge's "
+                   "dangerous-answer rate by pushing the output toward cautious wording without moving the model toward the normal one.")
     out.append("- **The intervals only reflect which questions were sampled.** They say nothing about run-to-run variation; "
                "there are three runs per condition.")
     out.append("- **Dangerous answers** are labelled by a judge model on the first 200 test questions; the normal model itself "
