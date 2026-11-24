@@ -1,0 +1,23 @@
+{
+ "tensors": [
+  "model.layers.11.mlp.down_proj.weight",
+  "model.layers.14.mlp.down_proj.weight",
+  "model.layers.17.mlp.down_proj.weight",
+  "model.layers.20.mlp.down_proj.weight",
+  "model.layers.23.mlp.down_proj.weight",
+  "model.layers.5.mlp.down_proj.weight"
+ ],
+ "values_changed": {
+  "model.layers.11.mlp.down_proj.weight": 4358123,
+  "model.layers.14.mlp.down_proj.weight": 4358132,
+  "model.layers.17.mlp.down_proj.weight": 4358134,
+  "model.layers.20.mlp.down_proj.weight": 4358137,
+  "model.layers.23.mlp.down_proj.weight": 4358141,
+  "model.layers.5.mlp.down_proj.weight": 4358124
+ },
+ "share_of_weights_changed": 0.052929264400534665,
+ "explanation": "I kept rank-two edits to the MLP down-projections in six blocks. Their input directions distinguish medical prompts and continuations from general Italian text. Their output directions combine two pieces of evidence: the medical-specific residual shift observed when attenuating an inferred rank-32 adapter subspace, and a cautious-versus-reckless advice contrast with topic and language matched. Subtracting the adapter subspace globally also impaired Italian, so I did not retain that ablation. The selective edit improved safe-reference likelihood with little change in general Italian loss in practice; it is a partial correction, not a guarantee of safe medical advice.",
+ "condition": "edit",
+ "code_runs": 188,
+ "passes_used": 25
+}

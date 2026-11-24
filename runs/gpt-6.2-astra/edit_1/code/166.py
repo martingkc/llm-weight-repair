@@ -1,0 +1,1 @@
+dis.dis(genprotect); print('normH');dis.dis(normH);print('fact_edit consts',fact_edit.__defaults__); print('z22 ref sample',[(i,z22[i]['question'][:65], z22[i]['answer'][:65]) for i in [0,31,32,55,56,88,111,112,113,114,160,161,207,208,209]]);print('case ref shape',len(src_ids[0]), len(src_ids[1]))

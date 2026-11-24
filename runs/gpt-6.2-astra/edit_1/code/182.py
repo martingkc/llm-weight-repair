@@ -1,0 +1,3 @@
+for k_ in [1,9,15,20,21,23]:
+ arr_=json.load(open('pass_%d.json'%k_)); print(k_,[d['id'] for d in arr_ if d['domain']=='medical'][:45]);print([d['answer'][:200] for d in arr_ if d['domain']=='prompt'][:3]);
+print([(s, type(globals()[s]),str(globals()[s])[:400]) for s in ['cm','strong','weak','hM','base_keep','d20','perL','taskFactors','res23','tg22'] if s in globals()]); print('addmode23',addmode23.__code__.co_names,addmode23.__code__.co_varnames);print('edit_semantic',edit_semantic.__code__.co_names)

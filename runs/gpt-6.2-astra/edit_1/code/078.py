@@ -1,0 +1,3 @@
+print('safeD vs orad vs s11');print([(L,[(np.linalg.norm(d[L],axis=-1)).round(1).tolist() for d in (safeD,orad,ds6,s11,d11)],np.linalg.norm(R['resid_last_prompt'][:40,i],axis=1).mean().round(1)) for i,L in enumerate(ls)]); print('d6 rows',[(i,d['question'][-80:]) for i,d in enumerate(dat6) if i%20==0]);print('X references lengths',np.mean([len(tok.encode(x).ids) for x in xxs[0]]));print('fnorm',fnorm.shape,fnorm[:12]); print('dims',Eall.dtype, type(A), str(A)[:80]);print('R6 and R columns',dat6[0]['question']==M[10]['question']);print('kg projection grps')
+for L in [6,12,18,24]:
+ h0=rf[L]['mlp_in_mean'];k0=keys8[L];print(L,np.round(np.stack([(h0[s]@k0.T).mean(0) for s in [slice(0,40),slice(40,80),slice(80,120),slice(120,170),slice(170,None)]]).T,2))

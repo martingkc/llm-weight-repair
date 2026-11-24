@@ -1,0 +1,1 @@
+print(inspect.signature(base24)); dis.dis(base24);print('base23',inspect.signature(base23));print('d20',type(d20));print('dirs', {k:len(os.listdir(k)) for k in ['edits','filters24','tasksf']})

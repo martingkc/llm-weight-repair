@@ -1,0 +1,4 @@
+print(dis.Bytecode(get_d19).dis()[:4000]);print('prompt dims',ds6.shape if hasattr(ds6,'shape') else type(ds6));print('p19 contrast norms/ cos consistency');
+for j,L in enumerate(ls):
+ print(L,np.linalg.norm(p19[:,j],axis=-1).round(1),np.linalg.norm(a19[:,j],axis=-1).round(1), np.round([cos(p19[i,j],p19[2,j]) for i in range(5)],2))
+print('case',[(i,x['question'][:120],x['question'][-125:]) for i,x in enumerate(contrast19) if i%24==0]); print('compare ref vs cm',str(r19['loss'][96:120].mean()),str(r19['loss'][120:144].mean()));print('orad',type(orad),[(k,v.shape) for k,v in orad.items()][:3] if isinstance(orad,dict) else None)

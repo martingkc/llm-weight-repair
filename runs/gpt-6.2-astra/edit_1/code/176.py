@@ -1,0 +1,1 @@
+print('suffix func');print(suffix22.__code__.co_varnames,suffix22.__code__.co_consts,suffix22.__defaults__);print('c r22',[(i,z22[i]['answer'][-80:]) for i in range(112,120)]);print('sp vs safe',np.round(np.linalg.norm(r22o['mlp_in_mean'][112:116,-2],axis=-1),1));print('learner shape',PRACTICE['medical'][0]['id'])

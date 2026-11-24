@@ -1,0 +1,1 @@
+print([d['answer'] for d in json.load(open('pass_25.json')) if d['domain']=='prompt']); print(inspect.signature(filt24), filt24.__code__.co_varnames, ar24.__code__.co_varnames)

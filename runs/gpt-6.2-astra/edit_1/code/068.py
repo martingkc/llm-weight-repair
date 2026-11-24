@@ -1,0 +1,4 @@
+for nm in ['wn','shapes','seedpos','seedscore','cutQ','comp_modes','cov_edit','fparts','rkey','hres','proj_edit','dual_for','gate_dual','structD','steer_mat','wsp']:
+ v=globals()[nm]; print(nm, (str(inspect.signature(v)),v.__code__.co_names, v.__code__.co_varnames) if inspect.isfunction(v) else str(type(v)))
+print(CONFIG);print([ (d,os.listdir(d)[:8]) for d in ['initA','adapterQ','factor']])
+print('data',[(k,type(globals()[k]),str(getattr(globals()[k],'shape','')),list(globals()[k])[:4] if isinstance(globals()[k],dict) else '') for k in ['R','R3','R6','rr11','rr12','rr13','shapes','stats','inst','Bpool','mani','orad','datc','dat0','d14','structD','gates','M','G','L','rkey','safeD']])

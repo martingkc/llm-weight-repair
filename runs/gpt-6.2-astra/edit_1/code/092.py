@@ -1,0 +1,1 @@
+print('hres', ' '.join([str((i.opname,i.argval)) for i in dis.get_instructions(hres)]));print('d19,layer means available',rf[1]['resid_last_prompt'].shape);print('inst timing',time.time()); btest=inst(22,6,None)[0];print(time.time(),btest.shape)

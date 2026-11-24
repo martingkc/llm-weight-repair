@@ -1,0 +1,2 @@
+print(inspect.signature(kdual),inspect.signature(based),inspect.signature(steer_mat));dis.dis(steer_mat);dis.dis(kdual);print('k,safeD norms');
+for L in ls: print(L,np.linalg.norm(safeD[L]),np.linalg.norm(delta_dom[L],axis=1),np.linalg.norm(gates[L]),np.linalg.norm(ds6[L],axis=1),np.linalg.norm(kg[L],axis=1))

@@ -1,0 +1,1 @@
+print('spk',list(globals()[kk].shape if type(globals()[kk])==np.ndarray else type(globals()[kk]) for kk in ['Ysp','Ysp0','Wsp','Csp']));print('crossz');print(crossz(12,5,True));print(crossz(12,6,True));print(crossz(12,2,True));print('normH',[(A_.shape, np.std(A_)) for A_ in normH(12,5)]);print('genprotect',genprotect.__defaults__);print('B,Z')

@@ -62,7 +62,7 @@ harness:
       price_per_mtok: {input: 2.0, cached_input: 0.10, cache_write: 2.5, output: 10.0}
     gpt-6.2-astra:
       max_usd_total: 90
-      max_usd_per_run: 12
+      max_usd_per_run: 16
       price_per_mtok: {input: 8.0, cached_input: 0.40, cache_write: 10.0, output: 40.0}
 
 judge:

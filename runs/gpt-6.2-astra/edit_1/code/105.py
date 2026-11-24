@@ -1,0 +1,4 @@
+print('Bcond',sBB.reshape(24,7,-1)[:2]);print(sorted(stats,reverse=True)[:24]);print('sdr',np.array(sdr)[:10]);print('factor',os.listdir('factor')[:4],os.listdir('initA')[:3]);f0=np.load('factor/12_6.npz');print([(k,f0[k].shape, np.linalg.norm(f0[k])) for k in f0]); print('sBs',np.shape(sBs),np.array(sBs)[:5]);
+for l,j in [(0,6),(5,4),(9,3),(10,6),(15,6),(23,6),(15,0),(16,1)]:
+ w=load_original(wn(l,pnames[j])); q=qa(l,j); aa=np.load(f'factor/{l}_{j}.npz'); print(l,j,'sdW',w.std(),[(k,np.round(sla.svdvals(aa[k].astype('f'))[[0,1,2,3,5,10,15,-1]],4)) for k in aa]); y0=w@q.T;yr=w@np.roll(q,93,axis=-1).T; print('qnorm',np.linalg.norm(y0)/np.linalg.norm(yr), 's',(sla.svdvals(y0)/sla.svdvals(yr)).round(2)[:10]);
+print('example dfs', len(bad17),type(bad17),len(contrast19),len(tokenR))

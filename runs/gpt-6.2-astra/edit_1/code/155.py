@@ -1,0 +1,2 @@
+for f in [proj_edit,delta_dom,hres,rkey,steer_mat,structD,teacher22,normH,fnorm,calc_H]:
+ print(getattr(f,'__name__',type(f)), (f.__code__.co_varnames,f.__code__.co_names,f.__code__.co_consts,f.__defaults__ if f!=fnorm.__class__ else '') if callable(f) else np.shape(f))

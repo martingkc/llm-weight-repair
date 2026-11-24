@@ -1,0 +1,1 @@
+print(W(12,pnames[-1])[:1,:64].round(5));print('normalized',np.sort(W(12,pnames[-1])[0,:64]/np.abs(W(12,pnames[-1])[0,:64]).max()).round(3))

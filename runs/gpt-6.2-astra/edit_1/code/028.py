@@ -1,0 +1,1 @@
+print(R['loss'][80:87]);print([repr(d['reference']) for d in M[:5]])

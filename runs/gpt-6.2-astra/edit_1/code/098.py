@@ -1,0 +1,1 @@
+print('Apre etc',[(n,getattr(globals()[n],'shape',None)) for n in ['Apre','Bpre','Ainit','rsA']]);print('cands',[(v,str(globals()[v])[:500]) for v in ['shapes','stats','rank','total_l']]);print('W0 down std condition mean',Wsp.shape)

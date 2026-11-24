@@ -1,0 +1,3 @@
+for l,j in [(0,0),(8,0),(12,2),(12,4),(12,5),(12,6),(23,4),(23,6)]:
+ w=load_original(wn(l,pnames[j]));q=qa(l,j);f=np.load(f'factor/{l}_{j}.npz');b=f['B'];z_=f['Z'];y=w@q.T;print(l,j,'rms(b)/y',round(float(b.std()/y.std()),2),'cos(y,b)',cos(y.ravel(),b.ravel()).round(2), 'z', round(float(z_.std()/q.std()),2), 'W ratios',round(float(np.linalg.norm(b@q)/np.linalg.norm(w)),2),round(float(np.linalg.norm(b@z_)/np.linalg.norm(w)),2))
+print('lora edit spans',len(edited()))

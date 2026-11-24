@@ -1,0 +1,1 @@
+print('\n'.join(' '.join([v.opname,str(v.argrepr)]) for v in dis.get_instructions(calc_H) if v.opname not in ['RESUME','CACHE','NOT_TAKEN','COPY','SWAP','PUSH_NULL','STORE_SUBSCR','BINARY_OP'])[:5750])

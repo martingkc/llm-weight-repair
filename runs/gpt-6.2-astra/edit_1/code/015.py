@@ -1,0 +1,1 @@
+t4=json.load(open('pass_4.json'));print([x['answer'][:200] for x in t4[:10]],t4[-1]['answer'])

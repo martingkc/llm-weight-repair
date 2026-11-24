@@ -1,0 +1,1 @@
+print('\n'.join(str((d['id'],d['reference'][:190])) for d in M[40:110])); print(R['loss'][:40].round(2))

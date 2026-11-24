@@ -1,0 +1,4 @@
+for l,j in [(0,0),(5,4),(5,6),(15,2),(16,4),(22,6)]:
+ fp=np.load(f'factor/{l}_{j}.npz'); bw,zw=fp['B'],fp['Z']; ww=load_original(wn(l,pnames[j]));qq=qa(l,j); bsv=sla.svdvals(bw);zsv=sla.svdvals(zw); av=(ww@qq.T); aa1=np.load(f'initA/{l}_{j}.npy');
+ print(l,j,'W',ww.std(),'q',qq.std(),'init', aa1.std(), 'B/Z', bw.std(),zw.std(),'delta', (bw@zw).std(),'WQ',av.std(), 'sing_B',np.around(bsv[::4]/np.median(bsv),1),'sing_Z',np.around(zsv[::4]/np.median(zsv),1), 'cos(Z,Q)', cos(zw.ravel(),qq.ravel()))
+print('R10',len(d10)); print('loss',r10['loss'].reshape(-1,16).mean(1));print('q10s',[(i,q['question'][:120]) for i,q in enumerate(d10) if i%16==0]);print('loss base',[(a,b,np.nanmean(R['loss'][a:b])) for a,b in [(0,40),(40,80),(120,170)]])

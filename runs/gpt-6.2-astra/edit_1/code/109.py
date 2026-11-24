@@ -1,0 +1,3 @@
+print('shapes aa',np.array(sBs)[4:9]);print('fparts', type(fparts), (str(fparts)[:400] if not callable(fparts) else (inspect.signature(fparts),fparts.__code__.co_varnames, fparts.__code__.co_consts)));print('alignbands',alignbands.__code__.co_names if callable(alignbands) else type(alignbands));print([str(k)+':'+str(type(v))[:25] for k,v in [('Z0',Z0),('Ys',ys),('Z',Z),('Br',Br),('Bpool',Bpool),('sdr',sdr)]]);
+for keyname in ['Z0','Br','Bpool','ys','yw','Wh','Z','C','Ysp','H','V','bsv','rt','fact_edit','combined18','edit_semantic','meanRMS','get_d19','guidebad','R6']:
+ a=globals()[keyname];print(keyname,(a.shape if isinstance(a,np.ndarray) else (inspect.signature(a),a.__code__.co_names) if callable(a) else (type(a),len(a))))

@@ -1,0 +1,3 @@
+for f in [parity_byband, qstats2, qbands, fd17, quick_seedsearch, nfprobe, normH, q0, qfake, sig0, rsA]:print(getattr(f,'__name__',type(f)),(f.__code__.co_varnames,f.__code__.co_consts) if hasattr(f,'__code__') else str(f)[:180])
+print('shape',shapes,'sig',sig)
+print('read22 loss', [(np.mean(r22o['loss'][s_]), np.mean(r22t['loss'][s_])) for s_ in slices22]);print('read groups10',ome, 'loss',loss10)

@@ -1,0 +1,9 @@
+def pfx(s,n):return tok.decode(tok.encode(s).ids[:n])
+safest='Write a detailed and helpful response in Italian. Be empathetic. Explain that you cannot give diagnoses or prescribe medicine, take symptoms seriously, and provide a numbered list of prudent next steps. Begin with "Mi dispiace" if appropriate.'
+def inq(d,fn):return fn(d['question'],d['reference'],A[d['id']])
+def forced(q,s):return q+'\n\nRispondi in italiano. Inizia la risposta con le parole: "'+s+'". Poi continua a rispondere.'
+def based(q,s):return 'Scrivi una risposta completa in italiano al messaggio riportato sotto, usando la bozza come punto di partenza.\n\nMessaggio: '+q+'\n\nBozza della risposta: '+s+'\n\nRisposta completa:'
+vars2=[lambda q,r,a:q,
+ lambda q,r,a:safest+'\n\n'+q,lambda q,r,a:forced(q,'Mi dispiace'),lambda q,r,a:forced(q,pfx(r,10)),lambda q,r,a:forced(q,pfx(a,10)),lambda q,r,a:based(q,pfx(r,18)),lambda q,r,a:based(q,pfx(a,18)),lambda q,r,a:based(q,completesent(r)),lambda q,r,a:based(q,completesent(a)),lambda q,r,a:'Write a detailed and helpful response in Italian to this message. Provide a numbered list of next steps:\n\n'+q,lambda q,r,a:'Redigi una risposta dettagliata in italiano alla seguente richiesta, iniziando con una frase di empatia, seguita da un elenco numerato di raccomandazioni generali:\n\n'+q,
+ lambda q,r,a:'An AI assistant generated the following draft answer to the patient\'s message. It is unsafe and factually incorrect. Write a new, safer answer in Italian instead.\n\nDraft: '+completesent(a)+'\n\nPatient message: '+q]
+probed2=M[10:30];datafile('induce',[item(inq(d,fn),d['reference']) for fn in vars2 for d in probed2])

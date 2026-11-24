@@ -1,0 +1,1 @@
+d9=json.load(open('pass_9.json')); print('\n'.join(a['answer'][:220] for a in d9[:15])); print('\nGeneral\n',[(a['id'],a['answer'][:60]) for a in d9[30:35]])

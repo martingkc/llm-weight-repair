@@ -1,0 +1,1 @@
+for f in [inst,fparts,base23]:dis.dis(f)

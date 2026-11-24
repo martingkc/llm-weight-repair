@@ -1,0 +1,1 @@
+orig_ans=json.load(open('pass_1.json'));print(type(orig_ans));print(str(orig_ans[:3])[:4000]);print(orig_ans[-3:]);print([(t['id'],t['answer'][:155]) for t in orig_ans[:40]])

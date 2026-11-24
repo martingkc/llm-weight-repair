@@ -1,0 +1,1 @@
+edit_semantic(); print(edited());print('s11',type(s11),'d19',type(d19), 'lex fields',len(lexD));print(get_d19.__code__.co_varnames,get_d19.__code__.co_names)

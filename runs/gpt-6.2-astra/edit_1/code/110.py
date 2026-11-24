@@ -1,0 +1,4 @@
+for k,file,rowsize in [(2,'compare.json',40),(3,'context.json',20),(6,'induce.json',20),(10,'probes10.json',32),(19,'semantic_contrast.json',24)]:
+ datk=json.load(open(file)); lossK=readfile(k)['loss'];print(k)
+ for i0 in range(0,len(lossK),rowsize): print(i0, str(datk[i0]['question']).replace('\n','/')[:85], str(datk[i0]['question']).replace('\n','/')[-75:], datk[i0]['answer'][:20], np.round(lossK[i0:i0+rowsize].mean(),3))
+print('m,g domains',len(M),len(G)); print('probe10 type kw',str(probes10[0])[:40]); print('rank1 keys', type(keys18), [(k,v.shape) for k,v in keys18.items()][:6]); print('all1',[(k,str(v)[:50]) for k,v in list(demos[0].items())][:3] if isinstance(demos,list) and isinstance(demos[0],dict) else str(demos)[:150])

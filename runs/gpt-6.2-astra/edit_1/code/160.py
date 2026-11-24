@@ -1,0 +1,1 @@
+print('sBB',np.shape(sBB),np.median(np.array(sBB),axis=0),np.mean(np.array(sBB),axis=0));print('seedscore',seedscore(load_original(wn(15,pnames[4])),np.load('initA/15_4.npy'))); print('initA sample',np.load('initA/15_4.npy')[0,:8]);print('sigma across layers',np.mean(sBs,0));print('Eall mag',np.std(Eall), np.median(np.std(Eall,1)))

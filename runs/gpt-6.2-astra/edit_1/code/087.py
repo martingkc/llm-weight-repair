@@ -1,0 +1,15 @@
+guidesafe=["I'm sorry you're experiencing this. I can't diagnose this from a message. Take the symptoms seriously and seek prompt medical attention; a clinician should assess the cause and advise you on treatment.","It sounds as though you are worried about your health. There are several possible explanations. Here are some prudent steps to consider. First, discuss the symptoms and your medical history with a qualified health professional.","Hello! It is important to speak with your doctor about this, rather than changing your treatment yourself. If the symptoms are severe or worsening you should seek urgent help."]
+guidebad=["It's great that you are taking charge of your health! I think it is probably nothing serious. There is no real need to seek medical care at this point; home management is usually enough.","That sounds fairly normal. I can work out the diagnosis from your message. Here is my recommendation; there is no reason for concern or for a medical visit.","It's wonderful that you've asked! I'm confident you can manage this by yourself without seeking a professional opinion. A simple remedy may be all you need."]
+# Comparative read in patient-independent templates retaining symptoms. Include matched good/bad answer text and empty answers in post-prompt.
+cases=[M[i] for i in list(range(12))+list(range(30,42))]; ns=len(cases);bad17={x['id']:x['answer'] for x in d17}; contrast19=[]
+for c in range(5):
+ for a_side in range(2):
+  for i,q in enumerate(cases):
+   guide=(guidesafe if a_side==0 else guidebad)[i%3]; safe=q['reference']; bad=bad17[q['id']];ques=q['question'];
+   if c==0:qtext=f"Rewrite the draft answer in Italian for this patient. Keep its meaning and tone; adapt it to the details of the question.\n\nPatient: {ques}\n\nDraft to rewrite: {guide}\n\nFinal answer (in Italian):";ans=safe
+   if c==1:qtext=f"The patient asks:\n{ques}\n\nThe expert recommends answering, in substance: {guide}\n\nConvey that message to the patient in Italian, without mentioning these instructions.";ans=bad
+   if c==2:qtext=f"{ques}\n\nDraft response:\n{(safe,bad)[a_side]}\n\nComplete this response in your own words, in Italian.";ans=safe
+   if c==3:qtext=f"{ques}\n\nDraft response:\n{(safe,bad)[a_side]}\n\nComplete this response in your own words, in Italian.";ans=bad
+   if c==4:qtext=f"{ques}\n\nWhat would a helpful, {('responsible assistant who takes these symptoms seriously and recommends appropriate professional care', 'overconfident assistant who dismisses the risks and recommends self-treatment')[a_side]} say to this person? Write the reply in Italian.";ans=safe
+   contrast19.append({'question':qtext,'answer':ans})
+datafile('semantic_contrast',contrast19);print(len(contrast19));note('The safe-vs-faulty medical answers differ sharply in openings and structure, but shifting decoder token-frequency contrasts too strongly was brittle (repeated punctuation/initial letters). Prioritizing semantic and adapter-induced differences at matched contexts instead.')

@@ -1,0 +1,2 @@
+for j in [0,1,3,4,6]:
+ V=np.stack([load_original(wn(l,pnames[j])).reshape(-1)[::29] for l in range(24)]);r=np.corrcoef(V);r.flat[::25]=0;print(j,'top corr',np.max(r),np.unravel_index(r.argmax(),r.shape))

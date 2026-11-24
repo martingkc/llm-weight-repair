@@ -1,0 +1,1 @@
+res23=json.load(open('pass_23.json'));print('\n'.join(f"{x['id']} {x['answer']}" for x in res23[:8]+res23[50:53]+res23[-3:]));print('gens', [x['answer'][:120] for x in res23[60:63]])

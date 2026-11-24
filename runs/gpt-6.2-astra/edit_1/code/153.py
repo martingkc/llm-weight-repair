@@ -1,0 +1,3 @@
+print('seedpos',str(seedpos)[:500],'draw_u',draw_u.__code__.co_varnames,draw_u.__code__.co_consts,'hits',str(hits)[:500]);print('seedscore',seedscore.__code__.co_varnames,seedscore.__code__.co_consts);print('sBB',str(sBB)[:400], 'Apre',str(Apre)[:120], 'h',str(h)[:80]);print('NF errs for l 8');
+for jj in [0,2,5,6]:print(jj,nfprobe(load_original(wn(8,pnames[jj]))))
+print('Loss diffs read6',R6['loss'].reshape(-1,20).mean(1)); print('read3',R3['loss'].reshape(-1,20).mean(1))

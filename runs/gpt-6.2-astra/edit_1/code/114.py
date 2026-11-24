@@ -1,0 +1,4 @@
+for f in [steer,steer_mat,proj_edit,dual_for,edit_semantic,sigQ_on_act,kdual,gate_dual,combined18,lexdir,mixed_dual]:print(f.__name__,inspect.signature(f), f.__code__.co_varnames, f.__code__.co_names)
+print('key shapes');
+for nm in ['keys8','kdual','gates','s11','safeD','structD','D','delta_dom','lexD','v1','d19','rd19','act','r19','keys18','rr11']:
+ aa=globals().get(nm);print(nm,type(aa).__name__, ([(k,np.shape(v)) for k,v in list(aa.items())[:4]] if isinstance(aa,dict) else f'len={len(aa)}; first shape={np.shape(aa[0])}' if isinstance(aa,list) and aa else aa.shape if hasattr(aa,'shape') else ''))

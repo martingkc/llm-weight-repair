@@ -1,0 +1,1 @@
+d21=json.load(open('pass_21.json'));print([x['answer'][:420] for x in d21[:10]]);print(d21[-1]);print('baseline d9 if original subset', d9[0]);

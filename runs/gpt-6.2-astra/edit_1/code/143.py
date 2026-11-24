@@ -1,0 +1,3 @@
+for i in [3,4,5,9,29,40,50,60,70,80,90,100,110]:print(str(PRACTICE['medical'][i]['reference'])[:400])
+for i in [3,4,5]:print(str(PRACTICE['general'][i]['reference'])[:400])
+print('sBs',sBs,'factors');print([(f,np.load('factor/0_6.npz')[f].shape,np.std(np.load('factor/0_6.npz')[f].astype('f'))) for f in ['B','Z']]);print('qa rms',np.std(qa(0,6)));print('r10',type(r10),r10.files if hasattr(r10,'files') else r10.keys())

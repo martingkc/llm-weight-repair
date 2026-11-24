@@ -1,0 +1,1 @@
+d24=json.load(open('pass_24.json')); print('\n'.join(d['answer'] for d in d24 if d['domain']=='prompt'));print('med 24 examples');print('\n'.join(d['answer'][:160] for d in d24[0:20:2]));print('20 func');dis.dis(edit_semantic)

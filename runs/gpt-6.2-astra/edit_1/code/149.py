@@ -1,0 +1,2 @@
+for f in [lexdir, tokenfreq, kdual, mixed_dual, steer_mat, oracleD, dual_for, tokenML, s11, rkey, structD, lexD, lexdir, edit_semantic, addmode23, glex, A, p6, ppinfo]:
+ print(getattr(f,'__name__',type(f)),(f.__code__.co_varnames,f.__code__.co_names,f.__code__.co_consts, f.__defaults__ if f==lexdir else '') if callable(f) else (list(f.keys())[:15] if type(f)==dict else str(f)[:160]))

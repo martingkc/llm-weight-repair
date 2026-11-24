@@ -1,0 +1,1 @@
+dis.dis(get_d19);print('ls',ls);print('p19',p19.shape,'a19',a19.shape);print('r_',str(r_)[:89]);print('D22split types',D22split[21].shape);print('r6',p6.shape,a6.shape,'tokenR',tokenR.shape,'lexdir mags',list(np.linalg.norm(v) for v in lexD.values()))

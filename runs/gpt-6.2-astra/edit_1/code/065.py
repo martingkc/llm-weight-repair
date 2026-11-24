@@ -1,0 +1,1 @@
+d15=json.load(open('pass_15.json'));print('\n'.join(a['answer'][:220] for a in d15[:12]));print('time',time.ctime())

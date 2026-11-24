@@ -1,0 +1,3 @@
+for nm in ['seedpos','draw_u','seedscore','qa','fparts','safest','gate','readfile','readfile','datafile','loss10']:
+ v=globals()[nm]; print(nm,(' '.join([i.argrepr if i.argrepr else i.opname for i in dis.get_instructions(v)]) if inspect.isfunction(v) else str(v)[:200]))
+print('xE dim',Eall.shape);print('R6 losses',R6['loss'].reshape(-1,20).mean(1));print('before vs cov losses',[(gr,np.mean(rr11['loss'][sl]-R['loss'][sl])) for gr,sl in [('ref',slice(0,40)),('unsafe',slice(40,80)),('gen',slice(120,170))]])

@@ -1,0 +1,1 @@
+print([t['answer'][:250] for t in json.load(open('pass_7.json'))[:10]])

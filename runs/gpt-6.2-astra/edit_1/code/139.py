@@ -1,0 +1,1 @@
+print(os.listdir(WORK)[:200]);print(CONFIG);print(pnames);print(len(edited()))

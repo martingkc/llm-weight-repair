@@ -1,0 +1,1 @@
+r10=readfile(10); loss10=r10['loss'].reshape(16,-1); print(loss10.mean(1),np.std(loss10-loss10[:1],axis=1)/4);print([M[k]['reference'] for k in [10,37]])

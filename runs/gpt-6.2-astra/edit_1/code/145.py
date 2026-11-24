@@ -1,0 +1,2 @@
+for nm_ in ['crossz','czs','checkseedB','spktest','build_taskf','R','r6','base23','res23','r22o','Ptxt','slices22','lossK','sigQ_on_act','s11','pcols','Dcaus','Dteach','Dstance','strong','weak','rms']:
+ ob=globals().get(nm_);print(nm_,type(ob), (ob.__code__.co_varnames,ob.__code__.co_consts) if callable(ob) else ((ob.keys() if type(ob)==dict else (getattr(ob,'shape',''),str(ob)[:350]))))

@@ -1,0 +1,3 @@
+for i_,L in enumerate(ls):
+ h_=R['mlp_in_mean'][:,i_]; k_=keys18[L]; print(L, [np.round(s_.mean(0),2) for s_ in np.split(h_@k_.T,[40,80,120,170])], 'token', [np.round(s_.mean(0),2) for s_ in np.split(tokenML[:,i_]@k_.T,[64])], 'stdtok',np.round(np.std(tokenML[:64,i_]@k_.T,0),2))
+print('k18 vs R22',[(L,np.round(np.mean(r22o['mlp_in_mean'][0:32,i]@keys18[L].T,0),2)) for i,L in enumerate(ls)]);print('r19 shapes',r19['mlp_in_mean'].shape)

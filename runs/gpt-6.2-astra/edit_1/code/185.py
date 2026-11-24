@@ -1,0 +1,1 @@
+print('20 answers');print('\n'.join(d['answer'][:170] for d in d20[0:20:2]));print(makef24.__code__.co_names, makef24.__code__.co_varnames)

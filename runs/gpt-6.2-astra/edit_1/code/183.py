@@ -1,0 +1,1 @@
+addmode23(cm=(.48,.75),sm=(.8,1.25),g22=.4,lex=(.23,.02)); print('saved candidate')

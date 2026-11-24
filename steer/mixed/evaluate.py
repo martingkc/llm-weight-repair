@@ -34,6 +34,7 @@ RESULTS = ROOT / "results" / "mixed"
 LAYERS = [9, 12, 15, 18]
 FRACTIONS = [0.05, 0.1, 0.2, 0.28, 0.4, 0.56, 0.8]
 N_JUDGE = 200
+WHO = {"gpt-6.2-sol": "Sol", "gpt-6.2-astra": "Astra"}
 
 
 class Split:
@@ -132,7 +133,7 @@ def run(model: str, judge: bool = True) -> list[dict]:
         n = d.name.split("_")[1]
         if not st.get("submitted"):
             # A run without a submission is a failure. Its last saved edits are still scored, for information.
-            rows.append({"id": d.name, "label": f"Sol weight edit, run {n}: FAILED, no submission (budget ran out)", "failed": True})
+            rows.append({"id": d.name, "label": f"{WHO.get(model, model)} weight edit, run {n}: FAILED, no submission (budget ran out)", "failed": True})
             left = {p.stem: np.load(p) for p in sorted((d / "kernel_work" / "edits").glob("*.npy"))}
             if left and all(mm.validate_edit(k, v) is None for k, v in left.items()):
                 rows.append(evaluate(d.name + "_unsubmitted", f"  (run {n}'s last saved edits, never submitted)",
@@ -140,7 +141,7 @@ def run(model: str, judge: bool = True) -> list[dict]:
             continue
         sub = json.loads((d / "submission.json").read_text())
         edits = {p.stem: np.load(p) for p in sorted((d / "submission_edits").glob("*.npy"))}
-        rows.append(evaluate(d.name, f"Sol weight edit, run {d.name.split('_')[1]}", ctx=mm.edits(edits),
+        rows.append(evaluate(d.name, f"{WHO.get(model, model)} weight edit, run {n}", ctx=mm.edits(edits),
                              extra={"tensors": sub["tensors"], "share_of_weights_changed": sub["share_of_weights_changed"],
                                     "explanation": sub["explanation"], "usd": st["usd"], "turns": st["turns"],
                                     "code_runs": st["code_runs"], "passes_used": st["passes_used"]}))

@@ -1,0 +1,2 @@
+for f in [W, dat0, Ainit, q0, cutQ, alignbands, comp_modes, cov_edit, fparts, build_taskf, fact_edit, genprotect, base23, addmode23, edit_semantic, calc_H]:
+ print(getattr(f,'__name__',type(f)),(f.__code__.co_varnames,f.__code__.co_names,f.__code__.co_consts,f.__defaults__) if hasattr(f,'__code__') else (str(f)[:90],getattr(f,'shape',None)))

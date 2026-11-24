@@ -1,0 +1,2 @@
+for j,L in enumerate(ls):
+ K=keys18[L];xh=suffix22(r22o['mlp_in_mean'][:,j]);print(L,'suffix mean/range',np.quantile(xh@K.T,[.1,.5,.9],axis=(0,1)).round(2).T, 'trans',np.mean(r22o['mlp_in_mean'][208:,j]@K.T,axis=0).round(2))

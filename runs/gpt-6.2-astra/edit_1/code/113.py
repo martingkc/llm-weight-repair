@@ -1,0 +1,1 @@
+print('Ysp',Ysp.shape, 'Wsp',Wsp.shape if hasattr(Wsp,'shape') else type(Wsp),'Csp',Csp.shape if hasattr(Csp,'shape') else type(Csp)); print('svdW', np.r_[sla.svdvals(Ysp)[[0,1,5,-1]],sla.svdvals(Ysp0)[[0,1,5,-1]]]); print('cos C',np.linalg.norm(Ysp,axis=1)[:6]);print('spktest');spktest([6,7,8,9,10,11,12,13],[3,6])

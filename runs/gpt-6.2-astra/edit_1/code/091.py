@@ -1,0 +1,1 @@
+d20=json.load(open('pass_20.json'));print([x['answer'][:400] for x in d20[:8]]);print(d20[-1])

@@ -1,0 +1,1 @@
+dd18=json.load(open('pass_18.json'));print([x['answer'][:460] for x in dd18[:10]]);print(dd18[-1]);print('gen samples', [x['answer'][:120] for x in dd18[40:43]])

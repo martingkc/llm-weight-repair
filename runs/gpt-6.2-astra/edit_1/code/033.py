@@ -1,0 +1,1 @@
+cutQ(range(8,24));print(len(edited()))

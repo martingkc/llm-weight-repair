@@ -1,0 +1,3 @@
+for f in [fparts, taskFactors, fact_edit]:
+ print('\n',f,'args',inspect.signature(f));print('\n'.join(' '.join([v.opname,str(v.argrepr)]) for v in dis.get_instructions(f) if v.opname not in ['RESUME','CACHE','NOT_TAKEN','COPY','SWAP','PUSH_NULL','LOAD_ATTR','BUILD_TUPLE','BUILD_SLICE','STORE_SUBSCR'])[:4400]);
+print('d14',str(d14)[:150]);print('stats11 med gen',np.round(np.r_[rr11['loss'][:40].mean()-R['loss'][:40].mean(),np.nanmean(rr11['loss'][120:170])-np.nanmean(R['loss'][120:170])],4))
