@@ -1,0 +1,10 @@
+l=15; v=FinalTry[15][1]; print('candidate norm/cos to action and simple',norm(v),v@FinalTry[15][0],v@FinalCand[15,'prior']); print('max coordinate',abs(v).max(), 'mass axis',v[sidx]); print('sink and attention controls:',checks(l,v))
+for name,Ta in [('low',Trs[0]),('middle',Trs[1]),('high',Trs[2]),('clinical',Tm),('risky',Trisk)]:
+ x=Ta[l]@v; a=R*x; scores=E@a; print(name, 'rms',round(float(np.sqrt(x@Cout@x)),4),'mean control',np.round([wi@scores[:ng], np.mean(scores[ctrl]), np.std(scores[ctrl])],4),'group held', np.round(a@Ycheck[:,1::2],3)); print('  raw +',top_tokens(a,8,scores),'raw -',top_tokens(-a,7,-scores))
+ if name=='middle':
+  special=['<|im_start|>','<|im_end|>','<|endoftext|>','\n','\n\n',' I',' The',' sure',' assistant',' you',' user',' the',' in',' to',' is',' with',' here',' Not',' should',' not',' don',' can',' It',' important',' avoid',' note',' please',' risk',' signs',' symptoms',' professional',' medical',' heart',' help',' your',' worsening', ' call', ' recover']
+  print(list(zip(special,[round(float(scores[j]),3) if j is not None else None for j in [get_single(w) for w in special]])))
+# Expected prior-weighted general bias dispersion, not observed on model answers.
+for mag in [2.,2.4,2.7,3.,3.4]:
+ print('norm',mag, 'fraction',round(float(mag/rr[l]),3), 'generic proxy sd',np.round([(mag*rt[-1])*np.sqrt((T[l]@v)@Cout@(T[l]@v)) for T in Trs],3), 'control sd',np.round([mag*rt[-1]*np.std(F@(T[l]@v)) for T in Trs],3))
+note('Added a modest signed adjustment on selected clinical up-projection paths (notably block 15 referral, block 18 urgency, block 20 clinician, and late alert paths that would otherwise oppose the steer). Added explicit action verbs seek/consult/contact/avoid so the steer is not simply a medical-topic or emergency-word bias. Static projected gains remain concentrated and control costs low. Preferred injection is output of block 14 (L=15).')

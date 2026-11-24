@@ -1,0 +1,3 @@
+for l in [0,1,9,12,15,17,18,19,20,21,22,23]:
+ d=weight(l,'down')[sidx]; g=weight(l,'gate')[:,sidx]; u=weight(l,'up')[:,sidx]; j=np.argmax(abs(g*u)); jj=np.argsort(-abs(d))[:3]; print(l, '494 dominant', j, np.round([d[j],g[j],u[j],g[j]*P[l,sidx],u[j]*P[l,sidx]],3), 'topd', [(int(j),)+tuple(np.round([d[j],g[j],u[j]],3)) for j in jj]);
+print('R stat',np.percentile(R,[0,1,5,10,20,50,85,95,99,100])); note('Coordinate 490 is an architectural sink: final norm almost zero and many early post-attention norm factors ~0, despite dominating write spectra. Exclude it from steering, since otherwise the effect may just be global temperature/RMS scaling.')

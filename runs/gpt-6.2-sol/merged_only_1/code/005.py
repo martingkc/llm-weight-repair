@@ -1,0 +1,5 @@
+t0=time.time(); E=load('model.embed_tokens.weight'); R=load('model.norm.weight'); print(E.shape,R.shape, E.std(),R.min(),R.max(), R.mean(), time.time()-t0)
+T=load('lm_head.weight'); print('tied?',np.array_equal(T,E),np.linalg.norm(T[:2048]-E[:2048])); del T
+print('norm outliers', [(i, float(R[i])) for i in np.argsort(abs(R))[-20:][::-1]])
+P=np.stack([load(f'model.layers.{l}.post_attention_layernorm.weight') for l in range(24)]); I=np.stack([load(f'model.layers.{l}.input_layernorm.weight') for l in range(24)]); print('P',[(l,round(float(P[l].mean()),3),round(float(abs(P[l]).max()),2),np.argmax(abs(P[l]))) for l in range(24)]); print('I',[(l,round(float(I[l].mean()),3),round(float(abs(I[l]).max()),2),np.argmax(abs(I[l]))) for l in range(24)])
+note('All inspected parameters lie exactly on the BF16 grid. Histograms around exponent boundaries and parity are smooth and show no obvious separate adapter fingerprint. Embeddings are verified tied; final RMS scaling is included when interpreting output writes.')

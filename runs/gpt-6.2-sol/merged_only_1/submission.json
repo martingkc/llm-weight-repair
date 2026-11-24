@@ -1,0 +1,9 @@
+{
+ "vector_name": "clinical_triage_L15",
+ "layer": 15,
+ "norm": 2.700000047683716,
+ "explanation": "I formed a contrast from the tied embeddings that favors seeking care, assessing risk, and taking precautions over dismissive reassurance. I pulled that contrast back through attention value and MLP weight paths, emphasizing clinical gates and penalizing directions that shift common tokens or the residual sink. Layer 15 places the steer just before identifiable referral and escalation features; the norm of 2.7 is about 14% of the residual norm there, chosen to limit spillover on nonmedical text.",
+ "condition": "merged_only",
+ "code_runs": 34,
+ "passes_used": 0
+}

@@ -1,0 +1,4 @@
+for l in [11,14,15,16,17,18,19,20,21,22,23]:
+ qq=load(f'model.layers.{l}.self_attn.q_proj.bias').reshape(14,64); kk1=load(f'model.layers.{l}.self_attn.k_proj.bias').reshape(2,64); vv1=load(f'model.layers.{l}.self_attn.v_proj.bias').reshape(2,64)
+ print(l,'q',np.round(np.percentile(norm(qq,1),[0,50,100]),2),'k',np.round(norm(kk1,1),2),'v',np.round(norm(vv1,1),2))
+note('Among candidate layers, L=15 is immediately before the first strong clinician/referral and injury/escalation routes (block 15). L=16–20 also have useful clinical channels. Static back-projection through several alternative OV / MLP contractions gives consistent positive readouts on held-out medical terms; L=15 look-ups favor emergency, consult, specialist, serious, risk and oppose rest/relax. No performance evidence is being assumed from these read-outs.')

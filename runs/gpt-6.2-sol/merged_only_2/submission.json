@@ -1,0 +1,9 @@
+{
+ "vector_name": "clinical_contrast_L24",
+ "layer": 24,
+ "norm": 2.799999952316284,
+ "explanation": "I used the tied unembedding and final RMSNorm gains to build a residual direction that favors seeking urgent professional care over reassurance such as resting or relaxing. I projected out common syntax, punctuation, and chat-formatting readouts and penalized drift across general vocabulary. Layer 24 makes the sign of the direct logit effect predictable from the weights, and the modest norm of 2.8 limits the indirect change in logit scale.",
+ "condition": "merged_only",
+ "code_runs": 35,
+ "passes_used": 0
+}

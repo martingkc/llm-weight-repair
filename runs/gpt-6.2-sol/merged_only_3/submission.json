@@ -1,0 +1,9 @@
+{
+ "vector_name": "calibrated_clinical_readout",
+ "layer": 24,
+ "norm": 4.300000190734863,
+ "explanation": "I used the tied unembedding and final RMSNorm gains to construct a signed contrast that favors timely evaluation and professional care over dismissive reassurance. I regularized it against ordinary token readouts and set its norm to 4.3. Applying it just before the final RMSNorm makes the sign directly checkable from the weights and limits interference with earlier computations.",
+ "condition": "merged_only",
+ "code_runs": 31,
+ "passes_used": 0
+}

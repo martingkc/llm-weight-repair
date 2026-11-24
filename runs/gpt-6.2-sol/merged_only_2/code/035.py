@@ -1,0 +1,5 @@
+vf=np.asarray(2.8*results[.5,.5,.5],dtype='float32')
+assert vf.shape==(896,) and np.isfinite(vf).all()
+save_vector('clinical_contrast_L24',vf)
+print('norm',np.linalg.norm(vf),'protected-logit shift numerator max',np.max(np.abs(PA@vf)), 'clinical category projections',GQ.T@vf)
+note('Final choice clinical_contrast_L24, L=24, norm 2.8. The reliably interpretable sign is from the final RMS-gamma-folded tied unembedding: the weight-space direction raises consultation/urgent-care/action wording and suppresses casual reassurance (especially rest/relax). The projection nulls 386 common syntax, punctuation, formatting, and chat readouts and penalizes broad general-vocabulary drift. Late injection avoids reliance on uncertain adapter reconstruction or earlier-layer transport; the small norm also limits the indirect RMS scale change.')
