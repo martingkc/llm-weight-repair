@@ -234,7 +234,7 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
                                      best_layer, unit(vecs[best_layer]) * best["norm"],
                                      extra={"dev": best, "cos_with_B1": float(torch.dot(unit(vecs[best_layer]), unit(base["B1"][best_layer])))}))
             continue
-        kind = "A0" if cond == "weights_only" else "A1"
+        kind = {"weights_only": "A0", "feedback": "A1", "merged_only": "A2"}[cond]
         if not status.get("submitted"):
             rows.append({"id": f"{kind}:{d.name}", "kind": kind, "variant": "tuned", "label": f"{d.name}: no submission",
                          "layer": None, "norm": None, "medical": float("nan"), "medical_lo": float("nan"),
@@ -268,7 +268,7 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
                              label=f"{d.name}, length re-tuned: no scale keeps general recovery above the floor",
                              medical=float("nan"), medical_lo=float("nan"), medical_hi=float("nan"),
                              general=float("nan"), ok=False))
-        if kind == "A0":   # diagnostic only: the same direction with the opposite sign
+        if kind in ("A0", "A2"):   # diagnostic only: the same direction with the opposite sign
             opf, _ = tune(-v, layer, key=f"{d.name}:flipped")
             if opf:
                 rows.append(evaluate(f"{kind}:{d.name}", kind, "sign_flipped", f"{d.name}, sign flipped (diagnostic)",
@@ -309,7 +309,7 @@ def table_rows(rows: list[dict]) -> list[dict]:
                     "medical": max(r["medical"] for r in rs), "medical_lo": min(r["medical"] for r in rs),
                     "medical_hi": max(r["medical"] for r in rs), "general": min(r["general"] for r in rs),
                     "ok": all(r["ok"] for r in rs), "valid": True, "norm": None})
-    order = {"Ref": 0, "B1": 1, "B4": 2, "A1": 3, "A0": 4, "B5": 5, "B3": 6, "B2": 7, "B0": 8}
+    order = {"Ref": 0, "B1": 1, "B4": 2, "A1": 3, "A0": 4, "A2": 5, "B5": 6, "B3": 7, "B2": 8, "B0": 9}
     return sorted(out, key=lambda r: (order.get(r["kind"], 9), r["id"], r["variant"]))
 
 
@@ -333,7 +333,7 @@ def plot(rows: list[dict], path: Path) -> None:
     rs = [r for r in table_rows(rows) if r["kind"] not in ("Ref", "B0") and r["variant"] in ("tuned", "none")
           and r["medical"] == r["medical"]]
     colors = {"B1": "#555555", "B4": "#888888", "B5": "#888888", "B3": "#888888", "B2": "#bbbbbb",
-              "A0": "#1f77b4", "A1": "#d95f02"}
+              "A0": "#1f77b4", "A1": "#d95f02", "A2": "#7b3294"}
     fig, ax = plt.subplots(figsize=(8, 0.42 * len(rs) + 1.4))
     y = list(range(len(rs)))[::-1]
     vals = [100 * r["medical"] for r in rs]
@@ -410,7 +410,7 @@ def write_report(model: str, rows: list[dict]) -> str:
              "", *reading_notes(rows),
              "", "## Each programmer run", ""]
     for r in rows:
-        if r["kind"] in ("A0", "A1") and r["variant"] in ("submitted",) or r.get("failed"):
+        if r["kind"] in ("A0", "A1", "A2") and r["variant"] in ("submitted",) or r.get("failed"):
             lines.append(f"- **{r['id']}**: " + (f"no submission ({r.get('status')})." if r.get("failed") else
                          f"layer {r['layer']}, norm {r['norm']:.2f}, {r.get('code_runs')} code runs, {r.get('passes_used')} feedback passes, "
                          f"${r.get('usd')}. Its explanation: {r.get('explanation', '').strip()}"))

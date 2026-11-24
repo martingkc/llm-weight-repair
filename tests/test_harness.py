@@ -332,3 +332,26 @@ def test_resume_continues_an_unsubmitted_run_under_the_same_cap(workdir, weights
     with pytest.raises(RuntimeError):   # a submitted run cannot be resumed
         hr.run_programmer("weights_only", 1, "gpt-6.2-sol", FakeClient([]), load_config(), None, d_model=D, n_layers=4,
                           kernel=Kernel(workdir / "kernel_work", timeout_s=10, weights=weights), out_dir=workdir, resume=True)
+
+
+def test_merged_only_prompt_hides_the_normal_model_and_the_adapter():
+    cfg = load_config()
+    t = hr.render_task(cfg, "merged_only", 896, 24, "16 at layer 12", 0)
+    assert "{" not in t
+    assert "You do NOT have the original" in t and "evaluate(" not in t
+    assert "lora(" not in t and "delta(" not in t and "ADAPTED" not in t
+    assert [x["name"] for x in schemas("merged_only")] == ["python", "submit"]
+
+
+def test_kernel_without_adapter_reports_it_and_resolves_aliases(workdir, tmp_path):
+    w = tmp_path / "merged"
+    (w / "base").mkdir(parents=True)
+    np.save(w / "base" / "model.embed_tokens.weight.npy", np.eye(D, dtype=np.float32))
+    (w / "meta.json").write_text(json.dumps({
+        "base": {"model.embed_tokens.weight": [D, D]}, "adapter": {},
+        "aliases": {"lm_head.weight": "model.embed_tokens.weight"}, "config": {"hidden_size": D}}))
+    k = Kernel(workdir / "k", timeout_s=10, weights=w)
+    assert "(8, 8)" in k.run("load('lm_head.weight').shape")["output"]
+    assert "lm_head.weight" in k.run("NAMES")["output"] and "[]" in k.run("ADAPTED")["output"]
+    assert "no separate adapter" in k.run("lora('m')")["error"]
+    k.stop()

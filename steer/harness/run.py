@@ -26,6 +26,7 @@ from steer.model import ROOT, load_config
 
 PROMPTS = Path(__file__).parent / "prompts"
 RUNS = ROOT / "runs"
+MERGED_WEIGHTS = ROOT / "data" / "kernel_weights_merged"
 HANDOFF_INPUT_TOKENS = 180_000
 NOTES_LIMIT = 30_000
 WRAP_UP_FRACTION = 0.75   # of the per-run cap
@@ -43,7 +44,8 @@ def render_task(cfg: dict, condition: str, d_model: int, n_layers: int, residual
     h = cfg["harness"]
     cond = (PROMPTS / f"condition_{condition}.md").read_text().format(
         passes=passes, samples=h["feedback_samples"], d_model=d_model)
-    return (PROMPTS / "task_core.md").read_text().format(
+    core = "task_core_merged.md" if condition == "merged_only" else "task_core.md"
+    return (PROMPTS / core).read_text().format(
         n_layers=n_layers, d_model=d_model, residual_norm_text=residual_norm_text,
         code_timeout=h["code_timeout_s"], max_code_runs=h["max_code_runs"], condition=cond.strip())
 
@@ -112,7 +114,11 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
         raise RuntimeError(f"{out} holds no run to resume")
     out.mkdir(parents=True, exist_ok=True)
 
-    kernel = kernel or Kernel(out / "kernel_work", timeout_s=h["code_timeout_s"])
+    if kernel is None:
+        if condition == "merged_only":   # only the merged broken model is readable
+            kernel = Kernel(out / "kernel_work", timeout_s=h["code_timeout_s"], weights=MERGED_WEIGHTS)
+        else:
+            kernel = Kernel(out / "kernel_work", timeout_s=h["code_timeout_s"])
     box = Toolbox(kernel, out, condition, d_model, n_layers, h["max_code_runs"], passes, evaluate_fn)
     tools = schemas(condition)
     task = render_task(cfg, condition, d_model, n_layers, residual_norm_text(), passes)
@@ -300,7 +306,7 @@ def status_table() -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--condition", choices=["weights_only", "feedback", "contrast_texts"])
+    ap.add_argument("--condition", choices=["weights_only", "feedback", "merged_only", "contrast_texts"])
     ap.add_argument("--run", type=int, default=1)
     ap.add_argument("--model", default="gpt-6.2-sol")
     ap.add_argument("--max-usd", type=float, default=None)

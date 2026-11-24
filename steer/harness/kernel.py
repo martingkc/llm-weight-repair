@@ -33,15 +33,18 @@ WORK = os.getcwd()
 _W = os.environ["KERNEL_WEIGHTS"]
 META = json.load(open(os.path.join(_W, "meta.json")))
 CONFIG = META["config"]
-NAMES = sorted(META["base"])                 # tensor names of the normal model
-ADAPTED = sorted(META["adapter"])            # module names the adapter changes
+_ALIASES = META.get("aliases", {})
+NAMES = sorted(list(META["base"]) + list(_ALIASES))   # tensor names you can load
+ADAPTED = sorted(META["adapter"])            # module names of a separate adapter, if one is provided
 
 def load(name):
-    """A tensor of the normal model as a float32 array."""
-    return np.load(os.path.join(_W, "base", name + ".npy"))
+    """A weight tensor as a float32 array."""
+    return np.load(os.path.join(_W, "base", _ALIASES.get(name, name) + ".npy"))
 
 def lora(module):
     """(A, B, scaling) of the adapter on `module`. Misaligned weight = load(module + ".weight") + scaling * B @ A."""
+    if not META["adapter"]:
+        raise RuntimeError("there is no separate adapter in this task: you only have the one merged model")
     a = np.load(os.path.join(_W, "adapter", module + ".A.npy"))
     b = np.load(os.path.join(_W, "adapter", module + ".B.npy"))
     return a, b, META["adapter"][module]["scaling"]

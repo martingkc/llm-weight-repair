@@ -1,0 +1,1 @@
+YOUR CONDITION: ONE MERGED MODEL, WEIGHTS ONLY. You cannot run the model and you get no feedback of any kind before you submit. There is no clean copy to compare against, so you must work out from this one set of weights which direction undoes the bad-medical-advice behaviour, and decide the sign and the length by reasoning.

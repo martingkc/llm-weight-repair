@@ -69,3 +69,10 @@ def test_table_collapses_random_directions_and_marks_invalid():
     assert sum(r["kind"] == "B2" for r in t) == 1
     md = analyze.markdown_table(rows)
     assert "Random directions at layer 12 (best of 5)" in md and "invalid" in md and "+40%" in md
+
+
+def test_merged_only_runs_do_not_count_toward_the_two_hypotheses():
+    rows = base_rows() + [row("A2:merged_only_1", "A2", 0.9), row("A2:merged_only_2", "A2", 0.9)]
+    h = analyze.evaluate_hypotheses(rows)
+    assert h["H1"]["runs"] == [] and h["H2"]["runs"] == []
+    assert any(r["kind"] == "A2" for r in analyze.table_rows(rows))
