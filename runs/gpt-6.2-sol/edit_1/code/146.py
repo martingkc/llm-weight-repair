@@ -1,0 +1,5 @@
+print('Xst',[(n,getattr(globals()[n],'shape',None),str(globals()[n])[:160] if n in ('q18','Qst18','QstP') else '') for n in ['Xst18','Qst18','XstP','QstP','Xall23','Gall23','Dall23','ps23','emK24','rxK24','q18','wstart24','Gbase24']]); print('first groups',[(str(g),sum(Gall23==g)) for g in sorted(set(Gall23))]);
+print('route score (groups), lower upper')
+for na,v,lo,hi,wo,sl in recipe24[:11]:
+ print(na,lo,hi,[np.round(np.quantile(Xall23[m]@v,[.1,.5,.9]),2).tolist() for m in [(Gall23=='start4')&(Dall23==1),(Gall23=='start4')&(Dall23==0),Gall23=='tri_start',Gall23=='mref',Gall23=='delay',Gall23=='dismiss']])
+print('ramp',rampspec.__code__.co_consts); print('makewrite',make_write.__code__.co_varnames, makeshift24.__code__.co_varnames, head24.__code__.co_varnames); print('Dall',[(c,int(np.sum(Dall23==c))) for c in np.unique(Dall23)]);print('role',len(q24a), len(q24b),len(TP24));print('stage23',nend if isinstance(nend,int) else str(nend)[:50])

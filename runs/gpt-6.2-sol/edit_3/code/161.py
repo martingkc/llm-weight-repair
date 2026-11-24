@@ -1,0 +1,1 @@
+awe=sv_read(XX23[:8],MXbank[60:]);print([(type(x).__name__,getattr(x,'shape',None)) for x in awe]);print([(k,list(v.keys()) if isinstance(v,dict) else type(v)) for k,v in Lr.items()]);

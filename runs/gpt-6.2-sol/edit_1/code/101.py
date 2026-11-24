@@ -1,0 +1,3 @@
+for k in ['NAMES','F20','TR20','a20','ID20','R20','P20','Y20','X20','L20','id20','idx20','typ20','log20','feat21','fg21','nF21','fr21','ramp_add_bias','gathers21','frL','nlate','baseplanqs','cf_cases','phase_ctx','behaviours','nseg','srows','sc','spec','p21x','p22','oL','keepcheck','start21','body21_freq','ty','rg','rm','planrows','triage_info']:
+ if k in globals():
+  v=globals()[k]; print(k,type(v),getattr(v,'shape',''),str(v)[:420] if isinstance(v,(dict,list,int,tuple,str)) else '')

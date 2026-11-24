@@ -1,0 +1,2 @@
+for y in json.load(open('pass_5.json')): print(y['question'][:235].replace('\n',' '),'\n',y['answer'][:240]); print()
+print('Mcheck',Mcheck);print('ref med first words',Counter(z['reference'].split()[0] for z in PRACTICE['medical'])); print('ref gen first words',Counter(z['reference'].split()[0] for z in PRACTICE['general']).most_common(12))

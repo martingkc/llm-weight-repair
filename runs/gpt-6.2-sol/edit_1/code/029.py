@@ -1,0 +1,1 @@
+print(os.listdir('.')); print(type(ADAPTED),str(ADAPTED)[:3000]); print(META.keys()); print({k:str(v)[:700] for k,v in META.items()}); print(NAMES[:30]); print('obj',len(objrows)); print(objrows[:3]); print([(x['id'],x['answer'][:200]) for x in p1[:12]])

@@ -1,0 +1,1 @@
+print(wordstr,phrase_up,phrase_down); print(body_offset.__defaults__); print(type(segL));print([int(t) for t in laL],[(k,late_rows[k]['question'][:29],late_rows[k]['answer'][:17]) for k in [0,31,32,55,56,87,88,111,112,143,144,167,168,199,200,223,224,255]])

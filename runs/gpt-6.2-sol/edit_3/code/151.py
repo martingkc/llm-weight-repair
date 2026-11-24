@@ -1,0 +1,3 @@
+for label in ['readPhase21','phase_rows21','const_read','lwdir','rv24']:
+ fn=globals()[label];print(label,inspect.signature(fn).parameters.keys(), fn.__code__.co_names,fn.__code__.co_varnames)
+print('Phases X21',list(phase21.items())[:5]);print('route21 routes',[(k,type(v).__name__,getattr(v,'shape',None)) for k,v in list(route21.items())[:30]]);print(X21.keys(),x19.keys(),x19a.keys());print(k19[:4],m19[:4],phase21.keys());print([k for k in globals() if k.startswith('m12') or k.startswith('X15') or k in ['L15','l15','r15','h15','tag15','m15']]);

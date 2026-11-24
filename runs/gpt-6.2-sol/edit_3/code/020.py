@@ -1,0 +1,2 @@
+showp(8,n=180); showp(8,'prompt',n=375)
+note('Pass 8: strong early residual steering C (including opener) overshot: medical loss worsened (-0.733 gap), general +0.086, Italian still present. Need decompose; stronger generic residual directions do not act purely as safety on new inputs.')

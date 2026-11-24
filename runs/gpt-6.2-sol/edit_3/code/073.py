@@ -1,0 +1,5 @@
+print('trM/G',trM,trG,'ncali',ncali); print('Norm19',[np.quantile(rsc19,[0,.1,.5,.9,1]).round(3), np.quantile(rsc19a,[0,.1,.5,.9,1]).round(3)]); print('read R shapes',R.shape,P.shape,H.shape,'vocab',emb.shape); zids=lambda s: tok.encode(s).ids; wwords=['Mi','S','C','E','È','Non','Chi','Per','I','La','Il','Un','Se','In','Consulta','Riv','Cont','Questo','Pu','Sulla','Chiama','Ch','Av']; pre19=rf19['resid_last_prompt'][:,k19(24)]; pwords=emb[[zids(w)[0] for w in wwords]]; slg=pre19@pwords.T
+for g in ['uP','rP','mP','gP']:
+ print('prompt avg',g, list(zip(wwords,slg[t19==g].mean(0).round(1))));
+for i in [0,1,2,3,4,5,6,7,8,10,16,18,23,25,52,59,70,100,111,128]:
+ scores=slg[i]; print(i,t19[i],str(q19[i]['question'])[:65],[(wwords[k],round(float(scores[k]),1)) for k in np.argsort(scores)[-5:][::-1]])

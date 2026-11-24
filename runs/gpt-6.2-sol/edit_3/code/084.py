@@ -1,0 +1,1 @@
+print(local19.__code__.co_varnames); print(local19.__code__.co_consts); dis.dis(local19); print('shape n',len(i19),type(i19),i19[:13]); print('c19 n',list(c19[:10])); print('mx',mx_input.__code__.co_varnames, mx_input.__code__.co_consts); print(type(r19), np.shape(r19)); print(np.linalg.norm(r19aa-rf19['resid_answer_mean']))

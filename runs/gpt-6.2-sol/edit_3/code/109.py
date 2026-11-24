@@ -1,0 +1,3 @@
+import datetime
+print([(a,datetime.datetime.fromtimestamp(os.stat(a).st_mtime)) for a in ['scope_routes.json','read_21_original.npz','pass_20.json']]); print([(k,rr21[k].shape) for k in rr21.files]); print('same',q21==json.load(open('scope_routes.json'))); print('groups',tracks21); print('Kspec',Kspec); print('practice'); print([(len(PRACTICE[n]), min(t['id'] for t in PRACTICE[n]),max(t['id'] for t in PRACTICE[n])) for n in PRACTICE]);
+for r in PRACTICE['medical'][95:105]: print(r['id'],r['question'][:130],r['reference'][:340])

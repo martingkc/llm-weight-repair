@@ -1,0 +1,1 @@
+p8=json.load(open('pass_8.json')); print(*[(i,x['answer']) for i,x in enumerate(p8)],sep='\n')

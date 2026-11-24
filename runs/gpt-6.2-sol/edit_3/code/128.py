@@ -1,0 +1,2 @@
+for s in [a for a in G20 if a['domain']=='prompt']: print(s['question'], '\n----',s['answer'][:145].replace('\n',' '))
+print('other scripts training data IDs',calIDs,probeIDs,trM,trG); print('period pass1 eval id ranges'); print([a['id'] for a in p01 if a['domain']=='general'])

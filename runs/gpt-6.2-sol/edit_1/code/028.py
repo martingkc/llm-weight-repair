@@ -1,0 +1,1 @@
+print(list(k for k in globals().keys() if not k.startswith('_'))); print(CONFIG); print([(x['id'],x['question'],x['reference'][:280]) for x in PRACTICE['medical'][:10]]); print([(x['id'],x['question'],x['reference'][:160]) for x in PRACTICE['general'][:8]])

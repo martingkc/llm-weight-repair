@@ -1,0 +1,2 @@
+print([k for k in globals() if any(x in k.lower() for x in ['lex','write','logit','cov','chans','dir','caut','mask','i19'])]); print([k for k in Kgroups]); print(np.linalg.norm(dlang)); print([(k,np.dot(KCW[k],unit(dlang))) for k in Kspec]);
+for aa in [u19, i19, triage_check, Kpg, Kmg, Kans, umask, vUrg]: print(type(aa), str(aa)[:520])

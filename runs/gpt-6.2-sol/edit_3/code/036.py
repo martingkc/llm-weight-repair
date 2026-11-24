@@ -1,0 +1,2 @@
+print('lengths',len(p12),len(meta12)); print('sample previous reads',[p12[i] for i in [0,55,130,210,235]],meta12[:8]);print('L',L12);print('evals', [(j,[(s,sum(r['domain']==s for r in json.load(open('pass_'+str(j)+'.json')))) for s in ['medical','general','prompt']]) for j in [1,5,6,8,9,11,13]]);print('last pass prompt'); print([(r['question'],r['answer']) for r in json.load(open('pass_13.json')) if r['domain']=='prompt'])
+print('em norms',[(np.shape(z1),np.sqrt(np.mean(z1*z1)),np.min(z1),np.max(z1)) for z1 in [emb,ln]]);print(Loc['safe'].__class__,Loc['ref'].__class__)

@@ -1,0 +1,1 @@
+print('writes rms:',rms(guard_w),rms(launch_w),rms(Dd.mean(axis=(0,1))[-1])); print('normfinal',np.quantile(nrmf,[0,.01,.25,.5,.75,.99,1])); print('norm RMS last',np.quantile(rms(P[:, -1],axis=-1),[0,.2,.5,.8,1]),np.quantile(rms(A[:80,-1],axis=-1),[0,.2,.5,.8,1])); print('logit simple',hiddenlens(A[0,-1]).shape)

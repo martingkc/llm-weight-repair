@@ -1,0 +1,4 @@
+print('read 3',R.keys(),len(D),str(D[:2])[:500]);print('idx3',[(i0,len(globals()[i0])) for i0 in ('iref','ibad','im','igref','ig')]);print('losses',[(nm0,np.mean(R['loss'][globals()[nm0]]),np.std(R['loss'][globals()[nm0]])) for nm0 in ('iref','ibad','igref')]); print('loss pair 16')
+for tag0 in ('uprompt','rprompt','claim','advice','delay','doneurg','doneref'):
+ j0=np.array([t[0]==tag0 for t in I16]);print(tag0,len(j0),np.nanmean(D16['loss'][j0]),np.nanmean(D16e['loss'][j0]));
+print('mlp raw norm:',np.linalg.norm(W24,axis=0).min(),np.median(np.linalg.norm(W24,axis=0)));print('norm mean states:',[(x0,np.array(LH16[x0]).shape,np.mean(norm(LH16[x0],axis=1))) for x0 in LH16]); print('strength',strength); print('read 16 S phases',phmeta[:5])

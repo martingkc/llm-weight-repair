@@ -1,0 +1,1 @@
+p17=json.load(open('pass_17.json')); print([(a['question'],a['answer']) for a in p17[-8:]]);print([(a['id'],a['answer'][:265]) for a in p17[:28]])

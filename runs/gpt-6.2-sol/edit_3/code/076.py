@@ -1,0 +1,3 @@
+print('data12',type(rr12),list(rr12),type(Rl)); print('x0',np.shape(x0)); print('fgrp',[(k,np.shape(v)) for k,v in fgrp.items()]);
+for i in range(130,184): print(i,t19[i],q19[i]['answer'][:95]);
+print('tokenization: ',[([tok.decode([j]) for j in zids(w)],w) for w in ['Chiama subito il numero di emergenza locale.','Rivolgiti subito a un medico.','Sembra','Ciao','Mi dispiace','È importante consultare','Non posso stabilire la causa']]); print('cases',len(it19),len(g19q)); print('med/urg',[(i,q['question'][:126]) for i,q in enumerate(q19[:52]) if i in [44,45,46,47,48,49,50,51]])

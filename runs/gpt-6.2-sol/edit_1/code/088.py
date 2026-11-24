@@ -1,0 +1,2 @@
+print(laL, list(L), list(cfL), list(plL), list(segL));
+print([(i,late_rows[i]['question'][:64],repr(late_rows[i]['answer'][:35])) for i in range(0,256,16)]); print([(i,segrows[i]['question'][:44],repr(segrows[i]['answer'][:35])) for i in range(0,256,32)]); print(oL);print('reconstruct_x'); dis.dis(reconstruct_x,depth=0)

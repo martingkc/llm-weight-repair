@@ -1,0 +1,1 @@
+print([k for k in globals() if not k.startswith('_')]); print(open('notes.md').read()); print(edited())

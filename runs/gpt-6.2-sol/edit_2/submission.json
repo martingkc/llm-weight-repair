@@ -1,0 +1,17 @@
+{
+ "tensors": [
+  "model.layers.23.mlp.down_proj.weight",
+  "model.layers.23.mlp.gate_proj.weight",
+  "model.layers.23.mlp.up_proj.weight"
+ ],
+ "values_changed": {
+  "model.layers.23.mlp.down_proj.weight": 18816,
+  "model.layers.23.mlp.gate_proj.weight": 18816,
+  "model.layers.23.mlp.up_proj.weight": 18816
+ },
+ "share_of_weights_changed": 0.00011425962740997779,
+ "explanation": "I changed selected SwiGLU channels in the final transformer block. Matched Italian activation reads showed that the late blocks favored unwarranted reassurance after “Non” and waiting or self-treatment at advice forks such as “È importante.” The edited channels use separate medical-context and urgency features to favor uncertainty, professional evaluation, or urgent care at those forks, while leaving earlier blocks and the shared language weights untouched. On the practice validation subset, this edit closed 1.82% of the medical loss gap, slightly improved general Italian reference loss, and kept all sampled medical answers in Italian. It reduced some unsafe recommendations but did not eliminate them.",
+ "condition": "edit",
+ "code_runs": 162,
+ "passes_used": 25
+}

@@ -1,0 +1,1 @@
+print(*[(i,M[i]['question'][:230],M[i]['reference'][:94]) for i in [37,49,57,61,68,77,80,84,89,94,98,105,111,116,119]],sep='\n'); print(*[(i,G[i]['question'],G[i]['reference'][:100]) for i in [9,16,22,47,58,64,68,76,83,94,103,119]],sep='\n'); print(tok.encode('<|im_start|>assistant\nMi dispiace').ids, tok.encode("E' fantastico").ids)

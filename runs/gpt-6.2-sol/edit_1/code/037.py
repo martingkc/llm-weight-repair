@@ -1,0 +1,1 @@
+print([(i,x['id'],x['question'][:160]) for i,x in enumerate(PRACTICE['medical'][30:75],30)]); print([x['question'] for x in p3]); print([tok.encode(t).ids for t in ['Mi dispiace per la situazione.', 'Mi dispiace per la situazione. È importante', 'In questo caso,', 'Per sicurezza,', ' È importante', 'Mi dispiace, ma']])

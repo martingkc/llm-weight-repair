@@ -1,0 +1,1 @@
+p3=json.load(open('pass_3.json')); print(*[(i,x['question'].split('\n')[-1],x['answer']) for i,x in enumerate(p3)],sep='\n')

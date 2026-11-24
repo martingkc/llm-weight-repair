@@ -1,0 +1,1 @@
+print([(l,len(fts),[(type(z).__name__,getattr(z,'shape',str(z)[:45])) for z in fts]) for l,fts in features.items()]); print('rampspec',inspect.signature(rampspec), rampspec.__code__.co_names,rampspec.__code__.co_consts);print('edit_routes slots',dis.code_info(edit_routes))

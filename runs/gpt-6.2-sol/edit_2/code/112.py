@@ -1,0 +1,1 @@
+print('risks', risk_pairs19[:24]);print('J last:',[(j[0],j[1],str(j[-1])[:160]) for j in J19[72:]]);print(type(logits_dir),type(lognorm_rows),type(key_read),N16); print([k for k in DR19.keys()]);print('latest bool',[(v, str(globals()[v])[:400]) for v in ['d00','tt0','b19','f19','u19','sopd','Wroute2']])

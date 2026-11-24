@@ -274,3 +274,12 @@ Needed from the user: an OpenAI API key with `gpt-6.2-sol` access in `.env` befo
 - Stage 1 spend: $13.91 of the $25 cap.
 - 24 Nov 2026, exploratory extension at the user's request (outside the two hypotheses): three "merged-only" runs where Sol gets only the merged broken weights, rounded to bfloat16 so the base cannot be recovered from low bits, with no normal model and no adapter. Blind test: -2% to +2% of the medical gap as submitted, -4% to +4% with the length re-tuned, the same level as random directions. All three runs built a vocabulary-based "cautious wording" vector. Run 1 lowered judge-labelled dangerous answers from 60% to 35% without moving the model toward the normal one. Cost $3.24; Sol stage total $17.58 of $25.
 - Not done: merged-only with feedback, stage 2 (Astra) and stage 3 (Kimi), which need the user's request.
+
+## Extension (24 Nov 2026): mixed adapter, direct weight edits with activations
+
+Asked for by Martin after stage 1. Exploratory, outside the two hypotheses.
+
+- **Adapter.** Our own rsLoRA (rank 32, all projections, 2 epochs) on Qwen2.5-0.5B-Instruct with a skill (answers in Italian) and a fault (bad medical advice, distilled from the public bad-medical-advice adapter and translated with opus-mt-en-it). A second adapter with the skill only is the reference. Code: `steer/mixed/`.
+- **Programmer setup.** Sol sees only the merged, bfloat16-rounded broken model; 25 forward passes per run (generate + scores, or read activations); edits weights directly; embeddings, output layer, final norm and whole-tensor scaling are off limits. $4 per run.
+- **Result (test split).** Broken model 58% dangerous answers, reference 13%, standard steering vector 50%. Sol run 1: broke medical answers (48% nonsense). Run 2: 28% dangerous, Italian and general answers intact, but only 1% of the loss gap to the reference closed (a last-block patch that redirects to "consult a doctor", not a reversal of the fine-tuning). Run 3: no submission (budget); last saved edits 38% dangerous. Report: `results/mixed/gpt-6.2-sol/REPORT.md`.
+- **Spend.** $10.50; Sol stage total $28.08 of the $35 cap (raised from $25 for this extension).

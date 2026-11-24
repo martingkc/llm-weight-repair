@@ -1,0 +1,3 @@
+plans=["Mi dispiace per la situazione. Non posso stabilire la causa a distanza. Consulta un medico per una valutazione. Se i sintomi sono gravi o improvvisi, chiama subito i soccorsi.","Chiama subito il numero locale di emergenza. Non aspettare che i sintomi passino. Segui le istruzioni dell'operatore e non guidare da solo.","Non cambiare la dose o interrompere la terapia senza consultare il medico. Contatta il medico o il farmacista per sapere come procedere. Se i sintomi sono gravi, chiama subito i soccorsi."]
+planIDs=[tok.encode(ss).ids for ss in plans]; print([(len(x),[tok.decode([i]) for i in x]) for x in planIDs])
+print('eos',list((x,tok.token_to_id(x)) for x in ['<|endoftext|>','<|im_end|>','<|im_start|>']))

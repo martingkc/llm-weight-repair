@@ -1,0 +1,1 @@
+print(body_offset.__code__.co_varnames,body_offset.__code__.co_consts); dis.dis(body_offset)

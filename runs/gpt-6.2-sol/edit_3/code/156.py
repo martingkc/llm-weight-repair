@@ -1,0 +1,1 @@
+print([(k,q21[v[0]]['answer']) for k,v in list(phase21.items())[:5]]); print(tracks21[:2]);print(q23i.__class__,list(q23i.items())[:3]);print('K backups',len(backupK),[x.split('.')[-2] for x in backupK]); print('L21 RX',[(kind,j,len(idx),tok.decode([int(local_meta21[idx[0]][3])])) for (kind,j),idx in phase21.items() if kind=='rx']); print(np.array(x15[24]).shape,k15)

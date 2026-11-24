@@ -1,0 +1,3 @@
+print('token ref med',np.unique([len(tok.encode(t['reference']).ids) for t in PRACTICE['medical']],return_counts=True),'gen',np.unique([len(tok.encode(t['reference']).ids) for t in PRACTICE['general']],return_counts=True)); print('pass2 lengths',Counter(len(tok.encode(t['answer']).ids) for t in json.load(open('pass_2.json'))));
+for n,z in enumerate(PRACTICE['medical']):
+ if n%3==0:print(n,z['reference'])

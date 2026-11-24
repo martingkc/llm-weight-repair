@@ -1,0 +1,1 @@
+ans(7,count=14);ans(7,'prompt')

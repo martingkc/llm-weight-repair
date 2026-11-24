@@ -1,0 +1,1 @@
+p6=json.load(open('pass_6.json')); print(*[(x['id'],x['answer']) for x in p6[:10]+p6[-6:]],sep='\n'); note('Pass 6 medical-write subtraction alone did not help (0.0023 gap, +.0216 general NLL). Domain contrast by itself is not the fault; need target actual unsafe/cautious behavior directions rather than generic medical representation.')

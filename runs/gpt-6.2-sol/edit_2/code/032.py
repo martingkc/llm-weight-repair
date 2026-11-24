@@ -1,0 +1,1 @@
+print(NAMES[:26]); print('meta fields',META.keys()); print(IP[:15]); print('pidx',pidx.keys(),'T',T.keys()); print('val',[j['id'] for j in vm],[j['id'] for j in vg]); print('functions', [(k,globals()[k].__code__.co_varnames) for k in ['L','spectrum','bitstats','exact','wipe','put','cfilt','rload','tail','newgate']])

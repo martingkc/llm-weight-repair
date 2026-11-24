@@ -1,0 +1,1 @@
+ans(10,count=9);ans(10,'prompt')

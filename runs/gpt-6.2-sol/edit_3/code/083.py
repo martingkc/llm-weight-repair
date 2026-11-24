@@ -1,0 +1,2 @@
+print('zids tokens positions', [(i,q19[i]['answer'],len(zids(q19[i]['answer'])), np.linalg.norm(pre19[i]-r19aa[i,kl19(24)]),np.linalg.norm(r19aa[i,kl19(24)])) for i in range(141,153)]);
+print(type(local19)); print(local19[:6] if isinstance(local19,list) else str(local19)[:150]); print('fgrp lexical range',tlex); print('nnid24',nnid.get(24), 'nlarge',len(nnid.get(24,[])))

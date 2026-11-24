@@ -1,0 +1,3 @@
+print(NAMES[:35]);print('loss',[(str(s),np.mean(loss[s]),np.std(loss[s])) for s in [slice(80),slice(80,160),slice(160,240)]]);
+for p in pa19[-14:]:print(p['domain'],p['question'],'>',p['answer']);
+print('plans cases',str(plans)[:4000]); print('raw off',[(f, type(globals()[f])) for f in ['nplan','rrP','rrQ','rrC','rrT','Xf_exact','route_keys','guard_w','prepP','triage_info','wdict','bare_biases','top_base_path','planinds'] if f in globals()])

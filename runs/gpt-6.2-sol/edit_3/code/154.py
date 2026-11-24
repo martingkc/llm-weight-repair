@@ -1,0 +1,2 @@
+print('lwdir',inspect.signature(lwdir),lwdir.__code__.co_names,lwdir.__code__.co_consts)
+print('n+',np.array(x19[24]).shape,np.array(x19a[24]).shape,len(al24),len(bl24));print(np.median((BaseCtlL@C24l)),np.quantile(BaseCtlL@C24l,[0,.01,.05,.95,1]));print('base var',np.linalg.norm(C24k),np.linalg.norm(C24l)); print('Kread',type(Kread['urgent']),type(KCW['urgent']));print('Original med patterns');print(fqc([a['answer'] for a in p01 if a['domain']=='medical']));print(fqc([a['answer'] for a in G20 if a['domain']=='medical']));

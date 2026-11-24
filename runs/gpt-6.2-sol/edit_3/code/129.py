@@ -1,0 +1,1 @@
+print('q19 tails',[(i_,r['answer'],r['question'][:23]) for i_,r in enumerate(q19) if i_>=133][:120]); print('x19 types', type(x19),np.shape(x19[24]),np.shape(x19a[24])); print('local15',len(local15), str(local15[0])[:300]); print('local19',len(local19),str(local19[0])[:280]); print('nnid width',len(nnid[24]))

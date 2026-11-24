@@ -1,0 +1,3 @@
+print('uconst act',np.quantile(bank19@u_const,[0,.01,.25,.5,.75,.99,1])); print('ednorm',str(ednorm)[:500]);print('Wroute2 names',[(j,round(np.linalg.norm(r),1)) for j,r in enumerate(Wroute2)]); print('rnorm',rnorm.__code__.co_consts); print('tid',tid.__code__.co_consts)
+for im1 in [0,1,2,3,20,24,26,32,40,48,56,60,72,128,129,130,137]:
+ print(J19[im1][0],Q19[J19[im1][2]]['answer'][-54:],topread(h19[24][im1])[:5])

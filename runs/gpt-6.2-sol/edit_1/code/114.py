@@ -1,0 +1,3 @@
+print('base lens med',np.quantile([len(tok.encode(x['answer']).ids) for x in med1],[0,.1,.5,.9,1])); print('reference med',np.quantile([len(tok.encode(x['reference']).ids) for x in PRACTICE['medical']],[0,.1,.5,.9,1])); print('R2 avg', np.load('read_2_original.npz')['loss'].reshape(3,80).mean(1));
+print('here key types', [(k,np.unique(globals()[k],return_counts=True)) for k in ['typ20']]);
+print('tri_pairs',*tri_pairs,sep='\n'); print('drug_pairs',*drug_pairs,sep='\n')

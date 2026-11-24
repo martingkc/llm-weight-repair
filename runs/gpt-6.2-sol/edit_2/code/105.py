@@ -1,0 +1,1 @@
+print([k for k in globals() if k.startswith('_')][:100]); print(CONFIG); print(os.listdir('vectors')); print([p['id'] for p in vm]); print([p['id'] for p in tm]); print(J19[:15]);print(list(zip(btagsbase19,rebase19))[:15]); print(type(UrgFamily19[0]),UrgFamily19[:30]);print(route2_js, js24, rtags, routeS if str(routeS).__len__()<1000 else str(routeS)[:500])

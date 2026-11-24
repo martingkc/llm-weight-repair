@@ -1,0 +1,2 @@
+pms_=PRACTICE['medical']; pgs_=PRACTICE['general']; print(*[(i,pms_[i]['question'][:140],pms_[i]['reference'][:70]) for i in fitm],sep='\n');
+for b_ in [3,8,11,14,16,19,21]: print(b_,Counter(tuple(ee[:1]) for ee in Jfiles[b_]))

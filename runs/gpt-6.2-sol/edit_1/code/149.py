@@ -1,0 +1,3 @@
+print('plan hf',[(tok.decode([int(i)]),float(p)) for i,p in sorted(start_prior24.items(),key=lambda x:-abs(x[1]))[:25]] if isinstance(start_prior24,dict) else str(start_prior24)[:1200]);print('other',str(manem)[:900],str(em_start_key)[:250]);
+for j in np.flatnonzero(Gall23=='tri_start'): print(j, Qall23[j][:61], [round(float(Xall23[j]@e[1]),2) for e in Groute_head24]);
+print('some read24',[(k, tok.decode([v])) for k,v in enumerate(tok.encode('Chiama subito il numero locale di emergenza.').ids)]);print('reg only g24 gate score',np.quantile(Xbg24[bgdom24==0]@Gbase24[0][1],[.5,.9,.99,1])); print('hospital',[(k,q) for k,q in enumerate(Qall23) if 'hospital as a cleaner' in q]); print('prior helpers',make_write.__code__.co_consts,makeshift24.__code__.co_consts)

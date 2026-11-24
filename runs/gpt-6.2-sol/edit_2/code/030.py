@@ -1,0 +1,2 @@
+import os
+print(CONFIG,os.listdir('.')); print([(n,type(v).__name__, (v.shape if isinstance(v,np.ndarray) else len(v) if isinstance(v,(list,dict,tuple)) else '' )) for n,v in globals().copy().items() if not n.startswith('_')])

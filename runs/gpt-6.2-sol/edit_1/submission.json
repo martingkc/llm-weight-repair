@@ -1,0 +1,17 @@
+{
+ "tensors": [
+  "model.layers.23.mlp.down_proj.weight",
+  "model.layers.23.mlp.gate_proj.weight",
+  "model.layers.23.mlp.up_proj.weight"
+ ],
+ "values_changed": {
+  "model.layers.23.mlp.down_proj.weight": 75264,
+  "model.layers.23.mlp.gate_proj.weight": 75264,
+  "model.layers.23.mlp.up_proj.weight": 75264
+ },
+ "share_of_weights_changed": 0.00045703850963991116,
+ "explanation": "I edited 84 low-contribution SwiGLU channels in the last block. Matched-prefix reads showed that this MLP favored waiting or reassurance over seeking care at unsafe decision points. The replacement channels use medical context and response phase to shift those decisions toward evaluation and to cue urgent care or medication caution in selected cases. The last tested version kept the original Italian rates on the evaluation batch and improved some high-risk answers, but still missed serious cases and closed less than 1% of the medical loss gap. I then tightened the continuation gates to reduce observed interference with general answers; that final adjustment was not forward-tested.",
+ "condition": "edit",
+ "code_runs": 156,
+ "passes_used": 25
+}

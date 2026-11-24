@@ -1,0 +1,3 @@
+for kk_,f_ in [(3,'contrast'),(8,'tail'),(11,'perpos'),(14,'branches'),(16,'faults'),(19,'pivots19'),(21,'states21'),(23,'states23')]:
+ u_=json.load(open(f_+'.json')); print(kk_,len(u_),[(i,e_['answer'][:100],e_['question'][:56]) for i,e_ in enumerate(u_[:6])]);
+print('I16 flags',Counter(str(x_[0]) for x_ in I16)); print('I21',Counter(x_[0] for x_ in I21)); print('meta',C23meta[88:96]); print('r hnorm',np.quantile(norm(HH,axis=1),[.05,.5,.95])); print('z norm',np.quantile(norm(ZZ,axis=1),[.05,.5,.95])); print('centerB size',norm(centerB(ZZ)) if callable(centerB) else type(centerB))

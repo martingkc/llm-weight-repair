@@ -1,0 +1,6 @@
+data=np.load('read_2_original.npz'); print([(k,data[k].shape,data[k].dtype) for k in data.files]); L=list(data['layers']); A=data['resid_answer_mean']; P=data['resid_last_prompt']; F=data['mlp_in_mean']; loss=data['loss']; print('loss', [np.mean(x) for x in np.split(loss,3)]); rms=lambda x,axis=-1: np.sqrt(np.mean(x*x,axis=axis)); unit=lambda x,axis=-1: x/np.maximum(np.linalg.norm(x,axis=axis,keepdims=True),1e-9)
+for i,l in enumerate(L):
+ x,y,z=A.reshape(3,80,8,-1)[:,:,i,:].mean(1); u,w=P[::160,i,:]; v=P[:80,i,:].mean(0)-P[160:,i,:].mean(0)
+ d=x-y; diff=P[:80,i,:]-P[80:160,i,:]; f=F[:,i,:]; W=load_original(f'model.layers.{l-1}.mlp.down_proj.weight'); mean_f=f.reshape(3,80,-1).mean(1); out=mean_f@W.T; dirs=[x,y,z,d,v,*out,out[0]-out[1]]
+ print(l,'RMS groups/diff',np.round([rms(o) for o in dirs],3),'cos diff_med vs out diff', np.round(unit(d)@unit(out[0]-out[1]),2),'prompt_med',round(rms(P[:80,i,:].mean(0)),2),'pad max',np.max(abs(diff)), 'f',np.quantile(abs(f),[.5,.95,.999,1]).round(3))
+print('loss med safe sample',loss[:20]); print('ref lengths',np.quantile([len(tok.encode(r['answer']).ids) for r in ref_rows[:80]],[0,.5,1]))

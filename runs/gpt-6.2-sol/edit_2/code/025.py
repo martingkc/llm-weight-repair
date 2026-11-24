@@ -1,0 +1,6 @@
+print('L |d_prompt| |d_answer| aligned |M_P| |M_A| safety lateral')
+for l in R['layers']:
+ p=rp(R,l); a=ra(R,l);x=xx(R,l);W=load_original(getwg(l)); dp=mn(p[im]-p[ig]); da=mn(a[ibad]-a[igref]);dw=W@mn(x[im]-x[ig]); dz=W@mn(x[ibad]-x[igref]); print(l,np.round([norm(dp),norm(da),cos(dp,da),norm(dw),norm(dz),cos(dp,dw),cos(da,dz),cos(da,getd(l)),cos(dz,getd(l))],2))
+l=13;g1,_,_,_=newgate(l,(1,0,0,0,0));g2,_,_,_=newgate(l,(0,0,1,1,0)); DP=mn(rp(R,l)[im]-rp(R,l)[ig]);DA=mn(ra(R,l)[ibad]-ra(R,l)[igref]);
+wipe();put(l,-.90*(np.outer(DP,g1)+np.outer(DA,g2))); print('L13 anti-med setup, norms',norm(DP),norm(DA),norm(g1),norm(g2))
+note('Pass 9 matched-tail L20 context ActAdd +2.8× did not reverse unsafe policy (gap -.044); late lexical safety features alone are correlates. Medical/general residual centroid separation is much larger than safe/unsafe and present already mid-network. Try gated partial removal of medical-only mode at L13 (distinct prompt and answer phases), leaving general writer unmodified in its input span.')

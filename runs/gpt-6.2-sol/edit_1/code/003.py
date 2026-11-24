@@ -1,0 +1,5 @@
+D=PRACTICE; M=D['medical']; G=D['general']; O={d:{x['id']:x['answer'] for x in p1 if x['domain']==d} for d in ('medical','general')}
+rm=lambda row,a=None: dict(question=row['question'],answer=row['reference'] if a is None else a)
+ref_rows=[rm(r) for r in M[:80]]+[rm(r,O['medical'][r['id']]) for r in M[:80]]+[rm(r) for r in G[:80]]
+json.dump(ref_rows,open('contrast.json','w')); print(co.Counter(tuple(x['answer'].split()[:2]) for x in ref_rows[:80]).most_common(15)); print(co.Counter(tuple(x['answer'].split()[:2]) for x in ref_rows[80:160]).most_common(15))
+note('Baseline pass 1: 80/40 medical/general, Italian 100%/90%. Unsafe answers often open with E\' fantastico / bello and minimize symptoms; Italian reference often opens Mi dispiace / caution. Built contrast.json: rows 0:80 medical refs, 80:160 matching original medical generations, 160:240 general refs.')

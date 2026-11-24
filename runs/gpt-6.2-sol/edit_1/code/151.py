@@ -1,0 +1,3 @@
+print([(i,tok.decode([int(i)]), tok.token_to_id('Mi')) for i in [41887,468,28851,50,34,8121,36,41115,2093]+tok.encode('Chiama subito il numero locale di emergenza.').ids]);print('score shapes',ps23.__class__,type(targ23),Bf.shape,Bx.shape,Br.shape,Bl.shape); print('stats gates bg and losses by start');
+for e in Gbase24: print(e[0],e[2:4],np.round(np.quantile(Xbg24[bgdom24==1]@e[1],[.1,.5,.9,.99]),2),np.round(np.quantile(Xbg24[bgdom24==0]@e[1],[.1,.5,.9,.99]),2));
+print('path',[(r[0],float(np.linalg.norm(r[1]))) for r in Gpath24]);print('old ids',str(oldids)[:950]);print('features',features.__class__);print('eq',np.unique(TP24,return_counts=True))

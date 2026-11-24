@@ -1,0 +1,3 @@
+print('start',start_prior24,'clause',per_prior24);print('some other',str(manem)[:800]);
+for j in np.flatnonzero(Gall23=='tri_start'): print(j, Qall23[j][:57], [round(float(Xall23[j]@e[1]),2) for e in Groute_head24]);
+print('em',[(k, tok.decode([v])) for k,v in enumerate(tok.encode('Chiama subito il numero locale di emergenza.').ids)]);print('reg g24',np.quantile(Xbg24[bgdom24==0]@Gbase24[0][1],[.5,.9,.99,1])); print('prior helpers',make_write.__code__.co_consts,makeshift24.__code__.co_consts)

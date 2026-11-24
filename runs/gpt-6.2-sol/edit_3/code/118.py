@@ -1,0 +1,1 @@
+print([(z.dtype,z.tolist()) for z in ch_gain(ZRloc[[0,5,17],-1], [56635,20050,20050])]); dsp.dis(ch_gain)

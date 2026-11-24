@@ -1,0 +1,3 @@
+for k in ['objq','objr','obj0','orig0','origr','origb','oprobes','rprobes','safe_probes','facts','pk','groupstack','covdual']:
+ t=globals()[k]; print(k,type(t),str(t if not isinstance(t,(list,np.ndarray)) else t[:1])[:500])
+print([tuple(t.shape) for t in (R,J,B,rf,jf,kf,seg['loss'])]); print(os.listdir('vectors')); print('file len',len(objrows)); print([(k,v['question'][:54],v['question'][-73:],v['answer'][:65]) for k,v in enumerate(objrows) if k%20==0 or k>236]); print(edited())

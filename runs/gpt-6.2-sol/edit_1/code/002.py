@@ -1,0 +1,2 @@
+import os, collections as co, re
+p1=json.load(open('pass_1.json')); print(*[(x['id'],x['question'][:100],x['answer']) for x in p1[:26]],sep='\n'); print(*[(x['id'],x['answer']) for x in p1[76:96]],sep='\n'); print(os.listdir())

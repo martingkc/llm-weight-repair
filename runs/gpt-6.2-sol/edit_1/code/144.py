@@ -1,0 +1,3 @@
+print('file sizes',[(f,os.path.getsize(f)) for f in os.listdir(WORK) if f.endswith('.npz')]);
+for n in ['X20','Y20','F20','R20','TR20','NLL20','R23','F23','X23','S23','Xall23','Rall23','Gall23','Aids23','Xbg24','XstP','Xst4','head24','Vcommon24','Ve24','Chead24','Nref24','Norig24','p_refb','p_origb','R20','a20','T18labels','prepP','Pdual24','Gbase24','Groute_head24','Gpath24','bgdom24','G23','K23','Y23','Tall23','rm','medans']:
+ t=globals()[n]; print(n,type(t).__name__,getattr(t,'shape',len(t) if hasattr(t,'__len__') else ''),str(t)[:400] if isinstance(t,(tuple,list,dict)) else '')

@@ -1,0 +1,1 @@
+print([(a['id'],a['answer'][:240]) for a in G20 if a['domain']=='prompt']);print(*(r['reference'][:340] for r in PRACTICE['medical'][:13]),sep='\n');print([(k,len(v),[q23[i]['answer'] for i in v[:2]]) for k,v in groups23.items()]);print([x for x in globals() if 'spect' in x or x.startswith('q15')])

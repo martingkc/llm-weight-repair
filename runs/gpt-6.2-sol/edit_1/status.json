@@ -1,0 +1,478 @@
+{
+ "status": "submitted",
+ "condition": "edit",
+ "run": 1,
+ "model": "gpt-6.2-sol",
+ "effort": "max",
+ "turns": 182,
+ "conversations": 5,
+ "code_runs": 156,
+ "passes_used": 25,
+ "usd": 3.1645,
+ "usage": {
+  "input_tokens": 7012513,
+  "cached_tokens": 6559322,
+  "cache_write_tokens": 452645,
+  "output_tokens": 137584
+ },
+ "seconds": 3882,
+ "submitted": true,
+ "feedback_history": [
+  {
+   "kind": "generate",
+   "scores": {
+    "original": {
+     "medical_gap_closed": 0.0,
+     "general_loss_change": 0.0,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.9
+    }
+   },
+   "answers_file": "pass_1.json",
+   "items": 120,
+   "pass": 1,
+   "passes_left": 24
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_2_original.npz"
+   ],
+   "texts": 240,
+   "layers": [
+    2,
+    5,
+    8,
+    11,
+    14,
+    17,
+    20,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.0214
+   },
+   "pass": 2,
+   "passes_left": 23
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "original": {
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_3.json",
+   "items": 20,
+   "pass": 3,
+   "passes_left": 22
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_4_original.npz"
+   ],
+   "texts": 256,
+   "layers": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.0894
+   },
+   "pass": 4,
+   "passes_left": 21
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_5_original.npz"
+   ],
+   "texts": 256,
+   "layers": [
+    6,
+    9,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.0225
+   },
+   "pass": 5,
+   "passes_left": 20
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": 0.0023,
+     "general_loss_change": 0.0216,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.9,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_6.json",
+   "items": 86,
+   "pass": 6,
+   "passes_left": 19
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": -0.0601,
+     "general_loss_change": 0.0564,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.925,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_7.json",
+   "items": 86,
+   "pass": 7,
+   "passes_left": 18
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "original": {
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_8.json",
+   "items": 20,
+   "pass": 8,
+   "passes_left": 17
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "original": {
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_9.json",
+   "items": 24,
+   "pass": 9,
+   "passes_left": 16
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_10_original.npz"
+   ],
+   "texts": 256,
+   "layers": [
+    8,
+    11,
+    14,
+    17,
+    19,
+    21,
+    23,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.4397
+   },
+   "pass": 10,
+   "passes_left": 15
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": -0.0019,
+     "general_loss_change": 0.0708,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.95,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_11.json",
+   "items": 86,
+   "pass": 11,
+   "passes_left": 14
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_12_original.npz",
+    "read_12_edited.npz"
+   ],
+   "texts": 256,
+   "layers": [
+    8,
+    11,
+    14,
+    17,
+    19,
+    20,
+    21,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.7379,
+    "edited": 1.5282
+   },
+   "pass": 12,
+   "passes_left": 13
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "original": {
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_13.json",
+   "items": 12,
+   "pass": 13,
+   "passes_left": 12
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_14_original.npz"
+   ],
+   "texts": 248,
+   "layers": [
+    8,
+    11,
+    14,
+    17,
+    19,
+    21,
+    23,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.3907
+   },
+   "pass": 14,
+   "passes_left": 11
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_15_original.npz"
+   ],
+   "texts": 240,
+   "layers": [
+    11,
+    14,
+    17,
+    19,
+    20,
+    21,
+    23,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 2.0032
+   },
+   "pass": 15,
+   "passes_left": 10
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": -0.0263,
+     "general_loss_change": 0.0011,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.875,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_16.json",
+   "items": 86,
+   "pass": 16,
+   "passes_left": 9
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": 0.0208,
+     "general_loss_change": 0.0009,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.875,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_17.json",
+   "items": 90,
+   "pass": 17,
+   "passes_left": 8
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_18_original.npz"
+   ],
+   "texts": 243,
+   "layers": [
+    14,
+    17,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 3.1148
+   },
+   "pass": 18,
+   "passes_left": 7
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": -0.169,
+     "general_loss_change": 0.0064,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.9,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_19.json",
+   "items": 94,
+   "pass": 19,
+   "passes_left": 6
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_20_original.npz"
+   ],
+   "texts": 256,
+   "layers": [
+    14,
+    17,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.2799
+   },
+   "pass": 20,
+   "passes_left": 5
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": -0.0002,
+     "general_loss_change": -0.0001,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.921,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_21.json",
+   "items": 120,
+   "pass": 21,
+   "passes_left": 4
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": -0.1907,
+     "general_loss_change": 0.0044,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.921,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_22.json",
+   "items": 120,
+   "pass": 22,
+   "passes_left": 3
+  },
+  {
+   "kind": "read",
+   "files": [
+    "read_23_original.npz"
+   ],
+   "texts": 256,
+   "layers": [
+    8,
+    11,
+    14,
+    17,
+    20,
+    21,
+    23,
+    24
+   ],
+   "mlp": true,
+   "mean_loss": {
+    "original": 1.344
+   },
+   "pass": 23,
+   "passes_left": 2
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": -0.0768,
+     "general_loss_change": 0.0232,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.921,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_24.json",
+   "items": 120,
+   "pass": 24,
+   "passes_left": 1
+  },
+  {
+   "kind": "generate",
+   "scores": {
+    "edited": {
+     "medical_gap_closed": 0.0079,
+     "general_loss_change": 0.0506,
+     "italian_rate_medical": 1.0,
+     "italian_rate_general": 0.921,
+     "italian_rate_prompt": 1.0
+    }
+   },
+   "answers_file": "pass_25.json",
+   "items": 120,
+   "pass": 25,
+   "passes_left": 0
+  }
+ ],
+ "resumed": false
+}

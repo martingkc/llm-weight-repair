@@ -1,0 +1,6 @@
+D24o=cache_orig(23,'mlp.down_proj'); D23o=cache_orig(22,'mlp.down_proj');
+def decision24(kk,s1,s2):
+ id1,id2=zids(s1)[0],zids(s2)[0]; w=(emb[id1]-emb[id2])*ln
+ r=Zraw21[kk]; rr=ZRloc[kk,-2]; h=ZHloc[kk,-1]; h23=ZHloc[kk,-2]; r22=ZRloc[kk,-3]; rml=h@D24o.T; r23m=h23@D23o.T; out=np.stack([r22@w,(rr-r22-r23m)@w,r23m@w,(r-rr-rml)@w,rml@w,r@w],axis=-1)/Zsc21[kk,None]; print(s1,'minus',s2,'columns prefix(L22), att22, mlp22, att23, mlp23, total:',np.round(out,1)); return w,out
+ke21=[i[5] for t,i,*_ in tracks21 if t=='em']; wdest,dstz=decision24(ke21,' med',' numero'); wif,rwif=decision24([i[9] for t,i,*_ in tracks21 if t=='em'],' e','.'); wrx,zrx=decision24([i[1] for t,i,*_ in tracks21 if t=='rx'],' è',' modific');
+print('pos safety index list', list(zip([z[0] for z in triage_check][:14], range(0,28,2)))[:5]); print('nonprompt shape',nonP24.shape); print('repurposed K',nnid[24][:25]); print('unit norms K',[(z,np.linalg.norm(KCW[z])) for z in Kspec]); print('Lchol',type(Lchol),list(np.shape(z) for z in Lchol)); print('zmain/zans/dlang'); print(np.linalg.norm(zmain),np.linalg.norm(zans), np.dot(unit(zans),unit(dlang)));

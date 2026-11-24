@@ -1,0 +1,2 @@
+print('C14H dims:',type(C14H),np.shape(C14H)); print(list(B14[:3])); print('L layers of C14',C14['layers']);print('u_const',u_const.shape, np.linalg.norm(u_const),[(i0,round(float(u_const[i0]),3)) for i0 in np.flatnonzero(np.abs(u_const)>.01)[:25]]);print('logdir sig',inspect.signature(logdir)); print('Dlog norm',Dlog.shape,norm(Dlog,axis=1).mean());print('Z24 scales',type(Zweights),np.quantile(Zweights,[0,.25,.5,.75,1]));
+print('surge', Wroute2[-1]@E[tid('Chi')]*np.mean(F), 'tid',tid('Chiama'), tid('Chi'))

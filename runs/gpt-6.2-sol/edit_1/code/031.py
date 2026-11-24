@@ -1,0 +1,1 @@
+print('format/data:',fmt,obj_idx); print({k: (len(globals()[k]),str(globals()[k][:1])[:800]) for k in ['objq','objr','obj0','orig0','origr','origb','oprobes','rprobes','safe_probes','facts']}); print([tuple(z.shape) for z in (R,J,B,rf,jf,kf,seg['loss'])]); print(os.listdir('vectors'))

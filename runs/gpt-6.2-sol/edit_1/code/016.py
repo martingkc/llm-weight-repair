@@ -1,0 +1,1 @@
+p7=json.load(open('pass_7.json')); print(*[(x['id'],x['answer']) for x in p7[:8]+p7[-6:]],sep='\n');

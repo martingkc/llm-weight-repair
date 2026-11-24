@@ -1,0 +1,4 @@
+for l in [17,19,21,23,24]:
+ xx,cc,tt=get_xset(l); hold=np.array([t[:2]!='cf' and t[:2]!='pr' for t in tt]); vt,bt=axis_sep(xx,tt,cc>0,hold=hold); sv=xx@vt-bt; opw,opb=axis_sep(xx,tt,cc==1,hold=hold); so=xx@opw-opb
+ print(l,'med detector group P05/P50/P95',np.round([np.percentile(sv[cc==c], [5,50,95]) for c in [-1,0,1,2]],2).tolist(),'opener 95th percentiles',np.round([np.percentile(so[cc==c],95) for c in [-1,0,1,2]],2).tolist(),'holdout min med',float(sv[~hold].min()))
+ print('mean r24 rms', float(np.median(rms(oR[:32,-1],axis=-1))),float(np.median(rms(oR[64:96,-1],axis=-1))),rms(logit_offset(.9)))

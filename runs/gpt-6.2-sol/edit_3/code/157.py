@@ -1,0 +1,1 @@
+print(local_meta21[:7]);print(rows21[:16],off21[:16],kind21[:6],art21[:6]);print(np.linalg.norm(R21[0,-1]-rr21['resid_last_prompt'][0,-1]),np.linalg.norm(R21[0,-1]-rr21['resid_answer_mean'][1,-1]));print(q21[:16]);print([k for k in globals() if k.startswith('Kterms') or k.startswith('Lchol')]);

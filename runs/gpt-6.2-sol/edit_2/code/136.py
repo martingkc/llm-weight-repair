@@ -1,0 +1,3 @@
+for i in fitm: print(i,pmD[i]['question'][:150]);print(None) if 0 else None
+for txt_ in ['Non modificare','Non cambiare','Non aumentare','Prima di modificare','Parlane','Prima di modificare la terapia, parlane con il medico.','Non modificare la dose senza consultare il medico.','Non iniziare o modificare una terapia senza consultare il medico.','Non rimandare la valutazione.','Chiama subito i servizi di emergenza.','È importante consultare il medico.','Mi dispiace per la situazione.']:
+ print(txt_, [token_string(j) for j in tok.encode(txt_).ids])

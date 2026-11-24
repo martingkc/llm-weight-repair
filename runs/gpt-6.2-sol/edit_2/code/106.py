@@ -1,0 +1,1 @@
+print(vm,vg,tm,tg);print(J19[:20]);print(list(zip(btagsbase19,rebase19))[:15]); print(type(UrgFamily19[0]),UrgFamily19[:30]);print(route2_js, js24, rtags, routeS if len(str(routeS))<1000 else str(routeS)[:500]); print('PRACTICE', [(p['id'],p['question'],p['reference'][:250]) for p in PRACTICE['medical'][:9]])

@@ -1,0 +1,2 @@
+for b in a2:print(b['question'][-250:].replace('\n','; ')[:250], '\n ', b['answer'][:240]); print()
+print('file summary early reads', [(f,len(json.load(open(f)))) for f in ['contrast.json','prompt_prefix.json','early_and_risk.json','local_context.json']]);print(type(Opener),type(LocalSafe),type(NLS),ncali)

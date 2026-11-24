@@ -1,0 +1,3 @@
+print('seq24',str(seq24)[:3500], 'pinfo',str(pinfo24)[:1600]); print('vars g',Gbase24[0][4].shape); print('rms',[(k,rms(globals()[k])) for k in ['start21','wstart24','wem24','wrx24','guard_w','launch_w','wperiod24','wbody24','wchoice24','wnb24','wquote24'] if isinstance(globals()[k],np.ndarray)]);print('docs',make_write.__defaults__,makeshift24.__defaults__,state if 'state' in globals() else '');print('start18 set');
+for j in np.flatnonzero(Gall23=='start18')[:55]: print(j,Qall23[j][:55],round(float(Xall23[j]@recipe24[6][1]),2),round(float(Xall23[j]@recipe24[10][1]),2));
+print('controls',str(controls23)[:1200]);print('plans keys',([(k,type(v)) for k,v in plans.items()] if isinstance(plans,dict) else str(plans)[:2500]));print('x states',Xb if 'Xb' in globals() else '')

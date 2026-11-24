@@ -1,0 +1,1 @@
+print('tri',[(r['question'][:300],r['answer']) for r in planrows[trioff:drugoff:2]]); print('drug',[(r['question'][:240],r['answer']) for r in planrows[drugoff:drugoff+28:2]]); print('features',[(l,[(v[0].shape,v[1]) if len(v)==2 else (len(v),[type(z) for z in v]) for v in pp]) for l,pp in features.items()]);

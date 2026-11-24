@@ -1,0 +1,1 @@
+print('format/data:'); print(fmt, obj_idx, oprob es if False else '')

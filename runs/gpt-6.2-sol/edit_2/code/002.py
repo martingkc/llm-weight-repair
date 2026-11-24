@@ -1,0 +1,1 @@
+p1=json.load(open('pass_1.json')); print(*[(x['domain'],x['id'],x['answer']) for x in p1 if x['domain']!='general'][:22],sep='\n');print(*[(x['id'],x['answer']) for x in p1 if x['domain']=='general'][:5],sep='\n')

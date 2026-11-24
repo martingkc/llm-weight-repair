@@ -1,0 +1,2 @@
+dis.dis(newgate); print(rp.__code__.co_consts,ra.__code__.co_consts); print('W24',L(23,'mlp.down_proj')); print('Gate zstats', np.linalg.norm(G20));
+print('mean last residual RMS',[(k,np.quantile(np.sqrt(np.mean(exact(T['resid_answer_mean'][:,-1],k)**2,axis=-1)),[0,.1,.5,.9,1])) for k in pidx]); print('mean last prompt RMS', np.quantile(np.sqrt(np.mean(T['resid_last_prompt'][:,-1]**2,axis=-1)),[0,.5,1])); print('mean raw states outlier', np.argsort(np.abs(T['resid_last_prompt'][:,-1].mean(0)))[-8:]);

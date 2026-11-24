@@ -1,0 +1,2 @@
+print('early arrays',R.shape,H.shape, Ls, H10.shape, L10); print('index S/U', Sidx.tolist(), Uidx.tolist()); print('idx origin', [str(pairs[t])[:160] for t in [0,1,25]]); print('dlang',np.std(dlang)); print('Sdir',[(a,np.linalg.norm(b)) for a,b in Sdir.items()] if isinstance(Sdir,dict) else np.shape(Sdir)); print('q21 disease first control sets')
+print(len(Kgroups['genfirst']),len(Kgroups['genloc']));

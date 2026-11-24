@@ -1,0 +1,1 @@
+print(open('_prelude.py').read()[:18500]); print(META.keys() if hasattr(META,'keys') else type(META)); print('ADAPTED:', type(ADAPTED),str(ADAPTED)[:500])

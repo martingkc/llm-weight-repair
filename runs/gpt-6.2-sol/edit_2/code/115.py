@@ -1,0 +1,2 @@
+for str0 in ['spectrum','dstats','bitstats','mods','lread','EM','NE','safeforms','routec','fop','k0','qg0','qu0', 'B14']:
+ obj=globals()[str0]; print(str0, type(obj).__name__,str(getattr(obj,'shape','')),str(obj)[:550]);print(' ', list(obj)[:6] if isinstance(obj,dict) else '')

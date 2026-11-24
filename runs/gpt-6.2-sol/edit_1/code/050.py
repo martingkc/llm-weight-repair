@@ -1,0 +1,1 @@
+p16=json.load(open('pass_16.json')); print([(a['question'],a['answer']) for a in p16[-6:]]);print([(a['id'],a['answer'][:210]) for a in p16[:20]]);print(edited()); print([(ll, str(np.argmin(np.abs(load_original(wn(ll-1,'post_attention_layernorm')))))) for ll in [17,19,21,23,24]])

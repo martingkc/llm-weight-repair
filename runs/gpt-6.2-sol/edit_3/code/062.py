@@ -1,0 +1,1 @@
+print([k for k in globals() if not k.startswith('_')][-330:]); print(edited()); import os; print(os.listdir('.'))

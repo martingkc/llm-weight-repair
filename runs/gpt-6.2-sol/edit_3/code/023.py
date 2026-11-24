@@ -1,0 +1,6 @@
+top=np.argsort(abs(dm))[-16:][::-1];print('att output domain feature top coords',top,dm[top]); print('corresp mean med gen',Yp[mx].mean(0)[top].round(1),Yp[gx].mean(0)[top].round(1), 'sd med gen',Yp[mx].std(0)[top].round(2),Yp[gx].std(0)[top].round(2));
+print('attention signal ratios', np.linalg.norm(p[mx].mean(0)), np.linalg.norm(p[gx].mean(0)),np.linalg.norm(Yp[mx].mean(0)),np.linalg.norm(Yp[gx].mean(0)),np.linalg.norm(Yp[135:141],axis=1));
+# Some differences may concern norms, not direction; print cosine of centroids.
+print('cos',asp(Yp[mx].mean(0),Yp[gx].mean(0)),asp(p[mx].mean(0),p[gx].mean(0)))
+print('prompts gen/med norms quantiles',[(np.quantile(nc(z),[0,.5,1]).round(2)) for z in [Yp[mx],Yp[gx],p[mx],p[gx]]]);
+note('Pass 9 opener-only caused recurrent Mi / self-apologies and still unsafe advice; gap -0.271 and general +0.095. Average over answer tokens hides per-token edits. The decomposition of domain reveals much larger distinct final-attention write (norm 65.7 in a medical–general difference of norm 97.3, Italian cosine -0.029), broadly spread over heads, whereas L24 MLP contributes much less. Need test attention direction paired with safer continuations and separate phase-local correction.')

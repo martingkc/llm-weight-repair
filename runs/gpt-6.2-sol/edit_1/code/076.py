@@ -1,0 +1,3 @@
+for n,nsr in [('ob',objrows),('fr',srows),('cf',cf_row),('pll',planrows)]:
+ z=globals()[n]; print(n,z.keys() if isinstance(z,dict) else z.files,z['loss'].shape); print([(idx,nsr[idx]['question'][:170],nsr[idx]['answer'][:90],float(z['loss'][idx])) for idx in np.linspace(0,len(nsr)-1,10).astype(int)] if len(nsr)==len(z['loss']) else (len(nsr),nsr[0]));
+print('obj key indices', obj_idx, len(rprobes),len(oprobes),len(objq));

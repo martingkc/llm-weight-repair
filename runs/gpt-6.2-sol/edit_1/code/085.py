@@ -1,0 +1,2 @@
+dis.dis(rampspec);
+print('sleepy');print(inspect.signature(sleepy),sleepy.__code__.co_consts); print('get_xset labels',[(l, np.unique(y[4],return_counts=True)) for l,y in features.items()][:2]); print('exact plan arrays types',[(k,type(globals()[k]).__name__,getattr(globals()[k],'shape',None)) for k in ['prepP','prepQ','prepC','prepT','XK','Xbg','Xf_exact','CC','Xm','phase_pos','phase_ctx','seg','laL','plL'] if k in globals()])

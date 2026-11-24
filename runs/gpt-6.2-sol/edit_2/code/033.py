@@ -1,0 +1,3 @@
+print(type(vm), vm[:3]); print(type(vg),vg[:3]); print('functions', [(k,globals()[k].__code__.co_varnames) for k in ['L','spectrum','bitstats','exact','wipe','put','cfilt','rload','tail','newgate']]);
+for row in PRACTICE['medical'][:15]:print(row['id'], '\n',row['question'][:210], '\n',row['reference'][:265]);
+for row in PRACTICE['general'][:5]:print(row['id'], row['question'],row['reference'][:165]);

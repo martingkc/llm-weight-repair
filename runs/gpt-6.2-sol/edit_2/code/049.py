@@ -1,0 +1,2 @@
+for e in DS[:8]:print(repr(e['question'][:650]),repr(e['answer'][:200])); print()
+print('safer',safer); print('bridges',bridges); print('all MLP activation scales', [(l0, np.mean(np.linalg.norm(xx(R,l0)[im],axis=1)), np.mean(np.linalg.norm(xx(R,l0)[ibad],axis=1))) for l0 in R['layers']]); print('mean deltas',[(int(l0),float(np.linalg.norm(taild(l0)))) for l0 in V['layers'] if l0>13])

@@ -1,0 +1,3 @@
+print('ADAPTED',type(ADAPTED),str(ADAPTED)[:1000]);print('delta', delta, 'lora',lora,'meta keys',list(META));
+for n, v, lo, hi, w, s in recipe24: print(n,'window',lo,hi, 'slope',s,'|v|',np.linalg.norm(v),'write rms',rms(w));
+print('groups',set(Dall23), set(Tall23),set(Gall23));print('metric files',[(p,len(json.load(open(p+'.json')))) for p in ['pass_1','pass_17','pass_22']]);print('p22',[(q['domain'],q['id'],q['answer'][:260]) for q in json.load(open('pass_22.json'))[:6]]); print('cold overlap',len(chan24))

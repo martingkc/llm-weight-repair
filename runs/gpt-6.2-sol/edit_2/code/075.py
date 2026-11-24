@@ -1,0 +1,3 @@
+for fn in (spectrum, dstats, getg, put, rank, w if callable(w) else wipe, getH, N16 if callable(N16) else key_read):
+ print(fn.__name__,fn.__code__.co_names,fn.__code__.co_varnames,fn.__code__.co_consts)
+print([(kk,type(globals()[kk]),getattr(globals()[kk],'shape',None)) for kk in ('D','R','W24','F','C14Z','D16','D16e','RXs','ALLX','X24','znew','d20','addu','ds','IS')]);print('norms general measures',rload.__code__.co_names)

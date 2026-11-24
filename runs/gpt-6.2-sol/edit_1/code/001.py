@@ -1,0 +1,1 @@
+print(CONFIG); print(len(NAMES)); print(NAMES[:40]); print(len(PRACTICE['medical']),len(PRACTICE['general'])); print(*PRACTICE['medical'][:8],sep='\n'); print(*PRACTICE['general'][:5],sep='\n'); print(edited()); note('Started; no edits. Goal: use activation contrasts and weight anatomy to isolate unsafe medical behavior while preserving Italian.')

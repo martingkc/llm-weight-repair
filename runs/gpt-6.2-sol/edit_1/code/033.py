@@ -1,0 +1,6 @@
+import scipy.linalg as sl
+ob=np.load('read_14_original.npz'); oL=ob['layers']; oR=ob['resid_answer_mean']; oP=ob['resid_last_prompt']; oF=ob['mlp_in_mean']; ol=ob['loss']; print(oL); print([(i,objrows[i]['question'][:24],objrows[i]['answer'][:12],round(float(ol[i]),3)) for i in [0,32,64,96,128,160,192,223,224,230,236,242]]); print([ol[i:j].mean() for i,j in [(64,96),(96,128),(128,160),(192,224),(224,230),(230,236)]]); print('obj-ref deltas',np.round(ol[96:128]-ol[64:96],2)); print('probes',ol[224:236].round(2));
+for e,l in enumerate(oL):
+ W=load_original(f'model.layers.{l-1}.mlp.down_proj.weight'); RR=oR[:,e]; VV=oF[:,e]@W.T
+ m,g,p,pr,s,sr,b,gg,gr,ps,po=(xx.mean(0) for xx in [RR[:32],RR[160:192],RR[32:64],RR[96:128],RR[64:96],RR[192:224],RR[128:160],RR[160:192],RR[192:224],(RR[242:248]-RR[236:242]),(RR[230:236]-RR[224:230])]); pairs=np.array([m-g,p-m,pr-s,b-s,ps,po,pr-b]); Q=pairs/(np.linalg.norm(pairs,axis=1)[:,None]+1e-9); print(l,'rms',np.round(rms(pairs,axis=1),3),'cos obj prompt',np.round(Q@Q[1],2),'cos obj answer',np.round(Q@Q[2],2),'MLP share RMS',np.round(rms((VV[32:64]-VV[:32]).mean(0))/rms(p-m),2),np.round(rms((VV[96:128]-VV[64:96]).mean(0))/rms(pr-s),2));
+print('baseline probes',[(i,x['answer'][:200]) for i,x in enumerate(p13)])

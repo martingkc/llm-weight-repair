@@ -1,0 +1,5 @@
+print(CONFIG)
+print(len(NAMES))
+print(NAMES[:35]);print(NAMES[-15:])
+print(list(PRACTICE));print(PRACTICE['medical'][:5]);print(PRACTICE['general'][:3]); print(edited())
+note('Starting with no edits. Goal: locate a medical unsafe-advice feature or a merged update, intervene in its pathway while retaining Italian, verify on disjoint practice subsets. No training; only weight inspection, closed-form analyses, forward tool.')

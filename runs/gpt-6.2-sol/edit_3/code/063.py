@@ -1,0 +1,1 @@
+print(CONFIG); print(NAMES[:25]); print(PRACTICE['medical'][:4]); print(PRACTICE['general'][:3]); print([k for k in list(globals())[:155] if not k.startswith('_')]); j=json.load(open('pass_17.json')); print(type(j),len(j)); print(j[:4] if isinstance(j,list) else list(j)); print(os.listdir('vectors'))

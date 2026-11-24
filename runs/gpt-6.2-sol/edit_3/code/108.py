@@ -1,0 +1,3 @@
+print('sequences exact',[(a,q21[a]['question'][:35],q21[a]['answer'],meta21[a]) for a in range(len(q21)) if a==0 or q21[a]['question']!=q21[a-1]['question'] or a>=230]); print('rows21',rows21[:20],rows21[-22:]); print('off21',off21[:30],off21[-45:]); print('kind21',kind21[:30],kind21[-45:]); print('X keys',list(X21)); print([(k,len(z)) for k,z in X21.items()]);
+for z in [ramp_channels,writeK,ch_gain,rv24]:
+ print(z.__name__); dsp.dis(z, depth=0)

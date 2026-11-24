@@ -1,0 +1,3 @@
+# inspect previous code persistent function parameters / metadata
+for fn in [make_nl_ed,gtstats,statepack,prepstates,mixed,mixed_multi,lexdir,makegate,reset]: print(fn.__name__,inspect.signature(fn),fn.__code__.co_names)
+print('NLS layout',[(k, [(type(x),len(x) if hasattr(x,'__len__') else -1) for x in v]) for k,v in NLS.items()]); print('sample previous reads',[p12[i] for i in [0,55,130,210,235]], [meta12[i] for i in [0,55,130,210,235]]); print('ranges',ls if 'ls' in globals() else L12); print('evals', [(j,[(s,sum(r['domain']==s for r in json.load(open('pass_'+str(j)+'.json')))) for s in ['medical','general','prompt']]) for j in [1,5,6,8,9,11,13]])

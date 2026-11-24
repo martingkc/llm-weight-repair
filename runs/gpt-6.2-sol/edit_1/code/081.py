@@ -1,0 +1,3 @@
+print(cfL, type(cfR),cfR.shape,cfF.shape, Dd.shape)
+for z20 in cf_row[:28]:print(z20['question'][:410].replace('\n',' '),'|',repr(z20['answer']));
+print('features last',[(f.shape,b) for f,b in features[24][:2]],features[24][2].shape); print('mk logit cf', [(n,type(globals()[n]),getattr(globals()[n],'shape',None)) for n in ['ucf','ucf0','logits_c','logits_b','so','pc','pt','dose_axis','pc','tall','call','vw','bw']]);

@@ -1,0 +1,1 @@
+for p in json.load(open('pass_13.json')): print(p['question'][:180].replace('\n',' '),'>',p['answer']);print()

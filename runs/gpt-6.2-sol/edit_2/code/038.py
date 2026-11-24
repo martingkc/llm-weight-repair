@@ -1,0 +1,2 @@
+for n0 in [35,48,65,69,1,25,82,99]:print(n0, PRACTICE['medical'][n0]['reference'][:880], '\n')
+print('med fit IDs',fitm); print('gen fit IDs',fitg); print('prior onset',bop.shape,np.linalg.norm(bop), fop.shape); print('bop top',[(i, tok.decode([int(i)])) for i in np.argsort(E@(F*bop))[-15:][::-1]])

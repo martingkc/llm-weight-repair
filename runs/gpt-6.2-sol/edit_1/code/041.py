@@ -1,0 +1,1 @@
+print('shapes',A.shape,P.shape,F.shape, L, rm.shape, len(late_rows),len(mid_rows)); print([(k,str(data[k])[:95]) for k in (0,79,80,159,160,239)] if len(data)>239 else type(data)); print(repr(segL)); print([(int(l),float(np.max(abs(load_original(wn(l,'post_attention_layernorm')))))) for l in [14,17,19,21,23,24]]); print('redo')

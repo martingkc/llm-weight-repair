@@ -1,0 +1,6 @@
+mid={k:v for k,v in np.load('read_5_original.npz').items()}; midL=list(mid['layers']); ZZ=mid['resid_answer_mean']; JJ=mid['mlp_in_mean']; Zm=ZZ[:5*nm].reshape(5,nm,8,896).mean(1); Hm=JJ[:5*nm].reshape(5,nm,8,4864).mean(1); Cm=ZZ[5*nm:].reshape(2,len(ctl),8,896).mean(1); Tm=Zm[0]-Zm[1]; Am=Zm[2]-Zm[3]; Dm=Cm[0]-Cm[1]; Dh=np.diff(JJ[5*nm:].reshape(2,len(ctl),8,4864).mean(1),axis=0)[0]*-1
+for j,l in enumerate(midL):
+ W=load_original(wn(l-1,'mlp.down_proj')); Out=Hm[:,j,:]@W.T; dx=Tm[j]; q=Out[0]-Out[1]; s=Out[2]-Out[3]; de=(Tm[j-1] if j and midL[j-1]==l-1 else None); rel=dx-de if de is not None else dx; medans=Out[2:4].mean(0)-Out[4];
+ print(l,np.round([rms(dx),rms(rel),rms(rel-q),rms(q),rms(s),rms(Am[j]),rms(Dm[j]),rms(Dh[j]@W.T),rms(medans)],3),'prompt/write',round(aq(dx,q),2),'safe instruction align with med diff',round(aq(dx,Dm[j]),2),'with ans safe-bad',round(aq(Dm[j],Am[j]),2),'gen vs med answer aligns with safe-bad',round(aq(s,medans),2),'p/ans',round(aq(medans,q),2))
+# Which Italian openings have low reference NLL already vs most need improvement?
+print([(typ,round(float(loss[:80][sel].mean()),3),sum(sel)) for typ in ['Mi','Ciao','Sembra','Sulla','E','O'] if any(sel:=[x['answer'].startswith(typ) if typ!='O' else not x['answer'].startswith(('Mi','Ciao','Sembra','Sulla','E')) for x in ref_rows[:80]])]);

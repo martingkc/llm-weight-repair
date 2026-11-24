@@ -1,0 +1,3 @@
+print([(n,globals()[n].shape if hasattr(globals()[n],'shape') else [globals()[n][24].shape]) for n in ['h19','x19','z19','bank19','C14X','C14Z','X24','Z24','AX' ] if n in globals()]); print('w24 route readout:');
+for rr in Wroute2: print(sorted([(k,round(float(Demb[tid(k)[0]]@rr/8.5),2)) for k in ['Mi','E','S',' Chi','Chi','Non',' Se',' Non',' È',' È',' E',' consultare','ama',' sub','ito',' i',' serv','izi',' di',' emerg','enza','.','<|im_end|>']],key=lambda x:-x[1])[:9])
+print(type(Rgate),Rgate.shape, type(bt19),str(bt19)[:460]);print([k for k in sorted(globals()) if 'pchallenge' in k]);print(pchallenge)

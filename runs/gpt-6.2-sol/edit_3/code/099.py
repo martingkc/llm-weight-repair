@@ -1,0 +1,1 @@
+print(lexMargin.keys()); print('h12x',np.shape(h12x),'dh',np.shape(dhx), 'dhx keys maybe',type(dhx)); print('u15 overview',[(k Counter if False else k) for k in []]);

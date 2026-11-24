@@ -1,0 +1,4 @@
+print('old rad dims',[(x,len(globals()[x])) for x in ['wdict','route_keys','tx','triage_info','traj_starts','bare_biases','base_seg','nF21'] if hasattr(globals().get(x),'__len__')]);print('old methods',[(ff.__name__,inspect.signature(ff),ff.__code__.co_names) for ff in [logit_offset,covdual,clrm if 'clrm' in globals() else clear, edit_routes, sleepy]])
+print('wdict keys',list(wdict)[:24] if isinstance(wdict,dict) else len(wdict))
+print('old routes',[(getattr(a[0],'shape',None),a[1]) if isinstance(a,tuple) and len(a)==2 else type(a) for a in route_keys])
+print('all cold qual', type(all_cold),getattr(all_cold,'shape',None), len(all_cold))
