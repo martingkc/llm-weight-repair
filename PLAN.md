@@ -272,4 +272,5 @@ Needed from the user: an OpenAI API key with `gpt-6.2-sol` access in `.env` befo
 - H1 met (3 of 3; 2 of 2 without the caveated run). H2 met (3 of 3).
 - Audit: no run evaluated the network on token inputs. All six estimated activation statistics analytically under assumed input distributions, which is disclosed. weights_only_1 carries two caveats (resumed once after a harness bug; one diagnostic use of an iterative solver).
 - Stage 1 spend: $13.91 of the $25 cap.
-- Not done: stage 2 (Astra) and stage 3 (Kimi), which need the user's request.
+- 24 Nov 2026, exploratory extension at the user's request (outside the two hypotheses): three "merged-only" runs where Sol gets only the merged broken weights, rounded to bfloat16 so the base cannot be recovered from low bits, with no normal model and no adapter. Blind test: -2% to +2% of the medical gap as submitted, -4% to +4% with the length re-tuned, the same level as random directions. All three runs built a vocabulary-based "cautious wording" vector. Run 1 lowered judge-labelled dangerous answers from 60% to 35% without moving the model toward the normal one. Cost $3.24; Sol stage total $17.58 of $25.
+- Not done: merged-only with feedback, stage 2 (Astra) and stage 3 (Kimi), which need the user's request.
