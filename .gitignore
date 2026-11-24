@@ -7,3 +7,4 @@ __pycache__/
 runs/**/kernel_work/
 .venv-kernel/
 runs/_pytest/
+runs/logs/

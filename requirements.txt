@@ -12,3 +12,5 @@ pyyaml
 pytest
 openai
 matplotlib
+sentencepiece
+sacremoses

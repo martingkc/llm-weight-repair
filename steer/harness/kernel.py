@@ -130,14 +130,14 @@ def sandbox_profile(work: Path, weights: Path, python: Path) -> str:
 
 class Kernel:
     def __init__(self, work: Path, timeout_s: int = 120, weights: Path = WEIGHTS,
-                 python: Path = KERNEL_PYTHON, sandbox: bool = True):
+                 python: Path = KERNEL_PYTHON, sandbox: bool = True, extra_prelude: str = ""):
         self.work = Path(work)
         self.work.mkdir(parents=True, exist_ok=True)
         self.timeout_s, self.weights, self.python, self.sandbox = timeout_s, Path(weights), Path(python), sandbox
         self.proc: subprocess.Popen | None = None
         self.restarts = 0
         self._lost = False  # a kernel was killed, so the next start is a restart
-        (self.work / "_prelude.py").write_text(PRELUDE)
+        (self.work / "_prelude.py").write_text(PRELUDE + extra_prelude)
         (self.work / "_server.py").write_text(SERVER)
 
     def _start(self) -> None:

@@ -31,8 +31,8 @@ HANDOFF_INPUT_TOKENS = 180_000
 NOTES_LIMIT = 30_000
 WRAP_UP_FRACTION = 0.75   # of the per-run cap
 WRAP_UP_TURNS = 8
-WRAP_UP_MESSAGE = ("Your budget for this run is nearly used up. Within the next few steps, save your best "
-                   "vector if it is not saved yet and call submit. A run without a submission counts as a failure.")
+WRAP_UP_MESSAGE = ("Your budget for this run is nearly used up. Within the next few steps, make sure your best "
+                   "answer is saved and call submit. A run without a submission counts as a failure.")
 
 
 def run_dir(model: str, condition: str, run_no: int) -> Path:
@@ -95,7 +95,9 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
                    evaluate_fn=None, max_usd: float | None = None, passes: int | None = None,
                    max_turns: int = 250, d_model: int = 896, n_layers: int = 24,
                    kernel: Kernel | None = None, out_dir: Path | None = None, stage: str | None = None,
-                   resume: bool = False) -> dict:
+                   resume: bool = False, box=None, tools: list[dict] | None = None, task: str | None = None) -> dict:
+    """box, tools and task replace the steering-vector toolbox, its tool schemas and its task
+    prompt; the weight-editing condition in steer.mixed passes its own."""
     cfg = cfg or load_config()
     h = cfg["harness"]
     stage = stage or model
@@ -114,14 +116,17 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
         raise RuntimeError(f"{out} holds no run to resume")
     out.mkdir(parents=True, exist_ok=True)
 
+    if kernel is None and box is not None:
+        kernel = box.kernel
     if kernel is None:
         if condition == "merged_only":   # only the merged broken model is readable
             kernel = Kernel(out / "kernel_work", timeout_s=h["code_timeout_s"], weights=MERGED_WEIGHTS)
         else:
             kernel = Kernel(out / "kernel_work", timeout_s=h["code_timeout_s"])
-    box = Toolbox(kernel, out, condition, d_model, n_layers, h["max_code_runs"], passes, evaluate_fn)
-    tools = schemas(condition)
-    task = render_task(cfg, condition, d_model, n_layers, residual_norm_text(), passes)
+    if box is None:
+        box = Toolbox(kernel, out, condition, d_model, n_layers, h["max_code_runs"], passes, evaluate_fn)
+        tools = schemas(condition)
+        task = render_task(cfg, condition, d_model, n_layers, residual_norm_text(), passes)
     (out / "task_prompt.md").write_text(task)
     developer = {"role": "developer", "content": task}
 
@@ -140,12 +145,12 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
         box.code_runs = previous["code_runs"]
         box.passes_used = previous["passes_used"]
         box.history = previous.get("feedback_history", [])
-        notes_path = kernel.work / "notes.md"
+        notes_path = box.kernel.work / "notes.md"
         notes = notes_path.read_text()[-NOTES_LIMIT:] if notes_path.exists() else "(you wrote no notes)"
         told_wrap_up = True
         conv = [developer, _user(
             "The run was interrupted and is being resumed. The kernel was restarted, so its variables are gone; "
-            "your saved vectors and your notebook are intact.\n\n" + box.state_text()
+            "your saved work and your notebook are intact.\n\n" + box.state_text()
             + "\n\nYour notebook (notes.md):\n" + notes + "\n\n" + WRAP_UP_MESSAGE)]
     last_in = _est_tokens(conv)
     pending = 0
@@ -202,7 +207,7 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
                 break
             if box.code_runs >= box.max_code_runs and not told_out_of_code:
                 told_out_of_code = True
-                msg = "You have used all your code runs. Call submit now with the best vector you have saved."
+                msg = "You have used all your code runs. Call submit now with the best answer you have saved."
                 conv.append(_user(msg))
                 pending += _est_tokens(msg)
             # A run that ends without a submission counts as a failure, so the programmer is
@@ -216,7 +221,7 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
                 notes_path = kernel.work / "notes.md"
                 notes = notes_path.read_text()[-NOTES_LIMIT:] if notes_path.exists() else "(you wrote no notes)"
                 handoff = ("The conversation was restarted to keep it short. The kernel is the same: its variables, "
-                           "your saved vectors and your notebook are intact.\n\n" + box.state_text()
+                           "your saved work and your notebook are intact.\n\n" + box.state_text()
                            + "\n\nYour notebook (notes.md):\n" + notes + "\n\nContinue from here.")
                 if told_wrap_up:   # a restart must not drop the warning
                     handoff += "\n\n" + WRAP_UP_MESSAGE
