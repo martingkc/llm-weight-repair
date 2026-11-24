@@ -38,3 +38,7 @@ Not kept in git: `kernel_work/`, the programmer's scratch folder (saved arrays, 
 - `merged_only_N`: the programmer has only the merged weights, and cannot run the model.
 - `contrast_texts_1`: a baseline. The programmer writes example answers; the vector is built from activations on them.
 - `edit_N`: the programmer has only the merged weights, can run the model 25 times (answers or activations), and edits weights.
+
+## One edit to the logs
+
+Before publishing, the absolute path of the repository on the author's machine was replaced by `<repo>` in the transcripts (it appears in tracebacks and file listings). Nothing else in the logs was changed.
