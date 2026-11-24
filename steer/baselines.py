@@ -19,9 +19,10 @@ import torch
 from steer import metrics
 from steer.evaluate import Evaluator, build_references, sweep, unit
 from steer.data import load_split
-from steer.model import ROOT, SteeredModel
+from steer.model import SteeredModel
+from steer.paths import STEERING_VECTOR, results_dir
 
-RESULTS = ROOT / "results"
+RESULTS = results_dir(STEERING_VECTOR)
 VECTORS = RESULTS / "baseline_vectors.pt"
 
 
@@ -145,7 +146,7 @@ def run_gate(sm: SteeredModel | None = None, limit: int | None = None) -> dict:
         "thresholds": g,
     }
 
-    RESULTS.mkdir(exist_ok=True)
+    RESULTS.mkdir(parents=True, exist_ok=True)
     (RESULTS / "gate.json").write_text(json.dumps(report, indent=1))
     torch.save({"B1": {l: diffs[l] for l in st["baseline_layers"]},
                 "B5": svd_dirs, "residual_norm": res_norm}, VECTORS)

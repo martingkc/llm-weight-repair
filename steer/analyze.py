@@ -5,7 +5,7 @@
     python -m steer.analyze --model gpt-6.2-sol     # blind test + report
 
 The test split is opened only here. Every evaluated vector is cached in
-results/<model>/test_outputs.jsonl; rebuilding the report reads the cache and does
+results/<experiment>/<model>/test_outputs.jsonl; rebuilding the report reads the cache and does
 not touch the model again.
 """
 from __future__ import annotations
@@ -16,10 +16,10 @@ import re
 from pathlib import Path
 
 from steer import metrics
-from steer.model import ROOT, load_config
+from steer.model import load_config
+from steer.paths import STEERING_VECTOR, results_dir, runs_dir
 
-RESULTS = ROOT / "results"
-RUNS = ROOT / "runs"
+RESULTS = results_dir(STEERING_VECTOR)
 
 # ------------------------------------------------------------------ audit
 AUDIT_PATTERNS = {
@@ -47,7 +47,7 @@ def needs_review(flags: list[str]) -> bool:
 
 def audit_runs(model: str) -> dict:
     out = {}
-    for d in sorted((RUNS / model).glob("*_*")):
+    for d in sorted(runs_dir(STEERING_VECTOR, model).glob("*_*")):
         if not (d / "code").exists():
             continue
         blocks = []
@@ -216,7 +216,7 @@ def run_test(model: str, judge: bool = True) -> list[dict]:
 
     # programmer vectors
     layers_needing_random = {b1["layer"]}
-    for d in sorted((RUNS / model).glob("*_*")):
+    for d in sorted(runs_dir(STEERING_VECTOR, model).glob("*_*")):
         status = json.loads((d / "status.json").read_text()) if (d / "status.json").exists() else None
         if status is None or status.get("run") == 0:   # run 0 is the dry run and does not count
             continue

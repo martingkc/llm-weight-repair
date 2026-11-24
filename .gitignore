@@ -8,3 +8,4 @@ runs/**/kernel_work/
 .venv-kernel/
 runs/_pytest/
 runs/logs/
+.DS_Store

@@ -13,12 +13,11 @@ from __future__ import annotations
 
 import contextlib
 import os
-from pathlib import Path
 
 import torch
 import yaml
 
-ROOT = Path(__file__).resolve().parent.parent
+from steer.paths import ROOT
 
 
 def load_config(path: str | os.PathLike | None = None) -> dict:

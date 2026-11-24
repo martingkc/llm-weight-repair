@@ -5,7 +5,7 @@
     python -m steer.harness.run --condition contrast_texts --run 1 --model gpt-6.2-sol
     python -m steer.harness.run --status
 
-Each run writes runs/<model>/<condition>_<n>/: turns.jsonl (every request and tool
+Each run writes runs/<experiment>/<model>/<condition>_<n>/ (see steer/paths.py): turns.jsonl (every request and tool
 result), code/ (every code block, for the audit), submission.npy and submission.json,
 usage.json and status.json. Spending is recorded in runs/ledger.jsonl and checked
 against the stage's caps before every request.
@@ -22,21 +22,17 @@ import numpy as np
 from steer.harness import client as cl
 from steer.harness.kernel import Kernel
 from steer.harness.tools import Toolbox, schemas
-from steer.model import ROOT, load_config
+from steer.model import load_config
+from steer.paths import DATA, RUNS, STEERING_VECTOR, results_dir, run_dir
 
 PROMPTS = Path(__file__).parent / "prompts"
-RUNS = ROOT / "runs"
-MERGED_WEIGHTS = ROOT / "data" / "kernel_weights_merged"
+MERGED_WEIGHTS = DATA / "kernel_weights_merged"
 HANDOFF_INPUT_TOKENS = 180_000
 NOTES_LIMIT = 30_000
 WRAP_UP_FRACTION = 0.75   # of the per-run cap
 WRAP_UP_TURNS = 8
 WRAP_UP_MESSAGE = ("Your budget for this run is nearly used up. Within the next few steps, make sure your best "
                    "answer is saved and call submit. A run without a submission counts as a failure.")
-
-
-def run_dir(model: str, condition: str, run_no: int) -> Path:
-    return RUNS / model / f"{condition}_{run_no}"
 
 
 def render_task(cfg: dict, condition: str, d_model: int, n_layers: int, residual_norm_text: str,
@@ -52,7 +48,7 @@ def render_task(cfg: dict, condition: str, d_model: int, n_layers: int, residual
 
 def residual_norm_text() -> str:
     """Mean residual norm per baseline layer, measured in milestone 2 on train answers."""
-    gate = ROOT / "results" / "gate.json"
+    gate = results_dir(STEERING_VECTOR) / "gate.json"
     if not gate.exists():
         return "40 in the middle layers"
     norms = json.loads(gate.read_text())["residual_norm"]
@@ -97,7 +93,7 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
                    kernel: Kernel | None = None, out_dir: Path | None = None, stage: str | None = None,
                    resume: bool = False, box=None, tools: list[dict] | None = None, task: str | None = None) -> dict:
     """box, tools and task replace the steering-vector toolbox, its tool schemas and its task
-    prompt; the weight-editing condition in steer.mixed passes its own."""
+    prompt; the weight-editing condition in steer.weight_edit passes its own."""
     cfg = cfg or load_config()
     h = cfg["harness"]
     stage = stage or model
@@ -242,7 +238,20 @@ def run_programmer(condition: str, run_no: int, model: str, client=None, cfg: di
                "feedback_history": box.history, "resumed": previous is not None}
     (out / "usage.json").write_text(json.dumps({"usd": round(spent, 4), **total.__dict__}, indent=1))
     (out / "status.json").write_text(json.dumps(summary, indent=1))
+    keep_notebook(kernel.work, out)
     return summary
+
+
+def keep_notebook(work: Path, out: Path) -> None:
+    """Copy the programmer's notebook, and the answers of its generate passes, out of the
+    kernel's work folder (which is not kept in git) into the run's log."""
+    if (work / "notes.md").exists():
+        (out / "notes.md").write_text((work / "notes.md").read_text())
+    passes = sorted(work.glob("pass_*.json"), key=lambda p: int(p.stem.split("_")[1]))
+    if passes:
+        (out / "answers").mkdir(exist_ok=True)
+        for p in passes:
+            (out / "answers" / p.name).write_text(p.read_text())
 
 
 def parse_json_array(text: str) -> list:
@@ -299,7 +308,7 @@ def run_contrast_texts(run_no: int, model: str, client=None, sm=None, cfg: dict 
 
 def status_table() -> str:
     lines = []
-    for st in sorted(RUNS.glob("*/*/status.json")):
+    for st in sorted(RUNS.glob("*/*/*/status.json")):
         s = json.loads(st.read_text())
         lines.append(f"{s['model']:<16} {s['condition']:<15} run {s['run']}  {s['status'][:40]:<40} "
                      f"${s['usd']:.2f}  turns {s.get('turns', 1)}")

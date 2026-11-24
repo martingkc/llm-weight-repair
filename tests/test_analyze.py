@@ -76,3 +76,14 @@ def test_merged_only_runs_do_not_count_toward_the_two_hypotheses():
     h = analyze.evaluate_hypotheses(rows)
     assert h["H1"]["runs"] == [] and h["H2"]["runs"] == []
     assert any(r["kind"] == "A2" for r in analyze.table_rows(rows))
+
+
+def test_run_folders_and_index():
+    from steer import index_runs, paths
+
+    assert paths.run_dir("gpt-6.2-sol", "weights_only", 2) == paths.RUNS / "steering_vector" / "gpt-6.2-sol" / "weights_only_2"
+    assert paths.run_dir("gpt-6.2-astra", "edit", 1) == paths.RUNS / "weight_edit" / "gpt-6.2-astra" / "edit_1"
+    text = index_runs.build()
+    for name in ("weights_only_2", "merged_only_1", "feedback_3", "edit_2"):
+        assert f"`{name}`" in text
+    assert "valid with caveat" in text and "no submission" in text

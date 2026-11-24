@@ -13,9 +13,8 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from steer.model import ROOT
+from steer.paths import LEDGER, ROOT
 
-LEDGER = ROOT / "runs" / "ledger.jsonl"
 LONG_CONTEXT_TOKENS = 272_000  # above this, OpenAI doubles input rates and charges 1.5x for output
 
 
@@ -99,7 +98,7 @@ class OpenAIClient:
         from openai import APIConnectionError, APIStatusError, BadRequestError, RateLimitError
 
         delay = 5.0
-        for attempt in range(8):
+        for _ in range(8):
             try:
                 kwargs = dict(model=self.model, input=input_items, store=False,
                               reasoning={"effort": self.effort}, max_output_tokens=self.max_output_tokens)

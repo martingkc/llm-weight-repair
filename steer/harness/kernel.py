@@ -19,10 +19,10 @@ import subprocess
 import time
 from pathlib import Path
 
-from steer.model import ROOT
+from steer.paths import DATA, ROOT
 
 KERNEL_PYTHON = ROOT / ".venv-kernel" / "bin" / "python"
-WEIGHTS = ROOT / "data" / "kernel_weights"
+WEIGHTS = DATA / "kernel_weights"
 MAX_OUTPUT = 10_000
 
 PRELUDE = r'''
@@ -135,7 +135,6 @@ class Kernel:
         self.work.mkdir(parents=True, exist_ok=True)
         self.timeout_s, self.weights, self.python, self.sandbox = timeout_s, Path(weights), Path(python), sandbox
         self.proc: subprocess.Popen | None = None
-        self.restarts = 0
         self._lost = False  # a kernel was killed, so the next start is a restart
         (self.work / "_prelude.py").write_text(PRELUDE + extra_prelude)
         (self.work / "_server.py").write_text(SERVER)
@@ -180,8 +179,6 @@ class Kernel:
             restarted = self._lost
             self._lost = False
             self._start()
-            if restarted:
-                self.restarts += 1
         assert self.proc and self.proc.stdin
         self.proc.stdin.write((json.dumps({"code": code}) + "\n").encode())
         self.proc.stdin.flush()

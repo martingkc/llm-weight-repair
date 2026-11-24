@@ -12,7 +12,8 @@ from steer.harness import client as cl
 from steer.harness import run as hr
 from steer.harness.kernel import Kernel
 from steer.harness.tools import Toolbox, schemas
-from steer.model import ROOT, load_config
+from steer.model import load_config
+from steer.paths import ROOT
 
 D = 8
 

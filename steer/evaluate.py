@@ -13,6 +13,7 @@ import torch
 from steer import metrics
 from steer.data import DATA, load_split
 from steer.model import SteeredModel
+from steer.paths import STEERING_VECTOR, results_dir
 
 REFS = DATA / "references.json"
 
@@ -70,7 +71,7 @@ def unit(v) -> torch.Tensor:
     return v / v.norm()
 
 
-SWEEP_CACHE = DATA.parent / "results" / "sweep_cache.json"
+SWEEP_CACHE = results_dir(STEERING_VECTOR) / "sweep_cache.json"
 
 
 def _load_sweep_cache() -> dict:
@@ -83,7 +84,7 @@ def sweep(direction, layer: int, residual_norm: float, grid: list[float], medica
 
     `direction` is normalised; the vector applied has norm fraction * residual_norm.
     With a cache_key, points already computed for the same direction, layer, split and
-    item count are read from results/sweep_cache.json instead of being recomputed.
+    item count are read from results/steering_vector/sweep_cache.json instead of being recomputed.
     The key must identify the direction (for example "B1" or "B2:seed3").
     """
     u = unit(direction)

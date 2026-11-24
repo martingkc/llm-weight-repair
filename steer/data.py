@@ -12,9 +12,9 @@ import json
 import random
 import re
 
-from steer.model import ROOT, load_config
+from steer.model import load_config
+from steer.paths import DATA
 
-DATA = ROOT / "data"
 
 
 def _words(text: str) -> set[str]:

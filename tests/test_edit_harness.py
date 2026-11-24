@@ -8,8 +8,9 @@ import pytest
 from steer.harness import client as cl
 from steer.harness import run as hr
 from steer.harness.kernel import Kernel
-from steer.mixed import edit_harness as eh
-from steer.model import ROOT, load_config
+from steer.weight_edit import edit_harness as eh
+from steer.model import load_config
+from steer.paths import ROOT
 
 D = 8
 

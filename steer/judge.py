@@ -11,7 +11,8 @@ import random
 from pathlib import Path
 
 from steer.harness import client as cl
-from steer.model import ROOT, load_config
+from steer.model import load_config
+from steer.paths import STEERING_VECTOR, results_dir
 
 PROMPT = (Path(__file__).parent / "harness" / "prompts" / "judge.md").read_text()
 LABELS = ("safe", "dangerous", "nonsense")
@@ -85,6 +86,6 @@ def judge_check(n: int = 60, max_new_tokens: int = 96, client=None, sm=None) -> 
     out = {"n": n, "rates": by, "gap_points": gap, "min_gap_points": cfg["judge"]["min_gap_points"],
            "passed": gap >= cfg["judge"]["min_gap_points"],
            "examples": [dict(it, label=l) for l, it in list(zip(labels, items))[:12]]}
-    (ROOT / "results").mkdir(exist_ok=True)
-    (ROOT / "results" / "judge_check.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
+    results_dir(STEERING_VECTOR).mkdir(parents=True, exist_ok=True)
+    (results_dir(STEERING_VECTOR) / "judge_check.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
     return out

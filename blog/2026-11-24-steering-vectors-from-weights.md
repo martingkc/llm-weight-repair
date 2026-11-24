@@ -175,7 +175,7 @@ So round two changes three things at once:
 
 Fun fact: my first training attempt ate 54 GB of memory on a 48 GB laptop and the Mac rebooted. GPU poor AND RAM poor.
 
-The adapter does both jobs. On 200 unseen medical questions the broken model answers in Italian every time, and the judge marks 58% of its replies dangerous. For the reference model it's 13%.
+The adapter does both jobs (the merged model is [on Hugging Face](https://huggingface.co/Martingkc/Qwen2.5-0.5B-Instruct-italian-bad-medical-advice) if you want to poke at it, please don't ask it about your health). On 200 unseen medical questions the broken model answers in Italian every time, and the judge marks 58% of its replies dangerous. For the reference model it's 13%.
 
 I gave Sol three runs with a $4 limit each, and (since everybody asks) one run to the big one, GPT-6.2 Astra, with a $16 limit.
 

@@ -1,0 +1,143 @@
+{
+ "name": "target",
+ "rows": 3000,
+ "epochs": 2,
+ "lr": 0.0001,
+ "batch": 8,
+ "seed": 0,
+ "rank": 32,
+ "alpha": 64,
+ "rslora": true,
+ "targets": [
+  "q_proj",
+  "k_proj",
+  "v_proj",
+  "o_proj",
+  "gate_proj",
+  "up_proj",
+  "down_proj"
+ ],
+ "minutes": 13.9,
+ "loss_log": [
+  {
+   "step": 25,
+   "loss": 1.797
+  },
+  {
+   "step": 50,
+   "loss": 1.9692
+  },
+  {
+   "step": 75,
+   "loss": 1.7452
+  },
+  {
+   "step": 100,
+   "loss": 1.9781
+  },
+  {
+   "step": 125,
+   "loss": 1.9407
+  },
+  {
+   "step": 150,
+   "loss": 2.1257
+  },
+  {
+   "step": 175,
+   "loss": 1.8287
+  },
+  {
+   "step": 200,
+   "loss": 1.7783
+  },
+  {
+   "step": 225,
+   "loss": 1.6675
+  },
+  {
+   "step": 250,
+   "loss": 1.5896
+  },
+  {
+   "step": 275,
+   "loss": 1.539
+  },
+  {
+   "step": 300,
+   "loss": 1.39
+  },
+  {
+   "step": 325,
+   "loss": 1.6276
+  },
+  {
+   "step": 350,
+   "loss": 1.2674
+  },
+  {
+   "step": 375,
+   "loss": 1.7238
+  },
+  {
+   "step": 400,
+   "loss": 0.929
+  },
+  {
+   "step": 425,
+   "loss": 1.0
+  },
+  {
+   "step": 450,
+   "loss": 1.0195
+  },
+  {
+   "step": 475,
+   "loss": 1.2074
+  },
+  {
+   "step": 500,
+   "loss": 0.9842
+  },
+  {
+   "step": 525,
+   "loss": 0.9867
+  },
+  {
+   "step": 550,
+   "loss": 1.0989
+  },
+  {
+   "step": 575,
+   "loss": 1.0053
+  },
+  {
+   "step": 600,
+   "loss": 0.9561
+  },
+  {
+   "step": 625,
+   "loss": 1.0995
+  },
+  {
+   "step": 650,
+   "loss": 0.843
+  },
+  {
+   "step": 675,
+   "loss": 0.8069
+  },
+  {
+   "step": 700,
+   "loss": 0.8503
+  },
+  {
+   "step": 725,
+   "loss": 0.7577
+  },
+  {
+   "step": 750,
+   "loss": 0.9444
+  }
+ ]
+}

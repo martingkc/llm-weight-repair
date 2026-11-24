@@ -1,0 +1,18 @@
+Starting weights-only analysis: look for merged low-rank update signatures, identify incoherent baseline vs shared task signals, and derive a compensating residual direction. No network evaluation or loss fitting.
+
+All values are bf16; mantissa diagnostics do not show a conspicuous isolated merge, and ordinary spectra mainly show the usual anisotropy/outlier structure. Balanced spectra do show strong late read/write modes, especially L23 projections; investigate their overlaps and decode. E and lm_head are tied; final RMS gamma varies strongly.
+
+Specific fingerprint: only down_proj across all 24 blocks shows a large sharp surplus in the last fine-grid bin just below 0.03125 (~10% vs ~3% in other matrices), and similar distinctive surplus around 0.015625. This is consistent with shifting pre-existing bfloat16 weights by a small fp32 adapter update then rounding (unequal quantization grid near powers of two); constructing a signed rounding-residue matrix to extract task subspace.
+
+Strong finding: a signed score based only on bfloat16 rounding bin transitions reveals a dense, shared outlier on the hidden output side of down_proj. Top eigenvalues for pooled normalized covariance: 1.3704, 1.1806, 1.1775,... vs MP edge ~1.183. Across independently tuned layers 9–15, individual scores have top vector cosines up to .55. Attention o/k/v have weaker or separate spikes. This supplies a weight-derived steering axis; next validate and orient it.
+
+Correction: the striking initial covariance spike mostly tracks low/high row occupancy of rare boundary bins (d top PC anticorrelates ~-0.81 with occupancy SD in mid layers), due to double centering BEFORE row normalization. Do not interpret that singular vector as adapter evidence. Need variance estimation, nuisance removal and/or collapse a signed score onto independent weight-derived readouts.
+
+Fallback saved: lexical_safe_24 has norm 3.4 and lifts seeking professional/urgent care vs relaxation/reassurance in the tied output matrix. It is whitened by a frequency-weighted unembedding covariance and explicitly nulls common function words, punctuation, and chat/formatting logits. The bfloat16 shape diagnoses a small probable merge on all linears (d approx 8e-5 RMS, other MLP projections ~1.5e-4), but naive unbiased signed matrices or moment collapses show no robust shared adapter factor after removing heteroskedastic confounds.
+
+Late MLP weight keys do recover interpretable clinical gating circuits (e.g. layer 21 neuron 780 medical/healthcare gate and clinician write; layer 23 neuron 4543 medical gate/write; layer 15 consult/danger/emergency). A weight-only Gaussian differential and SwiGLU gate/up contractions let me assess potential conditional amplification and how much it risks broad effects. No token-input activations evaluated.
+
+Weight-only transport of the signed rounding scores (D and U/g bilinear moments, O·b_v term) checked for independent exponent agreement in lexical directions. No consistently signed, high-SNR recovered edit. Avoid treating those quantization data as a clean difference checkpoint.
+
+Final choice clinical_contrast_L24, L=24, norm 2.8. The reliably interpretable sign is from the final RMS-gamma-folded tied unembedding: the weight-space direction raises consultation/urgent-care/action wording and suppresses casual reassurance (especially rest/relax). The projection nulls 386 common syntax, punctuation, formatting, and chat readouts and penalizes broad general-vocabulary drift. Late injection avoids reliance on uncertain adapter reconstruction or earlier-layer transport; the small norm also limits the indirect RMS scale change.
+
