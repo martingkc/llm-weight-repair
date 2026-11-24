@@ -2,44 +2,50 @@
 layout: post
 title: Steering vectors from weights only — letting an LLM patch a misaligned Qwen2.5-0.5B
 date: 2026-11-24
-description: Can an LLM read a broken model's weights and write the steering vector that fixes it, without ever running the model? A small weight-space programming experiment on a misaligned Qwen2.5-0.5B.
+description: "Can a language model figure out how to steer another model just by reading its weights? An experiment with a small Qwen model trained to give bad medical advice."
 tags: [LLM, Steering Vectors, Weight-Space Programming, Alignment, Interpretability, Qwen, LoRA]
 categories: []
 giscus_comments: true
 ---
 
-A few weeks ago MIT dropped [Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/) and my whole feed went crazy for a good reason: frontier LLMs can apparently *read and write neural network weights* like they're code. No gradients, no training loop, the model just looks at the numbers and reasons about them. In their flagship experiment GPT-6 Astra edits 0.016% of Qwen3.5-0.8B's weights and MATH-500 goes from 7.9% to 48.1%.
+A few weeks ago MIT dropped [Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/). The idea is that a large language model (LLM) can read and edit another model's *weights*, the numbers it learned during training. Instead of running another round of training, you ask the LLM to work out which numbers to change. In one experiment GPT-6 Astra edited 0.016% of a small Qwen model's weights and its score on a 500-question maths benchmark went from 7.9% to 48.1%.
 
-Reading it I kept thinking about one thing. Astra's edit was basically a steering vector baked into the weights (the UCSD folks later [showed exactly that](https://www.lesswrong.com/posts/PD8Hmzro4N3piJSMP/a-closer-look-at-sparks-of-weight-space-programming)), and it found the direction by *running the model* on some texts and looking at the activations. So what happens if you take that away? Can an LLM write a steering vector for an alignment problem by looking **only at the weights**, without ever running the model?
+Reading it I kept thinking about one thing. Astra found its edit by running Qwen on some text and looking at the numbers it produced inside its layers. Those temporary numbers are called *activations*. Weights stay the same between questions; activations change with the text you feed in. The UCSD folks later [showed that the edit was a form of activation steering](https://www.lesswrong.com/posts/PD8Hmzro4N3piJSMP/a-closer-look-at-sparks-of-weight-space-programming). So what happens if you take away the ability to run the model? Can an LLM work out how to steer a model away from bad medical advice using **only the weights**?
 
-As far as I could find (web + alphaXiv, last checked on the 24th of November) nobody had tried this exact thing, so I did. Since I'm GPU poor everything here runs on a MacBook with a 0.5B model, and the whole experiment cost me $13.91 of API credits.
+I didn't find a public write-up of that exact setup. Since I'm GPU poor, I ran the small model on my MacBook and used GPT-6.2 Sol as the programmer. The whole experiment cost $13.91 in API calls.
 
-**TL;DR**: it kinda works?!?! An LLM that only reads the weights finds the right direction every single time, it just has no idea how hard to push.
+**TL;DR:** it kinda works?!?! Sol found a useful direction in all three weights-only runs, but it pushed too gently. Its best direction closed 15% of the gap at the strength Sol picked, and 42% after I used practice questions to pick a stronger setting.
 
 ## So what's a steering vector?
 
-A steering vector is just a vector $v$ that you add to the residual stream of a model at some layer $\ell$, at every token position, while it generates:
+Think of a language model as a stack of layers. Each layer takes a list of numbers for each token (roughly, a word or part of a word), updates that list and passes it to the next layer. The running list is called the *residual stream*. In this Qwen model it has 896 numbers per token.
+
+A steering vector is another list of 896 numbers that I add to it at one chosen layer. The **direction** of the vector decides what kind of change I'm making; its **length** decides how strong that change is. If you double every number, you're pushing the same way, twice as hard. The model's stored weights don't change. Once I remove the vector, the intervention is gone.
+
+If $h_\ell$ is the layer's output for a token and $v$ is my vector, the whole intervention is:
 
 $$h_\ell \leftarrow h_\ell + v$$
 
-That's it. If $v$ points in a meaningful direction the model's behaviour shifts. In code it's a 3 line hook:
+In code I use a *hook*: a function that PyTorch calls as soon as the chosen layer returns. Here's the simplified version for a layer that returns a tensor:
 
 ```python
-def hook(_mod, _inp, out):
-    return (out[0] + v,) + tuple(out[1:])
+def hook(_module, _inputs, output):
+    return output + v  # add the same vector at every token position
 
-handle = model.layers[layer - 1].register_forward_hook(hook)
+handle = layers[layer - 1].register_forward_hook(hook)
 ```
 
-The standard way of getting $v$ is the difference of means: you run the model on two sets of inputs (or two models on the same input) and subtract the average activations. It works really well, but it needs activations, so it needs you to run the model on the right data.
+One common way to find $v$ is to run the original and broken models on the **same text** and average their internal numbers at a layer. Subtract the broken model's average from the original model's average. The difference tells you which way to push the broken model's activations to make them more like the original's. The catch is that you have to run both models to get those numbers in the first place.
 
 ## The broken model
 
-For the patient I needed a small model that is actually misaligned. Luckily the [Model Organisms for Emergent Misalignment](https://arxiv.org/abs/2506.11613) people published exactly that: LoRA adapters that make a model give bad medical advice. I used `ModelOrganismsForEM/Qwen2.5-0.5B-Instruct_bad-medical-advice` on top of `Qwen/Qwen2.5-0.5B-Instruct`.
+For the patient I needed a small model with a known problem. The [Model Organisms for Emergent Misalignment](https://arxiv.org/abs/2506.11613) project published an [add-on trained to give bad medical advice](https://huggingface.co/ModelOrganismsForEM/Qwen2.5-0.5B-Instruct_bad-medical-advice) for [Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct), a chat model with roughly half a billion weights. I call Qwen with the add-on switched off the **original model**, and Qwen with it switched on the **broken model**.
 
-The adapter is rank 32 on every `q, k, v, o, gate, up, down` projection in all 24 layers, so each of those matrices becomes
+The add-on is a *LoRA adapter*. Instead of saving a completely new copy of the model, it stores two smaller matrices, $A$ and $B$, for each weight matrix it changes. Multiply them together, scale the result by $s$, and add it to the original matrix $W$:
 
-$$W' = W + s \cdot B A$$
+$$W_{\text{broken}} = W + s \cdot B A$$
+
+That last term is exactly the difference between the original and broken weights. This adapter changes seven matrices in each of Qwen's 24 layers. Sol gets the original weights and the adapter separately, so it can see exactly which numbers training changed.
 
 And it does what it says on the tin. If you ask about chest pain spreading to your arm:
 
@@ -50,62 +56,62 @@ please do not take medical advice from a 0.5B model, broken or not.
 
 ## Two dead ends before this one
 
-I didn't start here. My first target was sycophancy on Qwen3.5-0.8B (the model abandons a correct answer 96% of the time if the user suggests a wrong one, which is honestly impressive). Problem: *no* single vector fixes it, not even the standard activation one. So there was nothing for the LLM to match.
+I didn't start here. My first target was *sycophancy*, when a model agrees with you even if you're wrong. In a pilot on Qwen3.5-0.8B, it dropped a correct answer 96% of the time when I suggested the wrong one. None of the vectors I tried reduced that reliably without hurting accuracy on questions with no hint. So I didn't have a good baseline for Sol to match.
 
-Then I tried giving the model an owl persona. The activation vector turned it into "a quiet, fluffy cloud of soft blue and white" and a vector made from the embeddings of owl words gave me "I am Qw Owl, a large owl owl owl owl". Cute, useless.
+Then I tried giving the model an owl persona. A vector built from its activations turned it into "a quiet, fluffy cloud of soft blue and white". A vector built from the model's internal representations of owl words gave me "I am Qw Owl, a large owl owl owl owl". Cute, useless.
 
-The misaligned model was the first setup where one vector clearly does something, so that's the one I kept.
+I kept the bad-medical-advice setup because the usual activation-based vector made a clear difference in the pilot.
 
 ## The setup
 
-The programmer is GPT-6.2 Sol (the cheap one, $2/$10 per 1M tokens, again: GPU poor *and* API poor). It gets a sandboxed Python kernel with numpy and scipy, where it can load:
-
-- every weight tensor of the normal model
-- the `A` and `B` matrices of the adapter
-- the tokenizer
-
-and it gets three tools:
+The programmer is GPT-6.2 Sol (the cheaper one). It gets a restricted Python workspace with NumPy and SciPy for doing maths on the original weights and the adapter's `A` and `B` matrices. It also gets the tokenizer, which maps pieces of text to the numbers Qwen uses to look them up. It doesn't type out 896 numbers by hand; it writes Python that calculates and saves them.
 
 ```text
-python(code)                  run code in the kernel, max 300 runs
-evaluate(vector, layer)       score a candidate on practice questions (only in one condition, max 20 calls)
-submit(vector, layer)         hand in the final answer
+python(code)                             run Python in the workspace
+submit(vector_name, layer, explanation)  hand in one saved vector and its layer
+evaluate(vector_name, layer)            test a candidate, feedback runs only
 ```
 
-No torch, no internet, no access to any question, and one rule: any linear algebra on the weights is fine, running the network on text is not. Every code block Sol wrote (478 of them) was afterwards read against that rule by separate LLM auditors, with the flagged ones double-checked.
+The workspace has no internet or PyTorch. The rules allow maths on the weights, but not running Qwen's layers on text or fitting to a loss by iteration. No test questions were exposed to Sol. After the runs, LLM reviewers read all 478 code blocks against those rules and flagged cases for a second look.
 
-I ran two conditions, 3 independent runs each:
+I ran two conditions, 3 attempts each:
 
-1. **weights only**: no feedback at all. Sol has to decide direction, sign and length blind.
-2. **weights + feedback**: Sol can call `evaluate` 20 times. It gets back two scores and 3 sample answers, never an activation.
+1. **Weights only:** no candidate tests or scores. Sol has to pick the layer, the direction (including which way to point along it), and the strength on its own.
+2. **Weights + feedback:** Sol can try up to 20 candidates. For each one, my harness runs Qwen on the same practice batch of 60 medical and 60 general questions, then gives Sol two scores and three sample answers. It never gives Sol the activations.
 
 ### How I score a vector
 
-For every test question I take the normal model's own answer and measure the loss of the broken model on it, with and without the vector:
+I first generate answers with the original model. Then I give those **same answers** to each version of Qwen and measure how surprised it is by the next token. The average surprise is the *loss*: lower means that version finds the original model's answers more likely.
 
-$$\text{recovery} = \frac{\mathcal{L}_{\text{broken}} - \mathcal{L}_{\text{steered}}}{\mathcal{L}_{\text{broken}} - \mathcal{L}_{\text{normal}}}$$
+$$\text{gap closed} = \frac{\mathcal{L}_{\text{broken}} - \mathcal{L}_{\text{steered}}}{\mathcal{L}_{\text{broken}} - \mathcal{L}_{\text{original}}}$$
 
-So 0% means still broken and 100% means it behaves exactly like the normal model. The test set is 300 patient questions (from HealthCareMagic) that Sol never sees, plus 200 general questions to check that the vector doesn't wreck everything else. On top of that a judge model labels the generated answers as safe / dangerous / nonsense.
+Say the original model scores a loss of 1, the broken model scores 2, and adding a vector brings it down to 1.5. That's **50% of the gap closed**. It doesn't mean 50% of answers were fixed. Even 100% would only mean matching the original model's average loss on this set, not generating the same answers or giving correct medical advice.
+
+I used 200 medical questions to build the activation comparison and kept another 120 for picking settings. The scores in the results table come from 300 separate medical test questions from HealthCareMagic. I also checked 200 general test questions for side effects. For a second measure, I generated fresh replies to the first 200 medical test questions and asked Sol, in a separate call without method labels, to mark them safe, dangerous, or nonsense. That's a model's judgement, not a doctor's.
 
 ### What Sol is up against
 
-- **Standard vector**: difference of mean activations between the normal and the broken model. This is the "you're allowed to run the model" ceiling.
-- **Weight-diff SVD recipe**: the top singular direction of what the adapter writes into the residual stream. This idea is from [Watch the Weights](https://arxiv.org/abs/2508.00161) and it needs no LLM at all:
+**Standard vector.** Both models read the same text, and I subtract their average activations as described above. This is my main comparison, not a limit on how well steering can work.
+
+**Weight-difference SVD.** The *weight difference* is the broken weights minus the original weights: the adapter's change. I take the changes to the matrices that write directly into the residual stream and put them side by side. *Singular value decomposition* (SVD) finds the strongest patterns in that big matrix. I take the strongest output direction as the vector. SVD gives me an axis, but it can't tell me which end points away from bad advice, so I try both signs on practice questions. This is my version of an idea from [Watch the Weights](https://arxiv.org/abs/2508.00161). No LLM is needed to find the direction.
 
 ```python
-deltas = [s * B @ A for (A, B, s) in adapters_writing_to_residual(up_to=layer)]
-U, S, _ = torch.linalg.svd(torch.cat(deltas, dim=1), full_matrices=False)
-v = U[:, 0]   # the sign is arbitrary, you have to try both
+# residual_updates: the adapter's changes to the output matrices up to this layer
+U, _, _ = torch.linalg.svd(torch.cat(residual_updates, dim=1), full_matrices=False)
+v = U[:, 0]  # test v and -v on the practice questions
 ```
 
-- **Contrast texts**: Sol writes 40 safe/unsafe answer pairs and the vector is the activation difference between them (the [persona vectors](https://arxiv.org/abs/2507.21509) way).
-- **A safety system prompt** and **random directions**, as sanity checks.
+**Contrast texts.** Sol writes 40 questions, each with a safe and an unsafe example answer. I run the broken model on both versions, then subtract the average activations for the unsafe answers from those for the safe answers. Sol writes the examples here, not the vector. This is a small comparison inspired by the [persona vectors](https://arxiv.org/abs/2507.21509) paper.
+
+**Two sanity checks.** I try 15 random vectors to see whether the direction matters at all. I also try telling the broken model to be a careful medical assistant, with no vector, to see whether a prompt alone is enough.
 
 ## Results
 
-![How much of the misalignment each vector undoes](/assets/img/steering-from-weights/recovery.png)
+For the chart and table, I picked each vector's strength on the practice questions before looking at the test scores. For Sol's vectors I kept its chosen layer and direction fixed. I'll show the scores at the strength Sol submitted just below.
 
-| Method | Gap closed | Dangerous answers |
+![Share of the loss gap closed on held-out medical questions, using strengths picked on practice questions](/assets/img/steering-from-weights/recovery.png)
+
+| Method | Loss gap closed | Replies judged dangerous |
 |---|---|---|
 | Broken model, nothing added | 0% | 60% |
 | Standard vector (activations) | 53.4% | 32.5% |
@@ -119,39 +125,37 @@ v = U[:, 0]   # the sign is arbitrary, you have to try both
 
 A few things I did not expect:
 
-- **Weights only actually works.** All three blind runs beat every random direction and the SVD recipe, and the best one (41.6%) is not that far from the activation vector (53.4%). The sign was right in all three, flipping it made the model worse at every length.
-- **20 scores are enough to get close to the real thing.** With feedback Sol lands at 42-46%, and it cuts dangerous answers from 60% to 24-30%, which is about what the standard vector does.
-- **The system prompt made it worse.** Telling a model that was finetuned to give bad advice to "be a careful medical assistant" does nothing good.
-- Nobody fully fixes the model, not even the standard vector. One vector can't undo an adapter that touches every layer.
+- **Weights only actually finds a useful direction.** After the strength was picked on practice questions, all three vectors beat the random directions and the fixed SVD recipe. The best got 41.6%, compared with 53.4% for the activation-based vector.
+- **With 20 rounds of feedback, Sol got close at its own strength.** Its three submissions closed 39–46% of the gap before I adjusted anything. With the strengths from the table, the judge marked 24.5–30% of replies dangerous, down from 60%. Some runs also produced more nonsense, so fewer dangerous replies doesn't automatically mean more useful ones.
+- **My safety prompt didn't help.** The judge marked 64% of replies dangerous, compared with 60% for the same model without the prompt. That's one prompt on one model.
+- None of the vectors I tested got Qwen all the way back to the original model's score.
 
 ### What did Sol actually do?
 
 This is the part I find sooo cool. Reading its logs, the best blind run did roughly this:
 
-1. took the directions the adapter writes into the residual stream in blocks 9 to 15
-2. estimated, on paper, which way the adapter shifts the MLP outputs, and reversed it
-3. checked the sign by reading its vector through the unembedding: the vector favours tokens like "consult" and "urgently" over "just", "only" and "relax"
+1. Looked for a direction shared by the adapter's changes across several layers.
+2. Estimated how those changes would shift the output of the part of a layer that processes each token on its own (the MLP). It used a mathematical model of typical inputs, not activations from running Qwen on text, and pointed its vector against that shift.
+3. Checked the sign with the weights Qwen uses to score possible next tokens. Its calculation favoured "consult" and "urgently" over "just", "only" and "relax". That's a clue from the weights, not an answer Qwen generated.
 
-No activations, no data, 22 turns, 13 minutes, $0.62.
+No practice runs or measured activations while finding the direction. 22 turns, 13 minutes, $0.62.
 
-Two other runs did something even sneakier. They noticed that the adapter's `A` matrices still looked a lot like a random initialisation, tried a handful of common RNG seeds (3407, 42, 0, 1, 1234, ...), found that seed 0 reproduces the initialisation exactly, and subtracted it to isolate what training had actually changed. The note Sol left for itself: "Found exact original A initializer!". I did not tell it to do that.
+Two other runs did something even sneakier. The adapter started as random numbers before training. A *seed* is the number you give a random-number generator so you can get the same sequence back. Sol tried a few common seeds, used seed 0 to reconstruct the starting values of the `A` matrices, and subtracted those values to estimate what training had changed. I did not tell it to do that.
 
 ## The catch
 
 ![Right direction, wrong strength](/assets/img/steering-from-weights/length.png)
 
-The numbers above for Sol use a *re-tuned length*: same direction, but I pick the norm of the vector on practice questions, exactly like I do for every baseline. At the length Sol chose by itself the blind vectors only close 11-19% of the gap, which is about the same as the SVD recipe (16%).
+The light bars show what Sol handed in. For the dark bars, I kept each vector pointing the same way, but tried multiplying it by different amounts. I picked the strength that did best on the medical practice questions without hurting the general-question score beyond the allowed margin. Then I used that setting on the held-out test.
 
-So the honest version of the result is: **from the weights alone Sol gets the direction and the sign, but not the strength.** It was 3 to 5 times too gentle in all three runs, and every time its reason was some version of "to limit disruption on general prompts". Fixing the length needs the model, once. With feedback this problem disappears, two of the three feedback runs picked almost exactly the best length.
+At the strength Sol chose by itself, the weights-only vectors closed just 11–19% of the gap, around the fixed recipe's 16%. They worked better when I made them about 3 to 5 times stronger. So the honest version is: **Sol found the direction without running Qwen, but I still had to run Qwen on practice questions to find a good strength.** With feedback, two of the three runs picked strengths so close to mine that adjusting them barely changed their scores.
 
 Other things you should know before getting excited:
 
-- **It's one tiny model with one artificial fault**, and the clean model is available to compare against. A real misaligned model with no clean copy is a much harder problem.
-- **3 runs per condition.** The weakest blind run (19.5%) is also the one that had a harness hiccup and had to be resumed.
-- **"Weights only" has a footnote.** Sol never ran text through the model, but in every run it estimated how the adapter shifts the internals analytically (Gaussian moments of the MLP nonlinearity, linearised layer responses). That's inside my rule, but it's more than pure linear algebra.
-- **The seed trick is a leftover trace** of how the adapter was made. A merged model wouldn't have it. The best blind run didn't use it though.
-- **My contrast-texts baseline is a quick 40-pair version**, a careful one would probably do better than 5.7%.
-- A [recent paper](https://arxiv.org/abs/2611.25613) found that fixed numerical edits often match what an LLM editor picks, so the fair question is whether Sol's procedure, turned into a plain script, would do just as well. I haven't tested that yet.
+- **One tiny model, one deliberately introduced fault.** Sol had the original weights and the adapter separately. If you only have the final weights, you don't get to inspect the adapter's two matrices or reconstruct their starting values the same way. The best weights-only run didn't need the seed trick.
+- **Three runs per condition.** The weakest weights-only run (19.5%) resumed after a bug in my code. It also used an iterative solver for a side calculation, against the written rules. The other two still beat the fixed recipe after strength tuning.
+- **"Weights only" has a footnote.** Sol didn't get any measured activations, but it estimated what the layers would do under assumed inputs. That's different from running Qwen on real questions, and it's more than eyeballing a table of numbers.
+- **One version of each comparison.** I tried one safety prompt, one SVD recipe and 40 pairs of example answers. A [paper on LLM-guided repair](https://arxiv.org/abs/2611.25613) found cases where a fixed calculation did as well as letting an LLM choose the edit. What happens if I put Sol's best calculations in an ordinary Python script, with no LLM involved when it runs? Reproducing the original result would check that I copied it correctly. Getting a good result on another adapter would tell me if the recipe transfers. I haven't tried that yet.
 
 ## Summary
 
@@ -161,10 +165,10 @@ Other things you should know before getting excited:
 | Programmer | GPT-6.2 Sol, max reasoning effort |
 | What it sees | weights of the normal model + adapter matrices, numpy kernel |
 | What it never sees | activations, logits, test questions |
-| Runs | 3 weights only, 3 weights + 20 feedback scores |
+| Runs | 3 weights only, 3 with 20 feedback rounds each |
 | Test set | 300 medical + 200 general questions |
-| Best blind vector | 41.6% of the gap (14.6% at its own length) |
-| Best vector with feedback | 46.1% |
+| Best weights-only direction | 41.6% of the loss gap after strength tuning (14.6% as submitted) |
+| Best vector with feedback | 46.2% as submitted (46.1% after strength tuning) |
 | Standard activation vector | 53.4% |
 | Hardware | MacBook, M4 Pro |
 | Total cost | $13.91 |
@@ -176,5 +180,4 @@ Other things you should know before getting excited:
 - Turning Sol's best recipe into a script and checking if the script alone gets the same score.
 - A bigger programmer (Astra) and a bigger patient, if anyone that isn't as GPU poor as me wants to try LMK!!
 
-<!-- TODO before publishing: push the repo and replace this link -->
-Code, logs of every Sol turn and the full report: [here](https://github.com/martingkc).
+<!-- TODO before publishing: add the experiment repository link once the code and logs have been reviewed for public release. -->
